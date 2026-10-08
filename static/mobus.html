@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mo Bus Guide | PravasiTrail (CampusBahar)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #f5efe2;
+      --ink: #17140d;
+      --teal: #12b3a4;
+      --coral: #ff5b57;
+      --mustard: #ffc531;
+      --violet: #6b5be6;
+      --sky: #3aa0ff;
+      --white: #ffffff;
+      
+      --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --border-hard: 3px solid #17140d;
+      --shadow-lg: 8px 8px 0 #17140d;
+      --shadow-md: 5px 5px 0 #17140d;
+      --shadow-sm: 4px 4px 0 #17140d;
+      --shadow-active: 2px 2px 0 #17140d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    ::selection { background: var(--mustard); color: var(--ink); }
+
+    /* CONFETTI ANIMATIONS */
+    @keyframes drift {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-24px) rotate(15deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    @keyframes bob {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-16px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .confetti-layer {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .confetti-item { position: absolute; pointer-events: none; }
+    .c-tri-coral { top: 90px; left: 4%; animation: drift 7s ease-in-out infinite; }
+    .c-arc-teal { top: 240px; right: 5%; animation: drift 9s ease-in-out infinite; }
+    .c-zigzag-sky { top: 560px; left: 3%; animation: bob 7s ease-in-out infinite; }
+
+    /* NAVBAR */
+    .nav-container {
+      position: relative; z-index: 10;
+      max-width: 1240px; margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .brand-wrap {
+      display: flex; align-items: center; gap: 0.85rem;
+      text-decoration: none; color: var(--ink);
+    }
+    .brand-tile {
+      width: 44px; height: 44px;
+      background: var(--mustard);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-md);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 800; font-size: 26px;
+      letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      color: var(--ink); font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; transition: color 0.15s ease;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
+    }
+    .btn-gate {
+      background: var(--teal); color: var(--white);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      padding: 0.65rem 1.3rem;
+      border: var(--border-hard); box-shadow: var(--shadow-md);
+      border-radius: 9999px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-gate:hover {
+      transform: translate(3px, 3px); box-shadow: var(--shadow-active);
+    }
+
+    /* HEADER */
+    .page-header {
+      position: relative; z-index: 1;
+      max-width: 1240px; margin: 2rem auto 2.5rem;
+      padding: 0 1.5rem; text-align: center;
+    }
+    .eyebrow-pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--violet); color: var(--white);
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 9999px; padding: 0.4rem 1.1rem;
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 800;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.85rem;
+    }
+    .eyebrow-dot {
+      width: 10px; height: 10px; background: var(--mustard);
+      border: 2px solid var(--ink); border-radius: 50%;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+    .page-lead {
+      font-size: 1.15rem; font-weight: 500;
+      max-width: 700px; margin: 0 auto; color: var(--ink);
+    }
+
+    /* PRO TIPS BANNER */
+    .protip-banner {
+      background: var(--ink); color: var(--white);
+      border: var(--border-hard); box-shadow: var(--shadow-lg);
+      border-radius: 18px; max-width: 1240px; margin: 0 auto 3rem;
+      padding: 1.4rem 2rem; display: flex; align-items: center; gap: 1.5rem;
+    }
+    .protip-badge {
+      background: var(--mustard); color: var(--ink);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.85rem;
+      border: 2px solid var(--ink); border-radius: 8px;
+      padding: 0.35rem 0.8rem; text-transform: uppercase; flex-shrink: 0;
+    }
+    .protip-text {
+      font-size: 1.05rem; font-weight: 700; color: var(--bg-cream);
+    }
+    .protip-text span { color: var(--mustard); }
+
+    /* CONTENT GRID */
+    .bus-grid {
+      position: relative; z-index: 1;
+      max-width: 1240px; margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+    }
+    .bus-card {
+      background: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 20px;
+      padding: 1.8rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .bus-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 11px 11px 0 var(--ink);
+    }
+    .bus-card-top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    .route-number-chip {
+      font-family: var(--font-mono); font-weight: 800; font-size: 1.3rem;
+      background: var(--sky); color: var(--ink);
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 12px; padding: 0.35rem 1rem;
+    }
+    .fare-tag {
+      font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;
+      background: var(--mustard); color: var(--ink);
+      border: var(--border-hard); border-radius: 9999px;
+      padding: 0.25rem 0.8rem;
+    }
+    .bus-corridor {
+      font-family: var(--font-display); font-size: 1.35rem; font-weight: 800;
+      margin-bottom: 0.5rem; line-height: 1.2;
+    }
+    .bus-desc {
+      font-size: 0.95rem; font-weight: 500; color: var(--ink);
+      line-height: 1.5; margin-bottom: 1.25rem;
+    }
+
+    .stop-timeline {
+      list-style: none; margin-bottom: 1.5rem;
+      border-left: 3px dashed var(--ink); padding-left: 1.25rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .stop-point {
+      font-size: 0.88rem; font-weight: 700; position: relative;
+    }
+    .stop-point::before {
+      content: ''; position: absolute; left: -1.7rem; top: 0.35rem;
+      width: 10px; height: 10px; background: var(--coral);
+      border: 2px solid var(--ink); border-radius: 50%;
+    }
+
+    .btn-trail-action {
+      background: var(--teal); color: var(--white);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      padding: 0.85rem; border: var(--border-hard);
+      box-shadow: var(--shadow-sm); border-radius: 9999px;
+      text-decoration: none; text-align: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-trail-action:hover {
+      transform: translate(2px, 2px); box-shadow: var(--shadow-active);
+      background: var(--mustard); color: var(--ink);
+    }
+
+    /* EXTRA SECTION */
+    .extra-section {
+      max-width: 1240px; margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+    }
+    .decision-card {
+      background: var(--white);
+      border: var(--border-hard); box-shadow: var(--shadow-lg);
+      border-radius: 20px; padding: 2rem;
+    }
+    .decision-title {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+      margin-bottom: 1.25rem;
+    }
+    .decision-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .decision-box {
+      background: var(--bg-cream); border: var(--border-hard);
+      border-radius: 14px; padding: 1.25rem;
+    }
+    .decision-head {
+      font-family: var(--font-display); font-size: 1.1rem; font-weight: 800;
+      margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.4rem;
+    }
+
+    footer {
+      border-top: var(--border-hard); background: var(--bg-cream);
+      padding: 2.5rem 1.5rem; text-align: center;
+      font-weight: 700; font-size: 0.95rem;
+    }
+
+    .footer-nav {
+      display: flex; justify-content: center;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+    }
+    .footer-nav a {
+      color: var(--ink); font-weight: 700; text-decoration: none; font-size: 0.9rem;
+      border: 2px solid var(--ink); background: var(--white);
+      padding: 0.35rem 0.85rem; border-radius: 9999px;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .footer-nav a:hover {
+      transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink);
+      background: var(--mustard);
+    }
+
+    .mobile-nav-bar { display: none; }
+
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .protip-banner { flex-direction: column; align-items: flex-start; }
+      .mobile-nav-bar {
+        display: flex; align-items: center; justify-content: center;
+        gap: 0.6rem; flex-wrap: wrap; margin: 0.5rem auto 1.5rem;
+        padding: 0 1rem; position: relative; z-index: 10;
+      }
+      .mobile-nav-link {
+        font-family: var(--font-display); font-weight: 800; font-size: 0.82rem;
+        color: var(--ink); text-decoration: none;
+        background: var(--white); border: 2px solid var(--ink);
+        box-shadow: 3px 3px 0 var(--ink); padding: 0.35rem 0.75rem;
+        border-radius: 9999px;
+      }
+      .mobile-nav-link:hover, .mobile-nav-link.active { background: var(--mustard); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- CONFETTI -->
+  <div class="confetti-layer" aria-hidden="true">
+    <svg class="confetti-item c-tri-coral" width="46" height="46" viewBox="0 0 46 46">
+      <polygon points="23,4 42,40 4,40" fill="#ff5b57" stroke="#17140d" stroke-width="3" stroke-linejoin="round"/>
+    </svg>
+    <svg class="confetti-item c-arc-teal" width="56" height="56" viewBox="0 0 56 56">
+      <path d="M4 52 A48 48 0 0 1 52 4 L52 52 Z" fill="#12b3a4" stroke="#17140d" stroke-width="3"/>
+    </svg>
+    <svg class="confetti-item c-zigzag-sky" width="54" height="36" viewBox="0 0 54 36">
+      <polyline points="4,28 16,8 28,28 40,8 50,28" fill="none" stroke="#3aa0ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="nav-container">
+    <a href="index.html" class="brand-wrap">
+      <div class="brand-tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
+          <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
+        </svg>
+      </div>
+      <span class="brand-name">PravasiTrail</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="trails.html">Campus Trails</a></li>
+      <li><a href="weather.html">TabPFN Weather</a></li>
+      <li><a href="mobus.html" class="active">Mo Bus Guide</a></li>
+      <li><a href="odia.html">Odia Cheatsheet</a></li>
+    </ul>
+
+    <a href="index.html" class="btn-gate">
+      <span>ITER Gate 1</span>
+    </a>
+  </nav>
+
+  <!-- Mobile Quick Navigation Bar -->
+  <div class="mobile-nav-bar">
+    <a href="index.html" class="mobile-nav-link">🏠 Scout</a>
+    <a href="trails.html" class="mobile-nav-link">🚶 Trails</a>
+    <a href="weather.html" class="mobile-nav-link">☀️ Weather</a>
+    <a href="mobus.html" class="mobile-nav-link active">🚌 Mo Bus</a>
+    <a href="odia.html" class="mobile-nav-link">🗣️ Odia</a>
+  </div>
+
+  <!-- HEADER -->
+
+  <header class="page-header">
+    <div class="eyebrow-pill">
+      <span class="eyebrow-dot"></span>
+      <span>CRUT MO BUS TRANSIT HACKS</span>
+    </div>
+    <h1 class="page-title">Navigate Bhubaneswar like a local.</h1>
+    <p class="page-lead">Transit routes, bus stop locations, and cash/card fares directly from ITER Gate 1 / Jagamara. Never pay ₹200 for a private auto again.</p>
+  </header>
+
+  <!-- PRO TIP BANNER -->
+  <div style="padding: 0 1.5rem;">
+    <div class="protip-banner">
+      <div class="protip-badge">Hostel Hack</div>
+      <div class="protip-text">
+        Get an <span>Ama Bus card</span> or keep crisp ₹10/₹20 notes ready. Buses stop right outside Jagamara Chhak every 15–20 minutes.
+      </div>
+    </div>
+  </div>
+
+  <!-- BUS ROUTES GRID -->
+  <main class="bus-grid">
+    <!-- Route 11 -->
+    <div class="bus-card">
+      <div>
+        <div class="bus-card-top">
+          <span class="route-number-chip">ROUTE 11</span>
+          <span class="fare-tag">FARE: ₹10 – ₹20</span>
+        </div>
+        <h2 class="bus-corridor">ITER Square ➔ Khandagiri ➔ Master Canteen</h2>
+        <p class="bus-desc">The essential lifeline for ITER students. Runs east-west connecting college gates to ancient caves, railway station, and central market.</p>
+        <ul class="stop-timeline">
+          <li class="stop-point">ITER Main Gate (Jagamara Chhak)</li>
+          <li class="stop-point">Khandagiri Caves Junction (Get off for trail!)</li>
+          <li class="stop-point">Fire Station Square / Baramunda</li>
+          <li class="stop-point">Master Canteen (Bhubaneswar Railway Station)</li>
+        </ul>
+      </div>
+      <a href="index.html?dest=khandagiri" class="btn-trail-action">
+        <span>Scout Khandagiri via Route 11 -&gt;</span>
+      </a>
+    </div>
+
+    <!-- Route 10 -->
+    <div class="bus-card">
+      <div>
+        <div class="bus-card-top">
+          <span class="route-number-chip">ROUTE 10</span>
+          <span class="fare-tag">FARE: ₹15 – ₹25</span>
+        </div>
+        <h2 class="bus-corridor">ITER ➔ Nayapalli ➔ Utkal University (Vani Vihar)</h2>
+        <p class="bus-desc">Direct green-belt transit corridor heading north. Drop off at Nayapalli for Ekamra Kanan Botanical Lake and Regional Plant Center.</p>
+        <ul class="stop-timeline">
+          <li class="stop-point">ITER Jagamara Bus Stop</li>
+          <li class="stop-point">Gandamunda Link Road</li>
+          <li class="stop-point">Nayapalli IRC Village (Ekamra Lake Gate)</li>
+          <li class="stop-point">Vani Vihar / Utkal University Gate</li>
+        </ul>
+      </div>
+      <a href="index.html?dest=ekamra" class="btn-trail-action">
+        <span>Scout Ekamra Lake via Route 10 -&gt;</span>
+      </a>
+    </div>
+
+    <!-- Route 20 & 21 -->
+    <div class="bus-card">
+      <div>
+        <div class="bus-card-top">
+          <span class="route-number-chip">ROUTE 20 & 21</span>
+          <span class="fare-tag">FARE: ₹10 – ₹25</span>
+        </div>
+        <h2 class="bus-corridor">ITER ➔ Old Town ➔ Lingaraj Temple Corridor</h2>
+        <p class="bus-desc">Southern heritage corridor connecting SOA campus to the ancient temple district, Bindu Sagar sacred lake, and Biju Patnaik Airport.</p>
+        <ul class="stop-timeline">
+          <li class="stop-point">Jagamara South Link</li>
+          <li class="stop-point">Airfield / Airport South Gate</li>
+          <li class="stop-point">Old Town Bindu Sagar Ghats</li>
+          <li class="stop-point">Lingaraj Temple South Entrance</li>
+        </ul>
+      </div>
+      <a href="index.html?dest=dhauli" class="btn-trail-action">
+        <span>Scout Heritage Corridor -&gt;</span>
+      </a>
+    </div>
+  </main>
+
+  <!-- DECISION MATRIX -->
+  <section class="extra-section">
+    <div class="decision-card">
+      <h2 class="decision-title">Hosteller Decision Matrix: Shared Auto vs. Mo Bus</h2>
+      <div class="decision-grid">
+        <div class="decision-box">
+          <h3 class="decision-head" style="color: var(--teal);">🚌 When to take Mo Bus</h3>
+          <p style="font-weight: 500; font-size: 0.95rem;">
+            Peak sun hours (Mo Buses are fully air-conditioned), traveling towards Nayapalli or Railway Station, and solo expeditions on tight budgets. Fares start at just ₹10.
+          </p>
+          <a href="weather.html" style="color: var(--teal); font-weight: 700; text-decoration: underline; display: inline-block; margin-top: 0.6rem; font-size: 0.88rem;">Check Afternoon Heat Index ➔</a>
+        </div>
+        <div class="decision-box">
+          <h3 class="decision-head" style="color: var(--coral);">🛺 When to take Shared Auto</h3>
+          <p style="font-weight: 500; font-size: 0.95rem;">
+            Short quick hops from ITER Gate to Khandagiri Chhak (₹15–₹20 flat), dawn trips before 6:30 AM when bus frequency is light, or returning close to 8:00 PM curfew.
+          </p>
+          <a href="odia.html" style="color: var(--coral); font-weight: 700; text-decoration: underline; display: inline-block; margin-top: 0.6rem; font-size: 0.88rem;">Learn Auto Driver Odia Phrases ➔</a>
+        </div>
+        <div class="decision-box">
+          <h3 class="decision-head" style="color: var(--violet);">🚲 When to use Mo Cycle</h3>
+          <p style="font-weight: 500; font-size: 0.95rem;">
+            Early morning dawn rides to Khandagiri (3.5 km). Dedicated stands exist right near ITER SOA Gate 1 and Khandagiri Square foothills.
+          </p>
+          <a href="trails.html" style="color: var(--violet); font-weight: 700; text-decoration: underline; display: inline-block; margin-top: 0.6rem; font-size: 0.88rem;">View All Campus Trails ➔</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-nav">
+      <a href="index.html">Home Scout</a>
+      <a href="trails.html">Campus Trails</a>
+      <a href="weather.html">TabPFN Weather</a>
+      <a href="mobus.html">Mo Bus Guide</a>
+      <a href="odia.html">Odia Cheatsheet</a>
+    </div>
+    <p>PravasiTrail (CampusBahar) • Siksha 'O' Anusandhan ITER Jagamara • DEV "Touch Grass" Hacktoberfest 2026</p>
+  </footer>
+
+
+</body>
+</html>

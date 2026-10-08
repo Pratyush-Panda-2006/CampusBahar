@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Trails | PravasiTrail (CampusBahar)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #f5efe2;
+      --ink: #17140d;
+      --teal: #12b3a4;
+      --coral: #ff5b57;
+      --mustard: #ffc531;
+      --violet: #6b5be6;
+      --sky: #3aa0ff;
+      --white: #ffffff;
+      
+      --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      --border-hard: 3px solid #17140d;
+      --shadow-lg: 8px 8px 0 #17140d;
+      --shadow-md: 5px 5px 0 #17140d;
+      --shadow-sm: 4px 4px 0 #17140d;
+      --shadow-active: 2px 2px 0 #17140d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    ::selection { background: var(--mustard); color: var(--ink); }
+
+    /* CONFETTI ANIMATIONS */
+    @keyframes drift {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-24px) rotate(15deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes sway {
+      0% { transform: translateX(0px) rotate(0deg); }
+      50% { transform: translateX(18px) rotate(-10deg); }
+      100% { transform: translateX(0px) rotate(0deg); }
+    }
+    @keyframes bob {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-16px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .confetti-layer {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .confetti-item { position: absolute; pointer-events: none; }
+    .c-tri-coral { top: 90px; left: 4%; animation: drift 7s ease-in-out infinite; }
+    .c-arc-teal { top: 220px; right: 5%; animation: sway 9s ease-in-out infinite; }
+    .c-dots-mustard { top: 620px; left: 3%; animation: bob 6s ease-in-out infinite; }
+    .c-plus-violet { top: 140px; right: 28%; animation: spin 14s linear infinite; }
+    .c-squiggle-black { top: 500px; right: 4%; animation: sway 8s ease-in-out infinite; }
+    .c-half-mustard { top: 880px; left: 10%; animation: drift 10s ease-in-out infinite; }
+
+    /* NAVBAR */
+    .nav-container {
+      position: relative; z-index: 10;
+      max-width: 1240px; margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .brand-wrap {
+      display: flex; align-items: center; gap: 0.85rem;
+      text-decoration: none; color: var(--ink);
+    }
+    .brand-tile {
+      width: 44px; height: 44px;
+      background: var(--mustard);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-md);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 800; font-size: 26px;
+      letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      color: var(--ink); font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; transition: color 0.15s ease;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
+    }
+    .btn-gate {
+      background: var(--teal); color: var(--white);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      padding: 0.65rem 1.3rem;
+      border: var(--border-hard); box-shadow: var(--shadow-md);
+      border-radius: 9999px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-gate:hover {
+      transform: translate(3px, 3px); box-shadow: var(--shadow-active);
+    }
+
+    /* HEADER */
+    .page-header {
+      position: relative; z-index: 1;
+      max-width: 1240px; margin: 2rem auto 2.5rem;
+      padding: 0 1.5rem; text-align: center;
+    }
+    .eyebrow-pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--violet); color: var(--white);
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 9999px; padding: 0.4rem 1.1rem;
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 800;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.85rem;
+    }
+    .eyebrow-dot {
+      width: 10px; height: 10px; background: var(--mustard);
+      border: 2px solid var(--ink); border-radius: 50%;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+    .page-lead {
+      font-size: 1.15rem; font-weight: 500;
+      max-width: 680px; margin: 0 auto; color: var(--ink);
+    }
+
+    /* TRAIL CARDS GRID */
+    .trails-grid {
+      position: relative; z-index: 1;
+      max-width: 1240px; margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .trail-card {
+      background: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 20px;
+      padding: 1.8rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .trail-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 11px 11px 0 var(--ink);
+    }
+    .card-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .dist-badge {
+      font-family: var(--font-display); font-weight: 800; font-size: 0.85rem;
+      background: var(--mustard); color: var(--ink);
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 9999px; padding: 0.25rem 0.8rem;
+    }
+    .trail-icon-box {
+      width: 50px; height: 50px;
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .ibox-coral { background: var(--coral); color: var(--white); }
+    .ibox-teal { background: var(--teal); color: var(--white); }
+    .ibox-sky { background: var(--sky); color: var(--white); }
+    .ibox-violet { background: var(--violet); color: var(--white); }
+
+    .trail-title {
+      font-family: var(--font-display); font-size: 1.4rem; font-weight: 800;
+      line-height: 1.15; margin-bottom: 0.75rem;
+    }
+    .trail-desc {
+      font-size: 0.95rem; line-height: 1.5; color: var(--ink);
+      margin-bottom: 1.25rem; font-weight: 500;
+    }
+    .specs-list {
+      list-style: none; margin-bottom: 1.5rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .specs-item {
+      font-size: 0.88rem; font-weight: 700;
+      background: var(--bg-cream);
+      border: 2px solid var(--ink);
+      border-radius: 8px; padding: 0.45rem 0.75rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .specs-item span { color: var(--ink); font-weight: 500; }
+
+    .btn-scout-trail {
+      background: var(--coral); color: var(--white);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      padding: 0.85rem 1.4rem;
+      border: var(--border-hard); box-shadow: var(--shadow-md);
+      border-radius: 9999px; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-scout-trail:hover {
+      transform: translate(3px, 3px); box-shadow: var(--shadow-active);
+      background: var(--mustard); color: var(--ink);
+    }
+
+    /* CAMPUS STRIP */
+    .campus-strip {
+      background: var(--ink); color: var(--white);
+      border-top: var(--border-hard); border-bottom: var(--border-hard);
+      padding: 1.25rem 1.5rem; text-align: center;
+      font-family: var(--font-display); font-weight: 800; font-size: 1rem;
+      letter-spacing: 0.05em;
+    }
+    .campus-strip span { color: var(--mustard); }
+
+    footer {
+      border-top: var(--border-hard); background: var(--bg-cream);
+      padding: 2.5rem 1.5rem; text-align: center;
+      font-weight: 700; font-size: 0.95rem;
+    }
+
+    .footer-nav {
+      display: flex; justify-content: center;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+    }
+    .footer-nav a {
+      color: var(--ink); font-weight: 700; text-decoration: none; font-size: 0.9rem;
+      border: 2px solid var(--ink); background: var(--white);
+      padding: 0.35rem 0.85rem; border-radius: 9999px;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .footer-nav a:hover {
+      transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink);
+      background: var(--mustard);
+    }
+
+    .transit-link {
+      color: var(--teal); text-decoration: underline; font-weight: 700;
+    }
+    .weather-check-link {
+      display: inline-block; font-size: 0.85rem; font-weight: 700;
+      color: var(--violet); text-decoration: underline; margin-bottom: 0.75rem;
+    }
+
+    .mobile-nav-bar { display: none; }
+
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .mobile-nav-bar {
+        display: flex; align-items: center; justify-content: center;
+        gap: 0.6rem; flex-wrap: wrap; margin: 0.5rem auto 1.5rem;
+        padding: 0 1rem; position: relative; z-index: 10;
+      }
+      .mobile-nav-link {
+        font-family: var(--font-display); font-weight: 800; font-size: 0.82rem;
+        color: var(--ink); text-decoration: none;
+        background: var(--white); border: 2px solid var(--ink);
+        box-shadow: 3px 3px 0 var(--ink); padding: 0.35rem 0.75rem;
+        border-radius: 9999px;
+      }
+      .mobile-nav-link:hover, .mobile-nav-link.active { background: var(--mustard); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND CONFETTI -->
+  <div class="confetti-layer" aria-hidden="true">
+    <svg class="confetti-item c-tri-coral" width="46" height="46" viewBox="0 0 46 46">
+      <polygon points="23,4 42,40 4,40" fill="#ff5b57" stroke="#17140d" stroke-width="3" stroke-linejoin="round"/>
+    </svg>
+    <svg class="confetti-item c-arc-teal" width="56" height="56" viewBox="0 0 56 56">
+      <path d="M4 52 A48 48 0 0 1 52 4 L52 52 Z" fill="#12b3a4" stroke="#17140d" stroke-width="3"/>
+    </svg>
+    <svg class="confetti-item c-dots-mustard" width="44" height="44" viewBox="0 0 44 44">
+      <circle cx="22" cy="22" r="18" fill="#ffc531" stroke="#17140d" stroke-width="3" stroke-dasharray="6,4"/>
+    </svg>
+    <svg class="confetti-item c-plus-violet" width="40" height="40" viewBox="0 0 40 40">
+      <rect x="14" y="2" width="12" height="36" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
+      <rect x="2" y="14" width="36" height="12" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
+    </svg>
+    <svg class="confetti-item c-squiggle-black" width="68" height="34" viewBox="0 0 68 34">
+      <path d="M4 17 Q 16 0, 28 17 T 52 17 T 64 17" fill="none" stroke="#17140d" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    <svg class="confetti-item c-half-mustard" width="52" height="30" viewBox="0 0 52 30">
+      <path d="M3 27 A23 23 0 0 1 49 27 Z" fill="#ffc531" stroke="#17140d" stroke-width="3"/>
+    </svg>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="nav-container">
+    <a href="index.html" class="brand-wrap">
+      <div class="brand-tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
+          <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
+        </svg>
+      </div>
+      <span class="brand-name">PravasiTrail</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="trails.html" class="active">Campus Trails</a></li>
+      <li><a href="weather.html">TabPFN Weather</a></li>
+      <li><a href="mobus.html">Mo Bus Guide</a></li>
+      <li><a href="odia.html">Odia Cheatsheet</a></li>
+    </ul>
+
+    <a href="index.html" class="btn-gate">
+      <span>ITER Gate 1</span>
+    </a>
+  </nav>
+
+  <!-- Mobile Quick Navigation Bar -->
+  <div class="mobile-nav-bar">
+    <a href="index.html" class="mobile-nav-link">🏠 Scout</a>
+    <a href="trails.html" class="mobile-nav-link active">🚶 Trails</a>
+    <a href="weather.html" class="mobile-nav-link">☀️ Weather</a>
+    <a href="mobus.html" class="mobile-nav-link">🚌 Mo Bus</a>
+    <a href="odia.html" class="mobile-nav-link">🗣️ Odia</a>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="eyebrow-pill">
+      <span class="eyebrow-dot"></span>
+      <span>BH-1 TO BH-9 • DESTINATION GUIDE</span>
+    </div>
+    <h1 class="page-title">Trails worth skipping weekend screen time for.</h1>
+    <p class="page-lead">Detailed breakdown of the four major nature & heritage escapes near campus. Pack your water bottle and step out before Monday mid-sems.</p>
+  </header>
+
+  <!-- TRAILS GRID -->
+  <main class="trails-grid">
+    <!-- Trail 1 -->
+    <div class="trail-card">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-coral">🪨</div>
+          <span class="dist-badge">3.5 KM FROM ITER</span>
+        </div>
+        <h2 class="trail-title">Khandagiri & Udayagiri Caves</h2>
+        <p class="trail-desc">2nd-century BCE rock-cut monastic caves of Emperor Kharavela. Expansive sandstone terraces, ancient inscriptions, and breezy hilltop panoramas overlooking the city.</p>
+        <ul class="specs-list">
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 11 (<a href="mobus.html" class="transit-link">View Bus Route</a>) / Auto ₹15–₹20</span></li>
+          <li class="specs-item">⏰ Best Window: <span>6:00 AM – 8:30 AM before heat escalates</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Rough ancient sandstone & hilltop pine breeze</span></li>
+        </ul>
+        <a href="weather.html" class="weather-check-link">☀️ Check Live Comfort on TabPFN Matrix</a>
+      </div>
+      <a href="index.html?dest=khandagiri" class="btn-scout-trail">
+        <span>Scout This Trail -&gt;</span>
+      </a>
+    </div>
+
+    <!-- Trail 2 -->
+    <div class="trail-card">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-teal">🌲</div>
+          <span class="dist-badge">14 KM FROM ITER</span>
+        </div>
+        <h2 class="trail-title">Deras Dam & Chandaka Canopy</h2>
+        <p class="trail-desc">Massive water reservoir bordering the Chandaka Wildlife Sanctuary. Raw earth embankments, complete silence away from campus horns, and dense teak & bamboo forest canopy.</p>
+        <ul class="specs-list">
+          <li class="specs-item">🚲 Transit: <span>Cycle trek or auto (<a href="mobus.html" class="transit-link">Transport Hacks</a>) ~₹60–₹80</span></li>
+          <li class="specs-item">⏰ Best Window: <span>Early morning dawn-to-dusk nature walks</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Cold forest mist & deep bamboo shade</span></li>
+        </ul>
+        <a href="weather.html" class="weather-check-link">☀️ Check Live Comfort on TabPFN Matrix</a>
+      </div>
+      <a href="index.html?dest=deras" class="btn-scout-trail">
+        <span>Scout This Trail -&gt;</span>
+      </a>
+    </div>
+
+    <!-- Trail 3 -->
+    <div class="trail-card">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-sky">🌺</div>
+          <span class="dist-badge">6 KM FROM ITER</span>
+        </div>
+        <h2 class="trail-title">Ekamra Kanan Botanical Lake</h2>
+        <p class="trail-desc">A 500-acre botanical sanctuary featuring a serene lake with pelicans, sweeping emerald grass lawns, rose gardens, and wide tree-shaded park avenues.</p>
+        <ul class="specs-list">
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 10 (<a href="mobus.html" class="transit-link">View Route 10</a>) to Nayapalli</span></li>
+          <li class="specs-item">⏰ Best Window: <span>4:00 PM – 6:30 PM sunset breeze</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Barefoot dew-soaked lawn walking</span></li>
+        </ul>
+        <a href="weather.html" class="weather-check-link">☀️ Check Live Comfort on TabPFN Matrix</a>
+      </div>
+      <a href="index.html?dest=ekamra" class="btn-scout-trail">
+        <span>Scout This Trail -&gt;</span>
+      </a>
+    </div>
+
+    <!-- Trail 4 -->
+    <div class="trail-card">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-violet">🕊️</div>
+          <span class="dist-badge">11 KM FROM ITER</span>
+        </div>
+        <h2 class="trail-title">Dhauli Shanti Stupa & Daya River</h2>
+        <p class="trail-desc">Historic white peace pagoda atop Dhauli hill overlooking the emerald Daya River basin. Walk the quiet hill path where Emperor Ashoka renounced warfare 2,200 years ago.</p>
+        <ul class="specs-list">
+          <li class="specs-item">🚌 Transit: <span>Auto/Bus (<a href="mobus.html" class="transit-link">Corridor 20/21</a>) via Kalpana / Puri bypass</span></li>
+          <li class="specs-item">⏰ Best Window: <span>5:00 PM – 6:45 PM golden hour sunset</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Sweeping valley river breeze</span></li>
+        </ul>
+        <a href="weather.html" class="weather-check-link">☀️ Check Live Comfort on TabPFN Matrix</a>
+      </div>
+      <a href="index.html?dest=dhauli" class="btn-scout-trail">
+        <span>Scout This Trail -&gt;</span>
+      </a>
+    </div>
+  </main>
+
+  <!-- CAMPUS STRIP -->
+  <section class="campus-strip">
+    HOSTEL CHECKPOINT • RETURN TO ITER GATE BEFORE <span>8:00 PM GATE IN-TIME</span>
+  </section>
+
+  <footer>
+    <div class="footer-nav">
+      <a href="index.html">Home Scout</a>
+      <a href="trails.html">Campus Trails</a>
+      <a href="weather.html">TabPFN Weather</a>
+      <a href="mobus.html">Mo Bus Guide</a>
+      <a href="odia.html">Odia Cheatsheet</a>
+    </div>
+    <p>PravasiTrail (CampusBahar) • Siksha 'O' Anusandhan ITER Jagamara • DEV "Touch Grass" Hacktoberfest 2026</p>
+  </footer>
+
+
+
+</body>
+</html>

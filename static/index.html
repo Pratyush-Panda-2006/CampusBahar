@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PravasiTrail | CampusBahar - Touch Grass Before Monday Classes</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       1. MEMPHIS / POSTMODERN DESIGN SYSTEM TOKENS
+       ========================================================= */
+    :root {
+      --bg-cream: #f5efe2;
+      --ink: #17140d;
+      --teal: #12b3a4;
+      --coral: #ff5b57;
+      --mustard: #ffc531;
+      --violet: #6b5be6;
+      --sky: #3aa0ff;
+      --white: #ffffff;
+      
+      --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      --border-hard: 3px solid #17140d;
+      --shadow-lg: 8px 8px 0 #17140d;
+      --shadow-md: 5px 5px 0 #17140d;
+      --shadow-sm: 4px 4px 0 #17140d;
+      --shadow-active: 2px 2px 0 #17140d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    /* Selection */
+    ::selection {
+      background: var(--mustard);
+      color: var(--ink);
+    }
+
+    /* =========================================================
+       2. ANIMATED MEMPHIS CONFETTI (CSS KEYFRAMES ONLY)
+       ========================================================= */
+    @keyframes drift {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-24px) rotate(15deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes sway {
+      0% { transform: translateX(0px) rotate(0deg); }
+      50% { transform: translateX(18px) rotate(-10deg); }
+      100% { transform: translateX(0px) rotate(0deg); }
+    }
+
+    @keyframes bob {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-16px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .confetti-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .confetti-item {
+      position: absolute;
+      pointer-events: none;
+      display: inline-block;
+    }
+
+    /* Positions & Animations of 8-10 Shapes */
+    .c-tri-coral {
+      top: 90px;
+      left: 4%;
+      animation: drift 7s ease-in-out infinite;
+    }
+    .c-arc-teal {
+      top: 220px;
+      right: 6%;
+      animation: sway 9s ease-in-out infinite;
+    }
+    .c-dots-mustard {
+      top: 540px;
+      left: 2%;
+      animation: bob 6s ease-in-out infinite;
+    }
+    .c-plus-violet {
+      top: 130px;
+      right: 28%;
+      animation: spin 14s linear infinite;
+    }
+    .c-squiggle-black {
+      top: 470px;
+      right: 4%;
+      animation: sway 8s ease-in-out infinite;
+    }
+    .c-half-mustard {
+      top: 780px;
+      left: 12%;
+      animation: drift 10s ease-in-out infinite;
+    }
+    .c-zigzag-sky {
+      top: 860px;
+      right: 15%;
+      animation: bob 7s ease-in-out infinite;
+    }
+    .c-striped-coral {
+      top: 360px;
+      left: 48%;
+      animation: spin 20s linear infinite;
+    }
+
+    /* =========================================================
+       3. NAVIGATION BAR
+       ========================================================= */
+    .nav-container {
+      position: relative;
+      z-index: 10;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .brand-tile {
+      width: 44px;
+      height: 44px;
+      background: var(--mustard);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-md);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .brand-tile:hover {
+      transform: translate(2px, 2px);
+      box-shadow: var(--shadow-active);
+    }
+
+    .brand-tile svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 26px;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--coral);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .btn-gate {
+      background: var(--teal);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 0.65rem 1.3rem;
+      border: var(--border-hard);
+      box-shadow: var(--shadow-md);
+      border-radius: 9999px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-gate:hover {
+      transform: translate(3px, 3px);
+      box-shadow: var(--shadow-active);
+    }
+
+    /* =========================================================
+       4. HERO LAYOUT & COLUMNS
+       ========================================================= */
+    .hero-section {
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 1.5rem auto 3.5rem;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.95fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* Left Column */
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .eyebrow-pill {
+      align-self: flex-start;
+      background: var(--violet);
+      color: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-sm);
+      border-radius: 9999px;
+      padding: 0.4rem 1rem;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .eyebrow-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--mustard);
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+
+    /* Marker Highlight Bars (Solid Fills Only) */
+    .hl-grass {
+      display: inline-block;
+      background: var(--mustard);
+      border: var(--border-hard);
+      padding: 0 0.25em;
+      transform: rotate(-1.5deg);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .hl-monday {
+      display: inline-block;
+      background: var(--teal);
+      color: var(--white);
+      border: var(--border-hard);
+      padding: 0 0.22em;
+      transform: rotate(1.2deg);
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+
+    .hero-lead {
+      font-size: 1.15rem;
+      color: var(--ink);
+      font-weight: 500;
+      max-width: 580px;
+    }
+
+    /* Scout Form Card */
+    .scout-card {
+      background: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.1rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-label {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .memphis-select {
+      width: 100%;
+      background: var(--bg-cream);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-sm);
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg2+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2317140d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .memphis-select:focus {
+      transform: translate(2px, 2px);
+      box-shadow: var(--shadow-active);
+    }
+
+    /* Dual CTA Row */
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--coral);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 0.9rem 1.8rem;
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 9999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      transform: translate(3px, 3px);
+      box-shadow: var(--shadow-active);
+    }
+
+    .btn-primary:active {
+      transform: translate(4px, 4px);
+      box-shadow: 0 0 0 #17140d;
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-ghost {
+      background: var(--white);
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 0.9rem 1.6rem;
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 9999px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-ghost:hover {
+      transform: translate(3px, 3px);
+      box-shadow: var(--shadow-active);
+      background: var(--mustard);
+    }
+
+    /* Trust Row */
+    .trust-row {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      margin-top: 0.5rem;
+    }
+
+    .avatar-stack {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: var(--border-hard);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--white);
+      margin-left: -9px;
+    }
+
+    .avatar-circle:first-child {
+      margin-left: 0;
+    }
+
+    .av-coral { background: var(--coral); }
+    .av-teal { background: var(--teal); }
+    .av-violet { background: var(--violet); }
+    .av-mustard { background: var(--mustard); color: var(--ink); }
+
+    .trust-text {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    /* Right Column (Tilted Live Output Dashboard Mockup) */
+    .hero-right {
+      position: relative;
+    }
+
+    .tilted-dashboard {
+      background: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 22px;
+      padding: 1.4rem;
+      transform: rotate(-2deg);
+      transition: transform 0.3s ease;
+    }
+
+    .tilted-dashboard:hover {
+      transform: rotate(0deg);
+    }
+
+    /* Chrome Header */
+    .chrome-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: var(--border-hard);
+      padding-bottom: 0.85rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .traffic-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .tdot {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      border: 2px solid var(--ink);
+    }
+
+    .tdot-coral { background: var(--coral); }
+    .tdot-mustard { background: var(--mustard); }
+    .tdot-teal { background: var(--teal); }
+
+    .chrome-title {
+      font-family: var(--font-display);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Weather & Comfort Widget */
+    .widget-box {
+      background: var(--bg-cream);
+      border: var(--border-hard);
+      border-radius: 14px;
+      padding: 1rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .widget-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .widget-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1rem;
+    }
+
+    .comfort-badge {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.35rem 0.85rem;
+      border: var(--border-hard);
+      box-shadow: var(--shadow-sm);
+      border-radius: 9999px;
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .badge-optimal {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .badge-moderate {
+      background: var(--mustard);
+      color: var(--ink);
+    }
+
+    .badge-avoid {
+      background: var(--coral);
+      color: var(--white);
+    }
+
+    /* TabPFN Probability Bar Chart */
+    .chart-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .bar-chart-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      align-items: flex-end;
+      height: 48px;
+      margin-top: 0.4rem;
+    }
+
+    .bar-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: flex-end;
+    }
+
+    .bar-fill {
+      width: 100%;
+      border: 2px solid var(--ink);
+      border-radius: 4px 4px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .bar-col span {
+      font-size: 0.68rem;
+      font-weight: 800;
+      font-family: var(--font-display);
+      margin-top: 3px;
+    }
+
+    .bar-1 { height: 95%; background: var(--teal); }
+    .bar-2 { height: 80%; background: var(--mustard); }
+    .bar-3 { height: 25%; background: var(--coral); }
+    .bar-4 { height: 88%; background: var(--violet); }
+
+    /* Pocket Guide Itinerary Output Box */
+    .guide-box {
+      border: var(--border-hard);
+      border-radius: 16px;
+      padding: 1.1rem;
+      background: var(--white);
+      margin-bottom: 1.1rem;
+    }
+
+    .guide-chip-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .memphis-chip {
+      background: var(--bg-cream);
+      border: var(--border-hard);
+      box-shadow: 3px 3px 0 var(--ink);
+      border-radius: 12px;
+      padding: 0.75rem 0.9rem;
+    }
+
+    .chip-header {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .chip-transit .chip-header { color: var(--sky); }
+    .chip-sensory .chip-header { color: var(--teal); }
+    .chip-odia .chip-header { color: var(--violet); }
+    .chip-screen .chip-header { color: var(--coral); }
+
+    .chip-body {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    /* Card Action Buttons */
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .btn-card-copy {
+      background: var(--coral);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 0.75rem;
+      border: var(--border-hard);
+      box-shadow: var(--shadow-sm);
+      border-radius: 9999px;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-card-copy:hover {
+      transform: translate(2px, 2px);
+      box-shadow: var(--shadow-active);
+    }
+
+    .btn-card-detox {
+      background: var(--teal);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.9rem;
+      padding: 0.75rem;
+      border: var(--border-hard);
+      box-shadow: var(--shadow-sm);
+      border-radius: 9999px;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-card-detox:hover {
+      transform: translate(2px, 2px);
+      box-shadow: var(--shadow-active);
+    }
+
+    /* =========================================================
+       5. FULL-BLEED BLACK CAMPUS STRIP
+       ========================================================= */
+    .campus-strip {
+      background: var(--ink);
+      color: var(--white);
+      border-top: var(--border-hard);
+      border-bottom: var(--border-hard);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .strip-label {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--mustard);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .strip-items {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .strip-items li {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--bg-cream);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .strip-dot {
+      color: var(--coral);
+      font-size: 1.4rem;
+    }
+
+    /* =========================================================
+       6. THREE-UP FEATURES SECTION
+       ========================================================= */
+    .features-section {
+      max-width: 1240px;
+      margin: 4.5rem auto 5rem;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+
+    .features-eyebrow {
+      display: inline-block;
+      background: var(--mustard);
+      color: var(--ink);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-sm);
+      border-radius: 9999px;
+      padding: 0.4rem 1.1rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .features-headline {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      max-width: 800px;
+      margin: 0 auto 3rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      text-align: left;
+    }
+
+    .feature-card {
+      background: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 20px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .feature-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 11px 11px 0 var(--ink);
+    }
+
+    .feature-chip-icon {
+      width: 54px;
+      height: 54px;
+      border: var(--border-hard);
+      box-shadow: var(--shadow-sm);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+    }
+
+    .chip-icon-coral { background: var(--coral); color: var(--white); }
+    .chip-icon-teal { background: var(--teal); color: var(--white); }
+    .chip-icon-violet { background: var(--violet); color: var(--white); }
+
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .feature-desc {
+      font-size: 0.98rem;
+      color: var(--ink);
+      font-weight: 500;
+      line-height: 1.55;
+    }
+
+    /* Footer */
+    footer {
+      border-top: var(--border-hard);
+      background: var(--bg-cream);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+    }
+
+    .footer-nav a {
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.9rem;
+      border: 2px solid var(--ink);
+      background: var(--white);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .footer-nav a:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--ink);
+      background: var(--mustard);
+    }
+
+    .feature-action-link {
+      margin-top: auto;
+      align-self: flex-start;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 2px solid var(--ink);
+      padding-bottom: 2px;
+      transition: color 0.15s ease;
+    }
+
+    .feature-action-link:hover {
+      color: var(--coral);
+    }
+
+    .mobile-nav-bar {
+      display: none;
+    }
+
+    /* Toast */
+    .memphis-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--mustard);
+      color: var(--ink);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 9999px;
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .memphis-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 960px) {
+      .hero-section {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .tilted-dashboard {
+        transform: rotate(0deg);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .mobile-nav-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin: 0.5rem auto 1.5rem;
+        padding: 0 1rem;
+        position: relative;
+        z-index: 10;
+      }
+      .mobile-nav-link {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 0.82rem;
+        color: var(--ink);
+        text-decoration: none;
+        background: var(--white);
+        border: 2px solid var(--ink);
+        box-shadow: 3px 3px 0 var(--ink);
+        padding: 0.35rem 0.75rem;
+        border-radius: 9999px;
+      }
+      .mobile-nav-link:hover {
+        background: var(--mustard);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND CONFETTI (CSS KEYFRAMES ONLY) -->
+  <div class="confetti-layer" aria-hidden="true">
+    <!-- Coral Triangle -->
+    <svg class="confetti-item c-tri-coral" width="46" height="46" viewBox="0 0 46 46">
+      <polygon points="23,4 42,40 4,40" fill="#ff5b57" stroke="#17140d" stroke-width="3" stroke-linejoin="round"/>
+    </svg>
+    <!-- Teal Quarter Arc -->
+    <svg class="confetti-item c-arc-teal" width="56" height="56" viewBox="0 0 56 56">
+      <path d="M4 52 A48 48 0 0 1 52 4 L52 52 Z" fill="#12b3a4" stroke="#17140d" stroke-width="3"/>
+    </svg>
+    <!-- Mustard Dotted Circle -->
+    <svg class="confetti-item c-dots-mustard" width="44" height="44" viewBox="0 0 44 44">
+      <circle cx="22" cy="22" r="18" fill="#ffc531" stroke="#17140d" stroke-width="3" stroke-dasharray="6,4"/>
+    </svg>
+    <!-- Violet Spinning Plus -->
+    <svg class="confetti-item c-plus-violet" width="40" height="40" viewBox="0 0 40 40">
+      <rect x="14" y="2" width="12" height="36" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
+      <rect x="2" y="14" width="36" height="12" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
+    </svg>
+    <!-- Black Bacteria Squiggle -->
+    <svg class="confetti-item c-squiggle-black" width="68" height="34" viewBox="0 0 68 34">
+      <path d="M4 17 Q 16 0, 28 17 T 52 17 T 64 17" fill="none" stroke="#17140d" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    <!-- Mustard Half Circle -->
+    <svg class="confetti-item c-half-mustard" width="52" height="30" viewBox="0 0 52 30">
+      <path d="M3 27 A23 23 0 0 1 49 27 Z" fill="#ffc531" stroke="#17140d" stroke-width="3"/>
+    </svg>
+    <!-- Sky Blue Zigzag -->
+    <svg class="confetti-item c-zigzag-sky" width="54" height="36" viewBox="0 0 54 36">
+      <polyline points="4,28 16,8 28,28 40,8 50,28" fill="none" stroke="#3aa0ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <!-- Coral Striped Circle -->
+    <svg class="confetti-item c-striped-coral" width="42" height="42" viewBox="0 0 42 42">
+      <circle cx="21" cy="21" r="18" fill="#ff5b57" stroke="#17140d" stroke-width="3"/>
+      <line x1="10" y1="14" x2="32" y2="14" stroke="#ffffff" stroke-width="3"/>
+      <line x1="6" y1="21" x2="36" y2="21" stroke="#ffffff" stroke-width="3"/>
+      <line x1="10" y1="28" x2="32" y2="28" stroke="#ffffff" stroke-width="3"/>
+    </svg>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="nav-container">
+    <a href="index.html" class="brand-wrap">
+      <div class="brand-tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
+          <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
+        </svg>
+      </div>
+      <span class="brand-name">PravasiTrail</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="trails.html">Campus Trails</a></li>
+      <li><a href="weather.html">TabPFN Weather</a></li>
+      <li><a href="mobus.html">Mo Bus Guide</a></li>
+      <li><a href="odia.html">Odia Cheatsheet</a></li>
+    </ul>
+
+    <a href="index.html" class="btn-gate">
+      <span>ITER Gate 1</span>
+    </a>
+  </nav>
+
+  <!-- Mobile Quick Navigation Bar -->
+  <div class="mobile-nav-bar">
+    <a href="index.html" class="mobile-nav-link active">🏠 Scout</a>
+    <a href="trails.html" class="mobile-nav-link">🚶 Trails</a>
+    <a href="weather.html" class="mobile-nav-link">☀️ Weather</a>
+    <a href="mobus.html" class="mobile-nav-link">🚌 Mo Bus</a>
+    <a href="odia.html" class="mobile-nav-link">🗣️ Odia</a>
+  </div>
+
+
+  <!-- ASYMMETRIC HERO SECTION -->
+  <main class="hero-section" id="scout-form">
+
+    <!-- Left Column (Hostel-to-Trail Scout Form) -->
+    <div class="hero-left">
+      <div class="eyebrow-pill">
+        <span class="eyebrow-dot"></span>
+        <span>BH-1 TO BH-9 • WEEKEND EXPEDITION</span>
+      </div>
+
+      <h1 class="hero-headline">
+        Touch <span class="hl-grass">grass</span> before <span class="hl-monday">Monday</span> classes
+      </h1>
+
+      <p class="hero-lead">
+        Built for non-Odia hostellers at ITER Bhubaneswar. Check TabPFN heat comfort, get Mo Bus routes, master local auto phrases, and shut your screen in under 30 seconds.
+      </p>
+
+      <!-- Interactive Scout Form Card -->
+      <div class="scout-card">
+        <div class="form-grid">
+          <!-- Destination -->
+          <div class="form-group">
+            <label class="form-label" for="dest-select">Destination</label>
+            <select class="memphis-select" id="dest-select">
+              <option value="khandagiri" selected>Khandagiri Caves (3.5 km)</option>
+              <option value="deras">Deras Dam / Chandaka (14 km)</option>
+              <option value="ekamra">Ekamra Kanan Lake (6 km)</option>
+              <option value="dhauli">Dhauli Shanti Stupa (11 km)</option>
+            </select>
+          </div>
+
+          <!-- Stepping Out Hour -->
+          <div class="form-group">
+            <label class="form-label" for="hour-select">Stepping Out Hour</label>
+            <select class="memphis-select" id="hour-select">
+              <option value="6">6:00 AM (Dawn)</option>
+              <option value="7" selected>7:30 AM (Morning)</option>
+              <option value="16">4:30 PM (Dusk)</option>
+              <option value="12">12:00 PM (Noon)</option>
+            </select>
+          </div>
+
+          <!-- Home State -->
+          <div class="form-group">
+            <label class="form-label" for="state-select">Home State</label>
+            <select class="memphis-select" id="state-select">
+              <option value="Bihar">Bihar</option>
+              <option value="Jharkhand" selected>Jharkhand</option>
+              <option value="West Bengal">West Bengal</option>
+              <option value="Uttar Pradesh">Uttar Pradesh</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Dual CTA Row -->
+        <div class="cta-row">
+          <button class="btn-primary" id="scout-btn" onclick="handleScoutSubmit()">
+            <span>Scout Trail & Comfort -&gt;</span>
+          </button>
+          <button class="btn-ghost" id="random-btn" onclick="handleRandomTrek()">
+            <span>🎲 Random Trek</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Trust Row -->
+      <div class="trust-row">
+        <div class="avatar-stack">
+          <div class="avatar-circle av-coral">B</div>
+          <div class="avatar-circle av-teal">J</div>
+          <div class="avatar-circle av-violet">U</div>
+          <div class="avatar-circle av-mustard">W</div>
+        </div>
+        <div class="trust-text">
+          Over 3,000+ hostellers exploring outdoor Odisha • Zero logins required
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column (Tilted Live Output Dashboard Mockup) -->
+    <div class="hero-right">
+      <div class="tilted-dashboard">
+        <!-- Chrome Bar -->
+        <div class="chrome-bar">
+          <div class="traffic-dots">
+            <div class="tdot tdot-coral"></div>
+            <div class="tdot tdot-mustard"></div>
+            <div class="tdot tdot-teal"></div>
+          </div>
+          <div class="chrome-title">Live TabPFN Sensor & Field Card</div>
+        </div>
+
+        <!-- Live Weather & Comfort Widget -->
+        <div class="widget-box">
+          <div class="widget-head">
+            <span class="widget-title">Bhubaneswar Outdoor Index</span>
+            <span class="comfort-badge badge-optimal" id="comfort-badge">Optimal Window</span>
+          </div>
+
+          <div class="chart-label">
+            <span>TabPFN Thermal Comfort (Dawn to Night)</span>
+            <span id="metric-values">26.0°C • 85% RH • UV 2.4</span>
+          </div>
+
+          <!-- Probability Bar Chart -->
+          <div class="bar-chart-row">
+            <div class="bar-col">
+              <div class="bar-fill bar-1"></div>
+              <span>06:00</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill bar-2"></div>
+              <span>08:00</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill bar-3"></div>
+              <span>12:00</span>
+            </div>
+            <div class="bar-col">
+              <div class="bar-fill bar-4"></div>
+              <span>17:00</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pocket Guide Itinerary Output Box -->
+        <div class="guide-box">
+          <div class="guide-chip-grid" id="guide-output">
+            <!-- 1. Transit -->
+            <div class="memphis-chip chip-transit">
+              <div class="chip-header">🚌 Transit & Mo Bus</div>
+              <div class="chip-body" id="chip-transit-text">
+                Exit Jagamara Gate. Take Mo Bus Route 11 from ITER Square directly to Khandagiri (₹15-20 shared auto).
+              </div>
+            </div>
+
+            <!-- 2. Sensory Checkpoint -->
+            <div class="memphis-chip chip-sensory">
+              <div class="chip-header">🌿 Sensory Checkpoint (Touch & See)</div>
+              <div class="chip-body" id="chip-sensory-text">
+                Run your palms over the cool, rough 2nd-century BCE sandstone inside Rani Gumpha; feel the hilltop sea breeze over the horizon.
+              </div>
+            </div>
+
+            <!-- 3. Driver Phrase -->
+            <div class="memphis-chip chip-odia">
+              <div class="chip-header">🗣️ Driver Phrase in Odia</div>
+              <div class="chip-body" id="chip-odia-text">
+                "Bhai, Khandagiri jibe ki? Kete tonka?" (Brother, will you go to Khandagiri? How much fare?)
+              </div>
+            </div>
+
+            <!-- 4. Screen-Off Rule -->
+            <div class="memphis-chip chip-screen">
+              <div class="chip-header">📴 Screen-Off Digital Detox Rule</div>
+              <div class="chip-body" id="chip-screen-text">
+                Phone in pocket now—navigate ancient carved stone steps using your eyes, not a screen.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="card-actions">
+          <button class="btn-card-copy" id="copy-card-btn" onclick="handleCopyCard()">
+            📋 Copy Field Notes
+          </button>
+          <button class="btn-card-detox" id="detox-btn" onclick="handleDetoxClose()">
+            🍃 Close & Go Touch Grass
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FULL-BLEED BLACK LOGO & CAMPUS STRIP -->
+  <section class="campus-strip">
+    <div class="strip-label">POPULAR EXPEDITIONS FROM ITER</div>
+    <ul class="strip-items">
+      <li><a href="index.html?dest=khandagiri" style="color: inherit; text-decoration: none;">Khandagiri Caves</a> <span class="strip-dot">•</span></li>
+      <li><a href="index.html?dest=deras" style="color: inherit; text-decoration: none;">Deras Dam</a> <span class="strip-dot">•</span></li>
+      <li><a href="index.html?dest=ekamra" style="color: inherit; text-decoration: none;">Ekamra Lake</a> <span class="strip-dot">•</span></li>
+      <li><a href="index.html?dest=dhauli" style="color: inherit; text-decoration: none;">Dhauli Stupa</a> <span class="strip-dot">•</span></li>
+      <li><a href="trails.html" style="color: var(--mustard); text-decoration: underline;">Browse All Trails ➔</a></li>
+    </ul>
+  </section>
+
+  <!-- THREE-UP FEATURES SECTION -->
+  <section class="features-section" id="features">
+    <span class="features-eyebrow">WHY WE BUILT THIS</span>
+    <h2 class="features-headline">Hostel rooms kill curiosity. Odisha is waiting outside.</h2>
+
+    <div class="features-grid">
+      <!-- Feature 1: TabPFN -->
+      <div class="feature-card">
+        <div class="feature-chip-icon chip-icon-coral">📊</div>
+        <h3 class="feature-title">TabPFN Foundation Model</h3>
+        <p class="feature-desc">
+          Zero-shot prior-data fitted tabular classifier trained on coastal Bhubaneswar climate cycles. Instant prediction of wet-bulb temperature, heat, and solar radiation comfort windows.
+        </p>
+        <a href="weather.html" class="feature-action-link">Open Diurnal Weather Matrix ➔</a>
+      </div>
+
+      <!-- Feature 2: LLM Guide -->
+      <div class="feature-card">
+        <div class="feature-chip-icon chip-icon-teal">⚡</div>
+        <h3 class="feature-title">Gemma 2 Open-Weights</h3>
+        <p class="feature-desc">
+          Synthesizes concise pocket itineraries specifically tailored for hostellers from Jharkhand, Bihar, and UP. Delivers exact Mo Bus transit routes and conversational Odia survival phrases.
+        </p>
+        <a href="mobus.html" class="feature-action-link">Explore Mo Bus Routes & Hacks ➔</a>
+      </div>
+
+      <!-- Feature 3: Detox Rule -->
+      <div class="feature-card">
+        <div class="feature-chip-icon chip-icon-violet">🌿</div>
+        <h3 class="feature-title">Zero Screen-Time Rule</h3>
+        <p class="feature-desc">
+          Designed to be viewed for under 20 seconds, noted or copied, and closed. Built for the DEV Hacktoberfest Touch Grass Challenge to pull engineers away from screens.
+        </p>
+        <a href="odia.html" class="feature-action-link">Read Odia Survival Phrases ➔</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-nav">
+      <a href="index.html">Home Scout</a>
+      <a href="trails.html">Campus Trails</a>
+      <a href="weather.html">TabPFN Weather</a>
+      <a href="mobus.html">Mo Bus Guide</a>
+      <a href="odia.html">Odia Cheatsheet</a>
+    </div>
+    <p>PravasiTrail (CampusBahar) • Siksha 'O' Anusandhan ITER Jagamara • DEV "Touch Grass" Hacktoberfest 2026</p>
+  </footer>
+
+
+
+  <!-- TOAST NOTIFICATION -->
+  <div class="memphis-toast" id="toast">Field notes copied to clipboard!</div>
+
+  <!-- =========================================================
+       7. FRONTEND JAVASCRIPT (/api/scout Integration)
+       ========================================================= -->
+  <script>
+    let currentRawCardMarkdown = "";
+
+    async function handleScoutSubmit() {
+      const scoutBtn = document.getElementById('scout-btn');
+      const destSelect = document.getElementById('dest-select');
+      const hourSelect = document.getElementById('hour-select');
+      const stateSelect = document.getElementById('state-select');
+
+      const destination = destSelect.value;
+      const target_hour = parseInt(hourSelect.value);
+      const student_home_state = stateSelect.value;
+
+      // Update button state
+      scoutBtn.disabled = true;
+      scoutBtn.innerText = "Consulting TabPFN & Gemma...";
+
+      try {
+        const apiEndpoint = (window.location.protocol === 'file:')
+          ? 'http://localhost:8000/api/scout'
+          : '/api/scout';
+
+        const response = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            destination: destination,
+            target_hour: target_hour,
+            student_home_state: student_home_state
+          })
+        });
+
+
+        if (!response.ok) {
+          throw new Error('API server returned error ' + response.status);
+        }
+
+        const data = await response.json();
+        currentRawCardMarkdown = data.card_markdown;
+
+        // 1. Update Comfort Badge
+        const comfortBadge = document.getElementById('comfort-badge');
+        const cClass = data.comfort.comfort_class;
+        comfortBadge.className = 'comfort-badge';
+
+        if (cClass === 'Optimal') {
+          comfortBadge.classList.add('badge-optimal');
+          comfortBadge.innerText = 'Optimal Window';
+        } else if (cClass === 'Moderate') {
+          comfortBadge.classList.add('badge-moderate');
+          comfortBadge.innerText = 'Moderate Thermal';
+        } else {
+          comfortBadge.classList.add('badge-avoid');
+          comfortBadge.innerText = 'Avoid High Heat';
+        }
+
+        // 2. Update Weather Metrics String
+        const metricsStr = `${data.weather.temp}°C • ${data.weather.humidity}% RH • UV ${data.weather.uv}`;
+        document.getElementById('metric-values').innerText = metricsStr;
+
+        // 3. Parse and Populate 4 Memphis Micro-Chips
+        parseMarkdownToChips(data.card_markdown);
+
+        showToast(`Scout Ready: ${data.destination}!`);
+      } catch (err) {
+        console.error('Scout fetch error:', err);
+        showToast('Offline Mode: Displaying cached trail guide.');
+      } finally {
+        scoutBtn.disabled = false;
+        scoutBtn.innerText = "Scout Trail & Comfort ->";
+      }
+    }
+
+    function parseMarkdownToChips(mdText) {
+      if (!mdText) return;
+      const lines = mdText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+
+      let transit = "";
+      let sensory = "";
+      let odia = "";
+      let screen = "";
+
+      for (const line of lines) {
+        if (/^1\./i.test(line) || /transit/i.test(line)) {
+          transit = line.replace(/^1\.\s*(Transit from ITER:)?/i, '').trim();
+        } else if (/^2\./i.test(line) || /sensory/i.test(line)) {
+          sensory = line.replace(/^2\.\s*(Sensory Touch-Grass( Challenge)?:)?/i, '').trim();
+        } else if (/^3\./i.test(line) || /odia/i.test(line)) {
+          odia = line.replace(/^3\.\s*(Essential )?(Odia (Driver )?Phrase:)?/i, '').trim();
+        } else if (/^4\./i.test(line) || /screen/i.test(line)) {
+          screen = line.replace(/^4\.\s*(Screen-Off Protocol:)?/i, '').trim();
+        }
+      }
+
+      if (transit) document.getElementById('chip-transit-text').innerText = transit;
+      if (sensory) document.getElementById('chip-sensory-text').innerText = sensory;
+      if (odia) document.getElementById('chip-odia-text').innerText = odia;
+      if (screen) document.getElementById('chip-screen-text').innerText = screen;
+    }
+
+    function handleRandomTrek() {
+      const destinations = ['khandagiri', 'deras', 'ekamra', 'dhauli'];
+      const hours = [6, 7, 16];
+      const randomDest = destinations[Math.floor(Math.random() * destinations.length)];
+      const randomHour = hours[Math.floor(Math.random() * hours.length)];
+
+      document.getElementById('dest-select').value = randomDest;
+      document.getElementById('hour-select').value = randomHour;
+
+      handleScoutSubmit();
+    }
+
+    function handleCopyCard() {
+      const transit = document.getElementById('chip-transit-text').innerText;
+      const sensory = document.getElementById('chip-sensory-text').innerText;
+      const odia = document.getElementById('chip-odia-text').innerText;
+      const screen = document.getElementById('chip-screen-text').innerText;
+
+      const fullText = currentRawCardMarkdown || `1. Transit: ${transit}\n2. Sensory: ${sensory}\n3. Odia: ${odia}\n4. Screen-Off: ${screen}`;
+
+      navigator.clipboard.writeText(fullText).then(() => {
+        const btn = document.getElementById('copy-card-btn');
+        const orig = btn.innerText;
+        btn.innerText = "Copied! ✓";
+        showToast("Field notes copied to clipboard!");
+        setTimeout(() => { btn.innerText = orig; }, 2000);
+      }).catch(() => {
+        showToast("Could not access clipboard.");
+      });
+    }
+
+    function handleDetoxClose() {
+      showToast("Shutting off screen. Have a great outdoor trek!");
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Auto-select destination from query param (e.g. /?dest=khandagiri)
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const destParam = urlParams.get('dest');
+      if (destParam) {
+        const destSelect = document.getElementById('dest-select');
+        if (destSelect) {
+          destSelect.value = destParam;
+          document.getElementById('scout-form')?.scrollIntoView({ behavior: 'smooth' });
+          handleScoutSubmit();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
+

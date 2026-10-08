@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odia Cheatsheet | PravasiTrail (CampusBahar)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #f5efe2;
+      --ink: #17140d;
+      --teal: #12b3a4;
+      --coral: #ff5b57;
+      --mustard: #ffc531;
+      --violet: #6b5be6;
+      --sky: #3aa0ff;
+      --white: #ffffff;
+      
+      --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      --border-hard: 3px solid #17140d;
+      --shadow-lg: 8px 8px 0 #17140d;
+      --shadow-md: 5px 5px 0 #17140d;
+      --shadow-sm: 4px 4px 0 #17140d;
+      --shadow-active: 2px 2px 0 #17140d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    ::selection { background: var(--mustard); color: var(--ink); }
+
+    /* CONFETTI ANIMATIONS */
+    @keyframes drift {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-24px) rotate(15deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes bob {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-16px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .confetti-layer {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .confetti-item { position: absolute; pointer-events: none; }
+    .c-tri-coral { top: 90px; left: 4%; animation: drift 7s ease-in-out infinite; }
+    .c-arc-teal { top: 240px; right: 5%; animation: drift 9s ease-in-out infinite; }
+    .c-plus-violet { top: 130px; right: 28%; animation: spin 14s linear infinite; }
+    .c-half-mustard { top: 620px; left: 3%; animation: bob 8s ease-in-out infinite; }
+
+    /* NAVBAR */
+    .nav-container {
+      position: relative; z-index: 10;
+      max-width: 1240px; margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .brand-wrap {
+      display: flex; align-items: center; gap: 0.85rem;
+      text-decoration: none; color: var(--ink);
+    }
+    .brand-tile {
+      width: 44px; height: 44px;
+      background: var(--mustard);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-md);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 800; font-size: 26px;
+      letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      color: var(--ink); font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; transition: color 0.15s ease;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
+    }
+    .btn-gate {
+      background: var(--teal); color: var(--white);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      padding: 0.65rem 1.3rem;
+      border: var(--border-hard); box-shadow: var(--shadow-md);
+      border-radius: 9999px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-gate:hover {
+      transform: translate(3px, 3px); box-shadow: var(--shadow-active);
+    }
+
+    /* HEADER */
+    .page-header {
+      position: relative; z-index: 1;
+      max-width: 1240px; margin: 2rem auto 2.5rem;
+      padding: 0 1.5rem; text-align: center;
+    }
+    .eyebrow-pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--violet); color: var(--white);
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 9999px; padding: 0.4rem 1.1rem;
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 800;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.85rem;
+    }
+    .eyebrow-dot {
+      width: 10px; height: 10px; background: var(--mustard);
+      border: 2px solid var(--ink); border-radius: 50%;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+    .page-lead {
+      font-size: 1.15rem; font-weight: 500;
+      max-width: 720px; margin: 0 auto; color: var(--ink);
+    }
+
+    /* PHRASE SECTION */
+    .content-container {
+      position: relative; z-index: 1;
+      max-width: 1240px; margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+    }
+
+    .category-title-bar {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin: 2rem 0 1.25rem;
+    }
+    .category-chip {
+      background: var(--ink); color: var(--mustard);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;
+      border: var(--border-hard); border-radius: 8px;
+      padding: 0.35rem 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .category-heading {
+      font-family: var(--font-display); font-size: 1.45rem; font-weight: 800;
+    }
+
+    .phrase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .phrase-card {
+      background: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 18px;
+      padding: 1.5rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+      gap: 0.9rem;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .phrase-card:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 11px 11px 0 var(--ink);
+    }
+
+    .phrase-odia {
+      font-family: var(--font-display);
+      font-size: 1.35rem; font-weight: 800; color: var(--ink);
+      line-height: 1.25;
+    }
+
+    .phonetic-chip {
+      background: var(--bg-cream);
+      border: 2px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      border-radius: 10px;
+      padding: 0.5rem 0.8rem;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--violet);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    .phrase-meaning {
+      font-size: 0.95rem; font-weight: 600; color: var(--ink);
+      display: flex; align-items: baseline; gap: 0.4rem;
+    }
+    .phrase-meaning span { color: var(--coral); font-weight: 800; }
+
+    .card-footer-tip {
+      font-size: 0.82rem; font-weight: 500; color: #64748b;
+      border-top: 1px dashed #cbd5e1; padding-top: 0.5rem;
+    }
+
+    .btn-copy-phrase {
+      background: var(--bg-cream); border: 2px solid var(--ink);
+      border-radius: 6px; padding: 0.2rem 0.6rem;
+      font-family: var(--font-display); font-weight: 800; font-size: 0.75rem;
+      cursor: pointer; transition: background 0.15s ease;
+    }
+    .btn-copy-phrase:hover { background: var(--mustard); }
+
+    /* CULTURAL PRO TIP BOX */
+    .culture-card {
+      background: var(--mustard);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-top: 3.5rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .culture-title {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+    }
+    .culture-text {
+      font-size: 1.05rem; font-weight: 600; line-height: 1.6;
+    }
+
+    footer {
+      border-top: var(--border-hard); background: var(--bg-cream);
+      padding: 2.5rem 1.5rem; text-align: center;
+      font-weight: 700; font-size: 0.95rem;
+    }
+
+    .footer-nav {
+      display: flex; justify-content: center;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+    }
+    .footer-nav a {
+      color: var(--ink); font-weight: 700; text-decoration: none; font-size: 0.9rem;
+      border: 2px solid var(--ink); background: var(--white);
+      padding: 0.35rem 0.85rem; border-radius: 9999px;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .footer-nav a:hover {
+      transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink);
+      background: var(--mustard);
+    }
+
+    .mobile-nav-bar { display: none; }
+
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: var(--mustard); color: var(--ink);
+      border: var(--border-hard); box-shadow: var(--shadow-lg);
+      font-family: var(--font-display); font-weight: 800; font-size: 1rem;
+      padding: 0.75rem 1.6rem; border-radius: 9999px;
+      z-index: 9999; opacity: 0; transition: all 0.25s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .mobile-nav-bar {
+        display: flex; align-items: center; justify-content: center;
+        gap: 0.6rem; flex-wrap: wrap; margin: 0.5rem auto 1.5rem;
+        padding: 0 1rem; position: relative; z-index: 10;
+      }
+      .mobile-nav-link {
+        font-family: var(--font-display); font-weight: 800; font-size: 0.82rem;
+        color: var(--ink); text-decoration: none;
+        background: var(--white); border: 2px solid var(--ink);
+        box-shadow: 3px 3px 0 var(--ink); padding: 0.35rem 0.75rem;
+        border-radius: 9999px;
+      }
+      .mobile-nav-link:hover, .mobile-nav-link.active { background: var(--mustard); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND CONFETTI -->
+  <div class="confetti-layer" aria-hidden="true">
+    <svg class="confetti-item c-tri-coral" width="46" height="46" viewBox="0 0 46 46">
+      <polygon points="23,4 42,40 4,40" fill="#ff5b57" stroke="#17140d" stroke-width="3" stroke-linejoin="round"/>
+    </svg>
+    <svg class="confetti-item c-arc-teal" width="56" height="56" viewBox="0 0 56 56">
+      <path d="M4 52 A48 48 0 0 1 52 4 L52 52 Z" fill="#12b3a4" stroke="#17140d" stroke-width="3"/>
+    </svg>
+    <svg class="confetti-item c-plus-violet" width="40" height="40" viewBox="0 0 40 40">
+      <rect x="14" y="2" width="12" height="36" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
+      <rect x="2" y="14" width="36" height="12" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
+    </svg>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="nav-container">
+    <a href="index.html" class="brand-wrap">
+      <div class="brand-tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
+          <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
+        </svg>
+      </div>
+      <span class="brand-name">PravasiTrail</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="trails.html">Campus Trails</a></li>
+      <li><a href="weather.html">TabPFN Weather</a></li>
+      <li><a href="mobus.html">Mo Bus Guide</a></li>
+      <li><a href="odia.html" class="active">Odia Cheatsheet</a></li>
+    </ul>
+
+    <a href="index.html" class="btn-gate">
+      <span>ITER Gate 1</span>
+    </a>
+  </nav>
+
+  <!-- Mobile Quick Navigation Bar -->
+  <div class="mobile-nav-bar">
+    <a href="index.html" class="mobile-nav-link">🏠 Scout</a>
+    <a href="trails.html" class="mobile-nav-link">🚶 Trails</a>
+    <a href="weather.html" class="mobile-nav-link">☀️ Weather</a>
+    <a href="mobus.html" class="mobile-nav-link">🚌 Mo Bus</a>
+    <a href="odia.html" class="mobile-nav-link active">🗣️ Odia</a>
+  </div>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="eyebrow-pill">
+      <span class="eyebrow-dot"></span>
+      <span>HOSTEL TO STREET SURVIVAL GUIDE</span>
+    </div>
+    <h1 class="page-title">Odia phrases so autos don't overcharge you.</h1>
+    <p class="page-lead">Transliterated everyday phrases for non-Odia hostellers from Jharkhand, Bihar, UP, and Bengal. Speak with confidence and unlock genuine local hospitality.</p>
+  </header>
+
+  <!-- CONTENT -->
+  <main class="content-container">
+    <!-- Category 1: Auto & Transit -->
+    <div class="category-title-bar">
+      <span class="category-chip">Category 01</span>
+      <h2 class="category-heading">Auto & Transit Negotiation</h2>
+      <a href="mobus.html" style="color: var(--teal); font-weight: 700; font-size: 0.9rem; text-decoration: underline; margin-left: auto;">🚌 View Mo Bus Guide ➔</a>
+    </div>
+
+
+    <div class="phrase-grid">
+      <div class="phrase-card">
+        <div class="phrase-odia">"ଖଣ୍ଡଗିରି ଯିବେ କି?"</div>
+        <div class="phonetic-chip">
+          <span>🗣️ Khandagiri jibe ki?</span>
+          <button class="btn-copy-phrase" onclick="copyPhrase('Khandagiri jibe ki?')">Copy</button>
+        </div>
+        <div class="phrase-meaning"><span>Meaning:</span> "Will you go to Khandagiri?"</div>
+        <div class="card-footer-tip">Tip: Look directly at the driver and speak clearly. Shared autos queue right outside ITER Gate 1.</div>
+      </div>
+
+      <div class="phrase-card">
+        <div class="phrase-odia">"କେତେ ଟଙ୍କା ହେବ?"</div>
+        <div class="phonetic-chip">
+          <span>🗣️ Kete tonka heba?</span>
+          <button class="btn-copy-phrase" onclick="copyPhrase('Kete tonka heba?')">Copy</button>
+        </div>
+        <div class="phrase-meaning"><span>Meaning:</span> "How much will the fare be?"</div>
+        <div class="card-footer-tip">Tip: Standard shared rate from Jagamara to Khandagiri is ₹15–₹20 per seat.</div>
+      </div>
+
+      <div class="phrase-card">
+        <div class="phrase-odia">"ଏଇଠି ରଖନ୍ତୁ ଭାଇ।"</div>
+        <div class="phonetic-chip">
+          <span>🗣️ Eithi rokhantu bhai.</span>
+          <button class="btn-copy-phrase" onclick="copyPhrase('Eithi rokhantu bhai.')">Copy</button>
+        </div>
+        <div class="phrase-meaning"><span>Meaning:</span> "Please stop here, brother."</div>
+        <div class="card-footer-tip">Tip: Say this 20 meters before reaching ITER Gate 1 or the trail entry point.</div>
+      </div>
+    </div>
+
+    <!-- Category 2: Food & Outing -->
+    <div class="category-title-bar">
+      <span class="category-chip">Category 02</span>
+      <h2 class="category-heading">Street Food & Refreshments</h2>
+    </div>
+
+    <div class="phrase-grid">
+      <div class="phrase-card">
+        <div class="phrase-odia">"ଦହିବରା ଆଳୁଦମ୍ ଗୋଟେ ପ୍ଲେଟ୍ ଦିଅନ୍ତୁ।"</div>
+        <div class="phonetic-chip">
+          <span>🗣️ Dahi Bara Aloo Dum gote plate diantu.</span>
+          <button class="btn-copy-phrase" onclick="copyPhrase('Dahi Bara Aloo Dum gote plate diantu.')">Copy</button>
+        </div>
+        <div class="phrase-meaning"><span>Meaning:</span> "Please give one plate of Dahi Bara Aloo Dum."</div>
+        <div class="card-footer-tip">Tip: Bhubaneswar's holy grail snack. Always ask for complimentary spicy 'Dahi Paani' at the end!</div>
+      </div>
+
+      <div class="phrase-card">
+        <div class="phrase-odia">"ଟିକେ ପାଣି ମିଳିବ କି?"</div>
+        <div class="phonetic-chip">
+          <span>🗣️ Tike paani milibo ki?</span>
+          <button class="btn-copy-phrase" onclick="copyPhrase('Tike paani milibo ki?')">Copy</button>
+        </div>
+        <div class="phrase-meaning"><span>Meaning:</span> "Can I get some drinking water?"</div>
+        <div class="card-footer-tip">Tip: Vital for hydration during midday warm climbs atop Udayagiri hill.</div>
+      </div>
+
+      <div class="phrase-card">
+        <div class="phrase-odia">"ପିଆଜ ଟିକେ ବେଶୀ ଦେବେ।"</div>
+        <div class="phonetic-chip">
+          <span>🗣️ Piaji tikke besi debe.</span>
+          <button class="btn-copy-phrase" onclick="copyPhrase('Piaji tikke besi debe.')">Copy</button>
+        </div>
+        <div class="phrase-meaning"><span>Meaning:</span> "Please add a bit more chopped onions."</div>
+        <div class="card-footer-tip">Tip: Works wonders at Ghugni, Chaat, and Bara stalls outside Khandagiri square.</div>
+      </div>
+    </div>
+
+    <!-- Category 3: Campus & Courtesy -->
+    <div class="category-title-bar">
+      <span class="category-chip">Category 03</span>
+      <h2 class="category-heading">Campus Navigation & Courtesy</h2>
+    </div>
+
+    <div class="phrase-grid">
+      <div class="phrase-card">
+        <div class="phrase-odia">"ମୋ କଲେଜ ଆଇଟିଇଆର୍ (ITER) ଜଗମରା ରେ ଅଛି।"</div>
+        <div class="phonetic-chip">
+          <span>🗣️ Mo college ITER Jagamara re achi.</span>
+          <button class="btn-copy-phrase" onclick="copyPhrase('Mo college ITER Jagamara re achi.')">Copy</button>
+        </div>
+        <div class="phrase-meaning"><span>Meaning:</span> "My college is at ITER Jagamara."</div>
+        <div class="card-footer-tip">Tip: If an auto driver is confused, mention 'SOA ITER Jagamara Gate 1' or 'SUM Hospital road'.</div>
+      </div>
+
+      <div class="phrase-card">
+        <div class="phrase-odia">"ଧନ୍ୟବାଦ!"</div>
+        <div class="phonetic-chip">
+          <span>🗣️ Dhanyabad!</span>
+          <button class="btn-copy-phrase" onclick="copyPhrase('Dhanyabad!')">Copy</button>
+        </div>
+        <div class="phrase-meaning"><span>Meaning:</span> "Thank you!"</div>
+        <div class="card-footer-tip">Tip: Universally appreciated by elders, street vendors, and conductors.</div>
+      </div>
+
+      <div class="phrase-card">
+        <div class="phrase-odia">"ମୁଁ ବାହାର ପିଲା, ଓଡ଼ିଆ ଶିଖୁଛି।"</div>
+        <div class="phonetic-chip">
+          <span>🗣️ Mun bahara pila, Odia sikhuchi.</span>
+          <button class="btn-copy-phrase" onclick="copyPhrase('Mun bahara pila, Odia sikhuchi.')">Copy</button>
+        </div>
+        <div class="phrase-meaning"><span>Meaning:</span> "I am from outside state, learning Odia."</div>
+        <div class="card-footer-tip">Tip: Instant smile guaranteed. Odia locals are extraordinarily welcoming when you try.</div>
+      </div>
+    </div>
+
+    <!-- CULTURAL CARD -->
+    <div class="culture-card">
+      <h3 class="culture-title">Cultural Pro-Tip for Hostellers</h3>
+      <p class="culture-text">
+        In Odisha, calling elder auto drivers or shopkeepers <b>"Bhai"</b> (Brother) or <b>"Mousa"</b> (Uncle) with a calm tone instantly disarms any tension and establishes mutual respect. You don't need fluent grammar—speaking these simple phrases proves you respect the land you're studying in.
+      </p>
+      <div style="margin-top: 1rem; display: flex; gap: 0.85rem; flex-wrap: wrap;">
+        <a href="trails.html" style="background: var(--ink); color: var(--mustard); border: 2px solid var(--ink); border-radius: 9999px; padding: 0.65rem 1.3rem; font-weight: 800; text-decoration: none; font-size: 0.9rem;">Test Phrases on a Trail ➔</a>
+        <a href="index.html" style="background: var(--white); color: var(--ink); border: 2px solid var(--ink); border-radius: 9999px; padding: 0.65rem 1.3rem; font-weight: 800; text-decoration: none; font-size: 0.9rem;">Generate Custom Pocket Scout ➔</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-nav">
+      <a href="index.html">Home Scout</a>
+      <a href="trails.html">Campus Trails</a>
+      <a href="weather.html">TabPFN Weather</a>
+      <a href="mobus.html">Mo Bus Guide</a>
+      <a href="odia.html">Odia Cheatsheet</a>
+    </div>
+    <p>PravasiTrail (CampusBahar) • Siksha 'O' Anusandhan ITER Jagamara • DEV "Touch Grass" Hacktoberfest 2026</p>
+  </footer>
+
+
+  <div class="toast" id="toast">Phrase copied to clipboard!</div>
+
+  <script>
+    function copyPhrase(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.getElementById('toast');
+        toast.innerText = `Copied: "${text}"`;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      }).catch(() => {
+        alert('Could not copy automatically.');
+      });
+    }
+  </script>
+</body>
+</html>

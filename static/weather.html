@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TabPFN Weather Comfort | PravasiTrail (CampusBahar)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-cream: #f5efe2;
+      --ink: #17140d;
+      --teal: #12b3a4;
+      --coral: #ff5b57;
+      --mustard: #ffc531;
+      --violet: #6b5be6;
+      --sky: #3aa0ff;
+      --white: #ffffff;
+      
+      --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      
+      --border-hard: 3px solid #17140d;
+      --shadow-lg: 8px 8px 0 #17140d;
+      --shadow-md: 5px 5px 0 #17140d;
+      --shadow-sm: 4px 4px 0 #17140d;
+      --shadow-active: 2px 2px 0 #17140d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-cream);
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    ::selection { background: var(--mustard); color: var(--ink); }
+
+    /* CONFETTI ANIMATIONS */
+    @keyframes drift {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-24px) rotate(15deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes bob {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-16px); }
+      100% { transform: translateY(0px); }
+    }
+
+    .confetti-layer {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .confetti-item { position: absolute; pointer-events: none; }
+    .c-tri-coral { top: 90px; left: 4%; animation: drift 7s ease-in-out infinite; }
+    .c-arc-teal { top: 240px; right: 5%; animation: drift 9s ease-in-out infinite; }
+    .c-plus-violet { top: 130px; right: 25%; animation: spin 14s linear infinite; }
+    .c-dots-mustard { top: 620px; left: 3%; animation: bob 6s ease-in-out infinite; }
+
+    /* NAVBAR */
+    .nav-container {
+      position: relative; z-index: 10;
+      max-width: 1240px; margin: 0 auto;
+      padding: 1.5rem 1.5rem 1rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    }
+    .brand-wrap {
+      display: flex; align-items: center; gap: 0.85rem;
+      text-decoration: none; color: var(--ink);
+    }
+    .brand-tile {
+      width: 44px; height: 44px;
+      background: var(--mustard);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-md);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 800; font-size: 26px;
+      letter-spacing: -0.02em;
+    }
+    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
+    .nav-links a {
+      color: var(--ink); font-weight: 700; font-size: 0.95rem;
+      text-decoration: none; transition: color 0.15s ease;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
+    }
+    .btn-gate {
+      background: var(--teal); color: var(--white);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      padding: 0.65rem 1.3rem;
+      border: var(--border-hard); box-shadow: var(--shadow-md);
+      border-radius: 9999px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-gate:hover {
+      transform: translate(3px, 3px); box-shadow: var(--shadow-active);
+    }
+
+    /* HEADER */
+    .page-header {
+      position: relative; z-index: 1;
+      max-width: 1240px; margin: 2rem auto 2.5rem;
+      padding: 0 1.5rem; text-align: center;
+    }
+    .eyebrow-pill {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--violet); color: var(--white);
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 9999px; padding: 0.4rem 1.1rem;
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 800;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.85rem;
+    }
+    .eyebrow-dot {
+      width: 10px; height: 10px; background: var(--mustard);
+      border: 2px solid var(--ink); border-radius: 50%;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 0.8rem;
+    }
+    .page-lead {
+      font-size: 1.15rem; font-weight: 500;
+      max-width: 720px; margin: 0 auto; color: var(--ink);
+    }
+
+    /* MAIN CONTAINER */
+    .content-container {
+      position: relative; z-index: 1;
+      max-width: 1240px; margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+    }
+
+    /* INTERACTIVE SIMULATOR CARD */
+    .sim-card {
+      background: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+    .sim-header {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem;
+    }
+    .sim-title {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+    }
+    .sim-badge {
+      font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;
+      text-transform: uppercase; padding: 0.4rem 1.1rem;
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 9999px;
+    }
+    .badge-optimal { background: var(--teal); color: var(--white); }
+    .badge-moderate { background: var(--mustard); color: var(--ink); }
+    .badge-avoid { background: var(--coral); color: var(--white); }
+
+    .slider-wrap {
+      margin-bottom: 1.5rem;
+    }
+    .slider-labels {
+      display: flex; justify-content: space-between;
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+    }
+    input[type=range] {
+      width: 100%; height: 16px;
+      background: var(--bg-cream); border: var(--border-hard);
+      border-radius: 9999px; outline: none; cursor: pointer;
+    }
+
+    .sim-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .metric-tile {
+      background: var(--bg-cream);
+      border: var(--border-hard);
+      box-shadow: 4px 4px 0 var(--ink);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .metric-label {
+      font-family: var(--font-display); font-weight: 800; font-size: 0.78rem;
+      text-transform: uppercase; color: var(--ink); margin-bottom: 0.25rem;
+    }
+    .metric-val {
+      font-family: var(--font-display); font-weight: 800; font-size: 1.6rem;
+      color: var(--ink);
+    }
+
+    .advisory-box {
+      background: var(--bg-cream);
+      border: var(--border-hard);
+      border-radius: 12px; padding: 1rem 1.25rem;
+      font-weight: 600; font-size: 0.95rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+
+    /* TABLE SECTION */
+    .table-section {
+      background: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 3.5rem;
+      overflow-x: auto;
+    }
+    .table-title {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+      margin-bottom: 1.25rem;
+    }
+    table.memphis-table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      font-size: 0.95rem;
+    }
+    table.memphis-table th {
+      background: var(--bg-cream);
+      border-top: var(--border-hard); border-bottom: var(--border-hard);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.85rem;
+      text-transform: uppercase; padding: 0.85rem 1rem; text-align: left;
+    }
+    table.memphis-table th:first-child {
+      border-left: var(--border-hard); border-radius: 10px 0 0 10px;
+    }
+    table.memphis-table th:last-child {
+      border-right: var(--border-hard); border-radius: 0 10px 10px 0;
+    }
+    table.memphis-table td {
+      padding: 0.85rem 1rem; border-bottom: 2px solid #e5dec9;
+      font-weight: 600;
+    }
+    table.memphis-table tr:hover td {
+      background: #fdfaf4;
+    }
+    .tbl-pill {
+      display: inline-block; padding: 0.2rem 0.65rem;
+      border-radius: 9999px; border: 2px solid var(--ink);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+    .tbl-opt { background: var(--teal); color: var(--white); }
+    .tbl-mod { background: var(--mustard); color: var(--ink); }
+    .tbl-avo { background: var(--coral); color: var(--white); }
+
+    /* THREE-UP CARDS */
+    .explain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .explain-card {
+      background: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 20px;
+      padding: 1.8rem;
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .explain-chip {
+      width: 48px; height: 48px;
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+    }
+    .ec-mustard { background: var(--mustard); }
+    .ec-coral { background: var(--coral); color: var(--white); }
+    .ec-teal { background: var(--teal); color: var(--white); }
+    .explain-title {
+      font-family: var(--font-display); font-size: 1.25rem; font-weight: 800;
+    }
+    .explain-text {
+      font-size: 0.95rem; font-weight: 500; line-height: 1.5;
+    }
+
+    .btn-scout-action {
+      background: var(--coral); color: var(--white);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      padding: 0.75rem 1.4rem; border: var(--border-hard);
+      box-shadow: var(--shadow-sm); border-radius: 9999px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-scout-action:hover {
+      transform: translate(2px, 2px); box-shadow: var(--shadow-active);
+      background: var(--mustard); color: var(--ink);
+    }
+    .btn-scout-ghost {
+      background: var(--white); color: var(--ink);
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      padding: 0.75rem 1.4rem; border: var(--border-hard);
+      box-shadow: var(--shadow-sm); border-radius: 9999px;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-scout-ghost:hover {
+      transform: translate(2px, 2px); box-shadow: var(--shadow-active);
+      background: var(--bg-cream);
+    }
+
+    footer {
+      border-top: var(--border-hard); background: var(--bg-cream);
+      padding: 2.5rem 1.5rem; text-align: center;
+      font-weight: 700; font-size: 0.95rem;
+    }
+
+    .footer-nav {
+      display: flex; justify-content: center;
+      gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+    }
+    .footer-nav a {
+      color: var(--ink); font-weight: 700; text-decoration: none; font-size: 0.9rem;
+      border: 2px solid var(--ink); background: var(--white);
+      padding: 0.35rem 0.85rem; border-radius: 9999px;
+      box-shadow: 3px 3px 0 var(--ink);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .footer-nav a:hover {
+      transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink);
+      background: var(--mustard);
+    }
+
+    .mobile-nav-bar { display: none; }
+
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .mobile-nav-bar {
+        display: flex; align-items: center; justify-content: center;
+        gap: 0.6rem; flex-wrap: wrap; margin: 0.5rem auto 1.5rem;
+        padding: 0 1rem; position: relative; z-index: 10;
+      }
+      .mobile-nav-link {
+        font-family: var(--font-display); font-weight: 800; font-size: 0.82rem;
+        color: var(--ink); text-decoration: none;
+        background: var(--white); border: 2px solid var(--ink);
+        box-shadow: 3px 3px 0 var(--ink); padding: 0.35rem 0.75rem;
+        border-radius: 9999px;
+      }
+      .mobile-nav-link:hover, .mobile-nav-link.active { background: var(--mustard); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- BACKGROUND CONFETTI -->
+  <div class="confetti-layer" aria-hidden="true">
+    <svg class="confetti-item c-tri-coral" width="46" height="46" viewBox="0 0 46 46">
+      <polygon points="23,4 42,40 4,40" fill="#ff5b57" stroke="#17140d" stroke-width="3" stroke-linejoin="round"/>
+    </svg>
+    <svg class="confetti-item c-arc-teal" width="56" height="56" viewBox="0 0 56 56">
+      <path d="M4 52 A48 48 0 0 1 52 4 L52 52 Z" fill="#12b3a4" stroke="#17140d" stroke-width="3"/>
+    </svg>
+    <svg class="confetti-item c-plus-violet" width="40" height="40" viewBox="0 0 40 40">
+      <rect x="14" y="2" width="12" height="36" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
+      <rect x="2" y="14" width="36" height="12" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
+    </svg>
+    <svg class="confetti-item c-dots-mustard" width="44" height="44" viewBox="0 0 44 44">
+      <circle cx="22" cy="22" r="18" fill="#ffc531" stroke="#17140d" stroke-width="3" stroke-dasharray="6,4"/>
+    </svg>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <nav class="nav-container">
+    <a href="index.html" class="brand-wrap">
+      <div class="brand-tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
+          <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
+        </svg>
+      </div>
+      <span class="brand-name">PravasiTrail</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="trails.html">Campus Trails</a></li>
+      <li><a href="weather.html" class="active">TabPFN Weather</a></li>
+      <li><a href="mobus.html">Mo Bus Guide</a></li>
+      <li><a href="odia.html">Odia Cheatsheet</a></li>
+    </ul>
+
+    <a href="index.html" class="btn-gate">
+      <span>ITER Gate 1</span>
+    </a>
+  </nav>
+
+  <!-- Mobile Quick Navigation Bar -->
+  <div class="mobile-nav-bar">
+    <a href="index.html" class="mobile-nav-link">🏠 Scout</a>
+    <a href="trails.html" class="mobile-nav-link">🚶 Trails</a>
+    <a href="weather.html" class="mobile-nav-link active">☀️ Weather</a>
+    <a href="mobus.html" class="mobile-nav-link">🚌 Mo Bus</a>
+    <a href="odia.html" class="mobile-nav-link">🗣️ Odia</a>
+  </div>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <div class="eyebrow-pill">
+      <span class="eyebrow-dot"></span>
+      <span>PRIOR LABS TABULAR FOUNDATION MODEL</span>
+    </div>
+    <h1 class="page-title">Know when the sun is safe. Step out smart.</h1>
+    <p class="page-lead">Powered by zero-shot tabular inference trained on coastal Odisha wet-bulb temperatures and UV cycles. Don't let Bhubaneswar humidity trap you.</p>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="content-container">
+    <!-- INTERACTIVE SIMULATOR -->
+    <div class="sim-card">
+      <div class="sim-header">
+        <div>
+          <h2 class="sim-title">Live Diurnal Comfort Simulator</h2>
+          <span style="font-weight: 600; font-size: 0.88rem; color: #64748b;">Anchor: Jagamara, Bhubaneswar Microclimate</span>
+        </div>
+        <div class="sim-badge badge-optimal" id="sim-badge">Optimal Window</div>
+      </div>
+
+      <div class="slider-wrap">
+        <div class="slider-labels">
+          <span>05:00 AM Dawn</span>
+          <span id="slider-hour-text" style="color: var(--coral);">07:00 AM Morning</span>
+          <span>08:00 PM Gate Curfew</span>
+        </div>
+        <input type="range" id="hour-slider" min="5" max="20" value="7" oninput="updateSimulator(this.value)">
+      </div>
+
+      <div class="sim-metrics-grid">
+        <div class="metric-tile">
+          <div class="metric-label">Ambient Temp</div>
+          <div class="metric-val" id="val-temp">25.8°C</div>
+        </div>
+        <div class="metric-tile">
+          <div class="metric-label">Relative Humidity</div>
+          <div class="metric-val" id="val-hum">82%</div>
+        </div>
+        <div class="metric-tile">
+          <div class="metric-label">Solar UV Index</div>
+          <div class="metric-val" id="val-uv">2.0</div>
+        </div>
+        <div class="metric-tile">
+          <div class="metric-label">Touch Grass Safety</div>
+          <div class="metric-val" id="val-safe" style="color: var(--teal);">SAFE</div>
+        </div>
+      </div>
+
+      <div class="advisory-box">
+        <span style="font-size: 1.3rem;">🌿</span>
+        <span id="advisory-text">Pleasant early morning breeze with mild solar radiation. Safe for open trails and Khandagiri ridge climbs.</span>
+      </div>
+
+      <div style="margin-top: 1.25rem; display: flex; gap: 0.85rem; flex-wrap: wrap;">
+        <a href="index.html" class="btn-scout-action">Launch Live Trail Scout for this Hour ➔</a>
+        <a href="trails.html" class="btn-scout-ghost">Explore Trails Suitable for this Window ➔</a>
+      </div>
+    </div>
+
+    <!-- TABULAR FORECAST MATRIX -->
+    <div class="table-section">
+      <h2 class="table-title">Bhubaneswar October Diurnal Climate Matrix</h2>
+      <table class="memphis-table">
+        <thead>
+          <tr>
+            <th>Hour</th>
+            <th>Expected Temp</th>
+            <th>Humidity</th>
+            <th>UV Index</th>
+            <th>Comfort Class</th>
+            <th>Hostel Advisory</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>05:00 AM</td>
+            <td>23.5°C</td>
+            <td>90%</td>
+            <td>0.0</td>
+            <td><span class="tbl-pill tbl-opt">Optimal</span></td>
+            <td>Crisp dawn sea breeze. Perfect for early morning run.</td>
+          </tr>
+          <tr>
+            <td>06:00 AM</td>
+            <td>24.2°C</td>
+            <td>88%</td>
+            <td>1.0</td>
+            <td><span class="tbl-pill tbl-opt">Optimal</span></td>
+            <td>Ideal departure for Khandagiri rock climb.</td>
+          </tr>
+          <tr>
+            <td>07:00 AM</td>
+            <td>25.8°C</td>
+            <td>82%</td>
+            <td>2.0</td>
+            <td><span class="tbl-pill tbl-opt">Optimal</span></td>
+            <td>Gentle solar index. Great for Ekamra Kanan.</td>
+          </tr>
+          <tr>
+            <td>08:00 AM</td>
+            <td>27.5°C</td>
+            <td>76%</td>
+            <td>4.0</td>
+            <td><span class="tbl-pill tbl-opt">Optimal</span></td>
+            <td>Warming up. Carry 500ml water bottle.</td>
+          </tr>
+          <tr>
+            <td>09:00 AM</td>
+            <td>29.8°C</td>
+            <td>70%</td>
+            <td>6.0</td>
+            <td><span class="tbl-pill tbl-mod">Moderate</span></td>
+            <td>Stick to dense tree canopies or shaded parks.</td>
+          </tr>
+          <tr>
+            <td>10:00 AM</td>
+            <td>31.6°C</td>
+            <td>63%</td>
+            <td>8.0</td>
+            <td><span class="tbl-pill tbl-avo">Avoid</span></td>
+            <td>High UV danger. Delay trails until after 4:00 PM.</td>
+          </tr>
+          <tr>
+            <td>12:00 PM</td>
+            <td>34.5°C</td>
+            <td>52%</td>
+            <td>10.0</td>
+            <td><span class="tbl-pill tbl-avo">Avoid</span></td>
+            <td>Peak coastal heat. Stay in hostel AC library.</td>
+          </tr>
+          <tr>
+            <td>02:00 PM</td>
+            <td>33.8°C</td>
+            <td>53%</td>
+            <td>9.0</td>
+            <td><span class="tbl-pill tbl-avo">Avoid</span></td>
+            <td>Sultry conditions. Risk of heat fatigue.</td>
+          </tr>
+          <tr>
+            <td>04:00 PM</td>
+            <td>30.5°C</td>
+            <td>67%</td>
+            <td>5.0</td>
+            <td><span class="tbl-pill tbl-mod">Moderate</span></td>
+            <td>Sun declining. Good window for lakeside tree walks.</td>
+          </tr>
+          <tr>
+            <td>05:00 PM</td>
+            <td>28.4°C</td>
+            <td>75%</td>
+            <td>2.0</td>
+            <td><span class="tbl-pill tbl-opt">Optimal</span></td>
+            <td>Golden hour. Dhauli river breeze is sublime.</td>
+          </tr>
+          <tr>
+            <td>06:00 PM</td>
+            <td>27.0°C</td>
+            <td>80%</td>
+            <td>0.0</td>
+            <td><span class="tbl-pill tbl-opt">Optimal</span></td>
+            <td>Evening sea-breeze. Begin transit back to ITER gate.</td>
+          </tr>
+          <tr>
+            <td>08:00 PM</td>
+            <td>25.8°C</td>
+            <td>86%</td>
+            <td>0.0</td>
+            <td><span class="tbl-pill tbl-opt">Optimal</span></td>
+            <td>Hostel Gate curfew in effect (8:00 PM). Return immediately.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- THREE-UP HIGHLIGHT CARDS -->
+    <div class="explain-grid">
+      <div class="explain-card">
+        <div class="explain-chip ec-mustard">⚡</div>
+        <h3 class="explain-title">Why TabPFN?</h3>
+        <p class="explain-text">TabPFN performs in-context prior-data classification without needing training loops or hyperparameter tuning. It accurately models micro-climate safety thresholds with instantaneous inference.</p>
+        <a href="index.html" style="font-weight: 800; font-size: 0.88rem; color: var(--coral); text-decoration: underline; margin-top: auto;">Test in Field Card ➔</a>
+      </div>
+
+      <div class="explain-card">
+        <div class="explain-chip ec-coral">🌡️</div>
+        <h3 class="explain-title">Coastal Humidity Trap</h3>
+        <p class="explain-text">Bhubaneswar sits 50 km from the Bay of Bengal. When 32°C combines with 70% humidity, the heat index exceeds 41°C. Opt for air-conditioned Mo Bus transport during afternoon transit.</p>
+        <a href="mobus.html" style="font-weight: 800; font-size: 0.88rem; color: var(--teal); text-decoration: underline; margin-top: auto;">View AC Mo Bus Routes ➔</a>
+      </div>
+
+      <div class="explain-card">
+        <div class="explain-chip ec-teal">🌅</div>
+        <h3 class="explain-title">Golden Walking Windows</h3>
+        <p class="explain-text">Two pristine slots exist daily: 5:30 AM to 8:00 AM (cool dawn mist) and 4:30 PM to 6:30 PM (sea breeze). Always plan departure times around these two windows.</p>
+        <a href="trails.html" style="font-weight: 800; font-size: 0.88rem; color: var(--violet); text-decoration: underline; margin-top: auto;">Browse Trail Destinations ➔</a>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-nav">
+      <a href="index.html">Home Scout</a>
+      <a href="trails.html">Campus Trails</a>
+      <a href="weather.html">TabPFN Weather</a>
+      <a href="mobus.html">Mo Bus Guide</a>
+      <a href="odia.html">Odia Cheatsheet</a>
+    </div>
+    <p>PravasiTrail (CampusBahar) • Siksha 'O' Anusandhan ITER Jagamara • DEV "Touch Grass" Hacktoberfest 2026</p>
+  </footer>
+
+  <script>
+
+    const climateTable = {
+      5: { temp: 23.5, hum: 90, uv: 0.0, class: "Optimal", safe: "SAFE", adv: "Crisp dawn sea breeze. Perfect for early morning run." },
+      6: { temp: 24.2, hum: 88, uv: 1.0, class: "Optimal", safe: "SAFE", adv: "Ideal departure for Khandagiri rock climb." },
+      7: { temp: 25.8, hum: 82, uv: 2.0, class: "Optimal", safe: "SAFE", adv: "Pleasant early morning breeze with mild solar radiation. Safe for open trails." },
+      8: { temp: 27.5, hum: 76, uv: 4.0, class: "Optimal", safe: "SAFE", adv: "Warming up. Carry 500ml water bottle." },
+      9: { temp: 29.8, hum: 70, uv: 6.0, class: "Moderate", safe: "CAUTION", adv: "Moderate thermal load. Stick to dense tree canopies." },
+      10: { temp: 31.6, hum: 63, uv: 8.0, class: "Avoid", safe: "UNSAFE", adv: "High UV danger. Delay trails until after 4:00 PM." },
+      11: { temp: 33.4, hum: 56, uv: 9.0, class: "Avoid", safe: "UNSAFE", adv: "Peak coastal heat. Stay in hostel AC library." },
+      12: { temp: 34.5, hum: 52, uv: 10.0, class: "Avoid", safe: "UNSAFE", adv: "Severe heat & UV index. Outdoor hiking strictly discouraged." },
+      13: { temp: 34.2, hum: 50, uv: 10.0, class: "Avoid", safe: "UNSAFE", adv: "Harsh sun. Rest in hostel or visit Odisha State Museum." },
+      14: { temp: 33.8, hum: 53, uv: 9.0, class: "Avoid", safe: "UNSAFE", adv: "Sultry conditions. Risk of heat fatigue." },
+      15: { temp: 32.2, hum: 59, uv: 7.0, class: "Avoid", safe: "UNSAFE", adv: "Sun beginning descent but pavement retains heat." },
+      16: { temp: 30.5, hum: 67, uv: 5.0, class: "Moderate", safe: "CAUTION", adv: "Sun declining. Good window for lakeside tree walks." },
+      17: { temp: 28.4, hum: 75, uv: 2.0, class: "Optimal", safe: "SAFE", adv: "Golden hour. Dhauli river breeze is sublime." },
+      18: { temp: 27.0, hum: 80, uv: 0.0, class: "Optimal", safe: "SAFE", adv: "Evening sea-breeze. Begin transit back to ITER gate." },
+      19: { temp: 26.2, hum: 84, uv: 0.0, class: "Optimal", safe: "SAFE", adv: "Brisk evening stroll before hostel gates close." },
+      20: { temp: 25.8, hum: 86, uv: 0.0, class: "Optimal", safe: "SAFE", adv: "Hostel Gate curfew in effect (8:00 PM). Return immediately." }
+    };
+
+    function updateSimulator(hourVal) {
+      hourVal = parseInt(hourVal);
+      const data = climateTable[hourVal] || climateTable[7];
+      
+      const period = hourVal >= 12 ? 'PM' : 'AM';
+      const dispHour = hourVal > 12 ? hourVal - 12 : hourVal;
+      document.getElementById('slider-hour-text').innerText = `${dispHour.toString().padStart(2, '0')}:00 ${period}`;
+
+      document.getElementById('val-temp').innerText = `${data.temp}°C`;
+      document.getElementById('val-hum').innerText = `${data.hum}%`;
+      document.getElementById('val-uv').innerText = data.uv.toFixed(1);
+      
+      const safeEl = document.getElementById('val-safe');
+      safeEl.innerText = data.safe;
+      safeEl.style.color = data.class === 'Optimal' ? 'var(--teal)' : (data.class === 'Moderate' ? 'var(--mustard)' : 'var(--coral)');
+
+      const badge = document.getElementById('sim-badge');
+      badge.className = 'sim-badge';
+      if (data.class === 'Optimal') {
+        badge.classList.add('badge-optimal');
+        badge.innerText = 'Optimal Window';
+      } else if (data.class === 'Moderate') {
+        badge.classList.add('badge-moderate');
+        badge.innerText = 'Moderate Thermal';
+      } else {
+        badge.classList.add('badge-avoid');
+        badge.innerText = 'Avoid High Heat';
+      }
+
+      document.getElementById('advisory-text').innerText = data.adv;
+    }
+  </script>
+</body>
+</html>
