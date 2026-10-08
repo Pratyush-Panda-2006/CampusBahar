@@ -153,7 +153,7 @@
       gap: 1rem;
     }
 
-    .brand-wrap {
+    .brand-wrap, .nav-brand {
       display: flex;
       align-items: center;
       gap: 0.85rem;
@@ -161,7 +161,7 @@
       color: var(--ink);
     }
 
-    .brand-tile {
+    .brand-tile, .logo-box {
       width: 44px;
       height: 44px;
       background: var(--mustard);
@@ -174,17 +174,17 @@
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .brand-tile:hover {
+    .brand-tile:hover, .logo-box:hover {
       transform: translate(2px, 2px);
       box-shadow: var(--shadow-active);
     }
 
-    .brand-tile svg {
+    .brand-tile svg, .logo-box svg {
       width: 24px;
       height: 24px;
     }
 
-    .brand-name {
+    .brand-name, .nav-brand span {
       font-family: var(--font-display);
       font-weight: 800;
       font-size: 26px;
@@ -198,7 +198,7 @@
       list-style: none;
     }
 
-    .nav-links a {
+    .nav-links a, .nav-link {
       color: var(--ink);
       font-weight: 700;
       font-size: 0.95rem;
@@ -206,13 +206,13 @@
       transition: color 0.15s ease;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover, .nav-link:hover, .nav-link.active, .nav-links a.active {
       color: var(--coral);
       text-decoration: underline;
       text-underline-offset: 4px;
     }
 
-    .btn-gate {
+    .btn-gate, .nav-cta-btn {
       background: var(--teal);
       color: var(--white);
       font-family: var(--font-display);
@@ -230,7 +230,7 @@
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .btn-gate:hover {
+    .btn-gate:hover, .nav-cta-btn:hover {
       transform: translate(3px, 3px);
       box-shadow: var(--shadow-active);
     }
@@ -349,30 +349,49 @@
       letter-spacing: 0.05em;
     }
 
-    .memphis-select {
+    select, .memphis-select, option, optgroup {
       width: 100%;
-      background: var(--bg-cream);
-      border: var(--border-hard);
-      box-shadow: var(--shadow-sm);
-      color: var(--ink);
+      outline: none !important;
+      border: 3px solid #17140d !important;
+      background-color: #f5efe2 !important;
+      color: #17140d !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      box-shadow: 4px 4px 0 #17140d !important;
       font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.95rem;
-      padding: 0.75rem 1rem;
+      padding: 0.75rem 2.2rem 0.75rem 1rem;
       border-radius: 12px;
-      outline: none;
       cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
-      background-image: url("data:image/svg2+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2317140d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2317140d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 1rem center !important;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .memphis-select:focus {
+    select:focus, .memphis-select:focus {
+      outline: none !important;
+      border: 3px solid #17140d !important;
       transform: translate(2px, 2px);
-      box-shadow: var(--shadow-active);
+      box-shadow: 2px 2px 0 #17140d !important;
+    }
+
+    option {
+      background-color: #f5efe2 !important;
+      color: #17140d !important;
+      padding: 10px 14px !important;
+      font-weight: 700 !important;
+      border: none !important;
+    }
+
+    optgroup {
+      background-color: #ede5d5 !important;
+      color: #17140d !important;
+      font-weight: 800 !important;
+      font-family: var(--font-display) !important;
+      padding: 8px 10px !important;
     }
 
     /* Dual CTA Row */
@@ -729,6 +748,222 @@
       box-shadow: var(--shadow-active);
     }
 
+    /* Campus Quick Selector Pills */
+    .campus-quick-chips {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
+    }
+
+    .campus-pill {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.74rem;
+      padding: 0.25rem 0.65rem;
+      background: var(--white);
+      border: 2px solid var(--ink);
+      box-shadow: 2px 2px 0 var(--ink);
+      border-radius: 9999px;
+      cursor: pointer;
+      color: var(--ink);
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    .campus-pill:hover, .campus-pill.active {
+      background: var(--mustard);
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+
+    /* Interactive Google Maps Box */
+    .map-container-box {
+      border: var(--border-hard);
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      margin-bottom: 1.1rem;
+    }
+
+    .map-header {
+      padding: 0.75rem 1rem;
+      background: #fdfaf3;
+      border-bottom: var(--border-hard);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .map-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .map-dest-badge {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--ink);
+    }
+
+    .map-dist-pill {
+      background: var(--teal);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.72rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      border: 2px solid var(--ink);
+    }
+
+    .map-iframe-wrap {
+      width: 100%;
+      height: 200px;
+      position: relative;
+      background: #e2e8f0;
+    }
+
+    .map-iframe-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .btn-map-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0.7rem 1rem;
+      background: var(--teal);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.86rem;
+      text-decoration: none;
+      border-top: var(--border-hard);
+      transition: background 0.15s ease;
+    }
+
+    .btn-map-nav:hover {
+      background: #0ea294;
+    }
+
+    /* Multi-Modal Transit Fare & Route Comparator */
+    .transit-matrix-box {
+      border: var(--border-hard);
+      border-radius: 16px;
+      background: var(--white);
+      padding: 1rem;
+      margin-bottom: 1.1rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .transit-matrix-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .transit-matrix-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .transit-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.65rem;
+    }
+
+    @media (max-width: 540px) {
+      .transit-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .transit-card {
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 0.65rem 0.75rem;
+      background: #faf6ee;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .transit-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.35rem;
+      gap: 0.4rem;
+    }
+
+    .transit-name {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.82rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .transit-badge {
+      font-size: 0.64rem;
+      font-weight: 800;
+      padding: 0.15rem 0.45rem;
+      border-radius: 9999px;
+      border: 1.5px solid var(--ink);
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .transit-route-text {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #475569;
+      line-height: 1.35;
+      margin-bottom: 0.45rem;
+    }
+
+    .transit-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.35rem;
+      border-top: 1px dashed rgba(23, 20, 13, 0.3);
+      margin-top: auto;
+    }
+
+    .transit-time {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    .transit-fare {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.88rem;
+      color: var(--ink);
+    }
+
     /* =========================================================
        5. FULL-BLEED BLACK CAMPUS STRIP
        ========================================================= */
@@ -1039,35 +1274,33 @@
 
   <!-- NAVIGATION BAR -->
   <nav class="nav-container">
-    <a href="index.html" class="brand-wrap">
-      <div class="brand-tile">
+    <a href="/" class="nav-brand">
+      <div class="logo-box">
         <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
           <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
         </svg>
       </div>
-      <span class="brand-name">PravasiTrail</span>
+      <span>PravasiTrail</span>
     </a>
 
-    <ul class="nav-links">
-      <li><a href="trails.html">Campus Trails</a></li>
-      <li><a href="weather.html">TabPFN Weather</a></li>
-      <li><a href="mobus.html">Mo Bus Guide</a></li>
-      <li><a href="odia.html">Odia Cheatsheet</a></li>
-    </ul>
+    <div class="nav-links">
+      <a href="/trails" class="nav-link">Campus Trails</a>
+      <a href="/weather" class="nav-link">TabPFN Weather</a>
+      <a href="/mobus" class="nav-link">Mo Bus Guide</a>
+      <a href="/odia" class="nav-link">Odia Cheatsheet</a>
+    </div>
 
-    <a href="index.html" class="btn-gate">
-      <span>ITER Gate 1</span>
-    </a>
+    <a href="/" class="nav-cta-btn">ITER Gate 1</a>
   </nav>
 
   <!-- Mobile Quick Navigation Bar -->
   <div class="mobile-nav-bar">
-    <a href="index.html" class="mobile-nav-link active">🏠 Scout</a>
-    <a href="trails.html" class="mobile-nav-link">🚶 Trails</a>
-    <a href="weather.html" class="mobile-nav-link">☀️ Weather</a>
-    <a href="mobus.html" class="mobile-nav-link">🚌 Mo Bus</a>
-    <a href="odia.html" class="mobile-nav-link">🗣️ Odia</a>
+    <a href="/" class="mobile-nav-link active">🏠 Scout</a>
+    <a href="/trails" class="mobile-nav-link">🚶 Trails</a>
+    <a href="/weather" class="mobile-nav-link">☀️ Weather</a>
+    <a href="/mobus" class="mobile-nav-link">🚌 Mo Bus</a>
+    <a href="/odia" class="mobile-nav-link">🗣️ Odia</a>
   </div>
 
 
@@ -1078,7 +1311,7 @@
     <div class="hero-left">
       <div class="eyebrow-pill">
         <span class="eyebrow-dot"></span>
-        <span>BH-1 TO BH-9 • WEEKEND EXPEDITION</span>
+        <span>BHUBANESWAR STUDENT ADVENTURE NETWORK • MULTI-CAMPUS SCOUT</span>
       </div>
 
       <h1 class="hero-headline">
@@ -1086,20 +1319,68 @@
       </h1>
 
       <p class="hero-lead">
-        Built for non-Odia hostellers at ITER Bhubaneswar. Check TabPFN heat comfort, get Mo Bus routes, master local auto phrases, and shut your screen in under 30 seconds.
+        City-wide outdoor scout for college students across Bhubaneswar. Interactive Google Maps, multi-campus transit routing, dynamic fare matrices across 4 transit modes, and 10 outdoor getaways.
       </p>
 
       <!-- Interactive Scout Form Card -->
       <div class="scout-card">
+        <!-- Campus Selector Quick Chips -->
+        <label class="form-label" style="margin-bottom: 0.4rem;">Select Your Campus Hub</label>
+        <div class="campus-quick-chips" id="campus-chips-container">
+          <span class="campus-pill active" data-campus="iter" onclick="selectCampus('iter')">📍 SOA / ITER</span>
+          <span class="campus-pill" data-campus="kiit" onclick="selectCampus('kiit')">📍 KIIT (Patia)</span>
+          <span class="campus-pill" data-campus="outr" onclick="selectCampus('outr')">📍 OUTR (CET)</span>
+          <span class="campus-pill" data-campus="aiims" onclick="selectCampus('aiims')">📍 AIIMS</span>
+          <span class="campus-pill" data-campus="utkal" onclick="selectCampus('utkal')">📍 Utkal Univ</span>
+          <span class="campus-pill" data-campus="silicon" onclick="selectCampus('silicon')">📍 Silicon</span>
+          <span class="campus-pill" data-campus="cvraman" onclick="selectCampus('cvraman')">📍 CVRCE</span>
+        </div>
+
         <div class="form-grid">
-          <!-- Destination -->
+          <!-- Campus Dropdown -->
           <div class="form-group">
-            <label class="form-label" for="dest-select">Destination</label>
-            <select class="memphis-select" id="dest-select">
-              <option value="khandagiri" selected>Khandagiri Caves (3.5 km)</option>
-              <option value="deras">Deras Dam / Chandaka (14 km)</option>
-              <option value="ekamra">Ekamra Kanan Lake (6 km)</option>
-              <option value="dhauli">Dhauli Shanti Stupa (11 km)</option>
+            <label class="form-label" for="campus-select">Campus / Starting Point</label>
+            <select class="memphis-select" id="campus-select" onchange="syncCampusPills(this.value)">
+              <option value="iter" selected>SOA / ITER (Jagamara, Khandagiri)</option>
+              <option value="kiit">KIIT University (Patia / Kalarahanga)</option>
+              <option value="outr">OUTR / CET (Ghatikia)</option>
+              <option value="aiims">AIIMS Bhubaneswar (Sijua)</option>
+              <option value="utkal">Utkal University (Vani Vihar)</option>
+              <option value="silicon">Silicon University (Infocity)</option>
+              <option value="cvraman">CV Raman Global Univ (Mahura / Janla)</option>
+            </select>
+          </div>
+
+          <!-- Destination (Tripadvisor Top Rankings) -->
+          <div class="form-group">
+            <label class="form-label" for="dest-select">Outdoor Destination</label>
+            <select class="memphis-select" id="dest-select" onchange="previewDestination()">
+              <optgroup label="⛰️ Hills & Caves">
+                <option value="khandagiri" selected>Khandagiri & Udayagiri Caves (Ancient Stone)</option>
+                <option value="jayadev">Jayadev Vatika Forest Park (Streams & Trails)</option>
+                <option value="barunei">Barunei Hill & Perennial Stream (Khordha)</option>
+                <option value="atri">Atri Geothermal Sulfur Springs (Khordha Woods)</option>
+              </optgroup>
+              <optgroup label="🌊 Lakes & Reserves">
+                <option value="deras">Deras & Jhumka Dam (Chandaka Sanctuary)</option>
+                <option value="ekamra">Ekamra Kanan Botanical Lake (Nayapalli)</option>
+                <option value="nandankanan">Nandankanan Botanical Garden (Kanjia Lake)</option>
+                <option value="rprc">RPRC Cactus Garden & Forest Lake (Nayapalli)</option>
+              </optgroup>
+              <optgroup label="🛕 Heritage & Culture">
+                <option value="dhauli">Dhauli Shanti Stupa & Daya Riverbank</option>
+                <option value="bindusagar">Bindu Sagar Heritage Corridor (Old Town)</option>
+                <option value="lingaraj">Lingaraj Temple Heritage Precinct (Ekamra Kshetra)</option>
+                <option value="mukteswara">Mukteswara & Parasurameswara (10th-Century Torana)</option>
+                <option value="tribal">Museum of Tribal Arts & Artifacts (CRPF Square)</option>
+                <option value="kalabhoomi">Odisha Crafts Museum - Kala Bhoomi (Pokhariput)</option>
+                <option value="sisupalgarh">Sisupalgarh 2000-Yr Fort Ruins (Dhauli Corridor)</option>
+                <option value="ekamrahaat">Ekamra Haat & Native Tree Avenues (Unit-3)</option>
+                <option value="chausathi">Chausathi Yogini Circular Temple (Hirapur)</option>
+              </optgroup>
+              <optgroup label="🌅 Open Horizons">
+                <option value="kuakhai">Kuakhai Riverfront & Bali Jatra Grounds</option>
+              </optgroup>
             </select>
           </div>
 
@@ -1107,22 +1388,10 @@
           <div class="form-group">
             <label class="form-label" for="hour-select">Stepping Out Hour</label>
             <select class="memphis-select" id="hour-select">
-              <option value="6">6:00 AM (Dawn)</option>
-              <option value="7" selected>7:30 AM (Morning)</option>
-              <option value="16">4:30 PM (Dusk)</option>
-              <option value="12">12:00 PM (Noon)</option>
-            </select>
-          </div>
-
-          <!-- Home State -->
-          <div class="form-group">
-            <label class="form-label" for="state-select">Home State</label>
-            <select class="memphis-select" id="state-select">
-              <option value="Bihar">Bihar</option>
-              <option value="Jharkhand" selected>Jharkhand</option>
-              <option value="West Bengal">West Bengal</option>
-              <option value="Uttar Pradesh">Uttar Pradesh</option>
-              <option value="Other">Other</option>
+              <option value="6">6:00 AM (Dawn Mist)</option>
+              <option value="7" selected>7:30 AM (Cool Morning)</option>
+              <option value="16">4:30 PM (Dusk Sea-Breeze)</option>
+              <option value="12">12:00 PM (Noon Sun)</option>
             </select>
           </div>
         </div>
@@ -1130,10 +1399,10 @@
         <!-- Dual CTA Row -->
         <div class="cta-row">
           <button class="btn-primary" id="scout-btn" onclick="handleScoutSubmit()">
-            <span>Scout Trail & Comfort -&gt;</span>
+            <span>Scout Trail, Transit & Maps -&gt;</span>
           </button>
           <button class="btn-ghost" id="random-btn" onclick="handleRandomTrek()">
-            <span>🎲 Random Trek</span>
+            <span>🎲 Random Expedition</span>
           </button>
         </div>
       </div>
@@ -1141,18 +1410,41 @@
       <!-- Trust Row -->
       <div class="trust-row">
         <div class="avatar-stack">
-          <div class="avatar-circle av-coral">B</div>
-          <div class="avatar-circle av-teal">J</div>
-          <div class="avatar-circle av-violet">U</div>
-          <div class="avatar-circle av-mustard">W</div>
+          <div class="avatar-circle av-coral">I</div>
+          <div class="avatar-circle av-teal">K</div>
+          <div class="avatar-circle av-violet">O</div>
+          <div class="avatar-circle av-mustard">A</div>
         </div>
         <div class="trust-text">
-          Over 3,000+ hostellers exploring outdoor Odisha • Zero logins required
+          Connecting students from 7 Bhubaneswar universities to Odisha's pristine trails • 100% Free
+        </div>
+      </div>
+
+      <!-- 📍 Live GPS Auto-Detect & Trail Pulse Card -->
+      <div class="gps-pulse-card" id="gps-pulse-card" style="margin-top: 1.5rem; background: var(--white); border: 3px solid #17140d; box-shadow: 5px 5px 0 #17140d; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 0.85rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 1.3rem;">📍</span>
+            <strong style="font-family: var(--font-display); font-size: 1.05rem;">Auto-Detect My Campus / Trail via GPS</strong>
+          </div>
+          <span style="background: var(--mustard); border: 2px solid #17140d; border-radius: 9999px; padding: 0.2rem 0.65rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800;">BROWSER GEOLOCATION</span>
+        </div>
+        <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.4;">
+          Step outside your hostel room. Tap below to calculate real-time distances to all Bhubaneswar university clusters and discover your closest green escape.
+        </p>
+        <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+          <button class="btn-gps-detect" id="gps-btn" onclick="handleDetectGpsLocation()" style="background: var(--teal); color: var(--white); border: 3px solid #17140d; box-shadow: 3px 3px 0 #17140d; border-radius: 9999px; padding: 0.65rem 1.3rem; font-family: var(--font-display); font-weight: 800; font-size: 0.92rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.45rem; transition: all 0.15s ease;">
+            <span id="gps-icon">🛰️</span>
+            <span id="gps-label">Detect Nearby Trails via My Location</span>
+          </button>
+        </div>
+        <div id="gps-result-badge" style="display: none; background: #faf6ee; border: 2px dashed #17140d; border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.86rem; font-weight: 700; color: var(--ink);">
+          <!-- Dynamic GPS status -->
         </div>
       </div>
     </div>
 
-    <!-- Right Column (Tilted Live Output Dashboard Mockup) -->
+    <!-- Right Column (Live Output Dashboard Mockup) -->
     <div class="hero-right">
       <div class="tilted-dashboard">
         <!-- Chrome Bar -->
@@ -1162,19 +1454,108 @@
             <div class="tdot tdot-mustard"></div>
             <div class="tdot tdot-teal"></div>
           </div>
-          <div class="chrome-title">Live TabPFN Sensor & Field Card</div>
+          <div class="chrome-title" id="dashboard-chrome-title">Live Navigation, Transit & Field Card</div>
         </div>
 
-        <!-- Live Weather & Comfort Widget -->
+        <!-- 1. Interactive Google Maps Embed Box -->
+        <div class="map-container-box" id="map-box">
+          <div class="map-header">
+            <div class="map-title-wrap">
+              <span>🗺️</span>
+              <span class="map-dest-badge" id="map-dest-title">Khandagiri & Udayagiri Caves</span>
+            </div>
+            <span class="map-dist-pill" id="map-dist-pill">3.5 km from ITER</span>
+          </div>
+          <div class="map-iframe-wrap">
+            <iframe
+              id="gmap-iframe"
+              title="Interactive Google Maps Trail View"
+              src="https://www.google.com/maps?q=20.2588,85.7865&z=14&output=embed"
+              loading="lazy"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <a
+            id="gmap-directions-btn"
+            href="https://www.google.com/maps/dir/?api=1&origin=20.2520,85.7956&destination=20.2588,85.7865&travelmode=transit"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-map-nav">
+            <span>Open Live Google Maps Navigation ➔</span>
+          </a>
+        </div>
+
+        <!-- 2. Multi-Modal Transit Fare & Route Comparator -->
+        <div class="transit-matrix-box" id="transit-matrix-box">
+          <div class="transit-matrix-head">
+            <div class="transit-matrix-title">
+              <span>⚡</span>
+              <span id="transit-matrix-campus-title">Transit Options from ITER Gate</span>
+            </div>
+            <span style="font-size: 0.72rem; font-weight: 800; color: #64748b;">4-WAY FARE COMPARATOR</span>
+          </div>
+          <div class="transit-grid" id="transit-cards-grid">
+            <!-- Mode 1: Mo Bus -->
+            <div class="transit-card">
+              <div class="transit-top">
+                <span class="transit-name">🚌 Mo Bus</span>
+                <span class="transit-badge" style="background: var(--teal); color: var(--white);">Cheapest / AC</span>
+              </div>
+              <div class="transit-route-text" id="route-mobus-text">Route 11 from Jagamara Chhak</div>
+              <div class="transit-bottom">
+                <span class="transit-time" id="time-mobus-text">12 mins</span>
+                <span class="transit-fare" id="fare-mobus-text" style="color: var(--teal);">₹10</span>
+              </div>
+            </div>
+            <!-- Mode 2: Auto -->
+            <div class="transit-card">
+              <div class="transit-top">
+                <span class="transit-name">🛺 Shared Auto</span>
+                <span class="transit-badge" style="background: var(--coral); color: var(--white);">Zero Wait</span>
+              </div>
+              <div class="transit-route-text" id="route-auto-text">Shared ₹15 / seat | Private ₹80</div>
+              <div class="transit-bottom">
+                <span class="transit-time" id="time-auto-text">8 mins</span>
+                <span class="transit-fare" id="fare-auto-text" style="color: var(--coral);">₹15 / seat</span>
+              </div>
+            </div>
+            <!-- Mode 3: Bike Taxi -->
+            <div class="transit-card">
+              <div class="transit-top">
+                <span class="transit-name">🛵 Bike Taxi</span>
+                <span class="transit-badge" style="background: var(--mustard); color: var(--ink);">Fastest</span>
+              </div>
+              <div class="transit-route-text" id="route-bike-text">Rapido / Uber Moto doorstep</div>
+              <div class="transit-bottom">
+                <span class="transit-time" id="time-bike-text">6 mins</span>
+                <span class="transit-fare" id="fare-bike-text" style="color: var(--ink);">₹40 – ₹60</span>
+              </div>
+            </div>
+            <!-- Mode 4: Shared Cab -->
+            <div class="transit-card">
+              <div class="transit-top">
+                <span class="transit-name">🚗 Shared Cab</span>
+                <span class="transit-badge" style="background: var(--violet); color: var(--white);">4-Split</span>
+              </div>
+              <div class="transit-route-text" id="route-cab-text">Uber / InDrive (₹140 total split)</div>
+              <div class="transit-bottom">
+                <span class="transit-time" id="time-cab-text">10 mins</span>
+                <span class="transit-fare" id="fare-cab-text" style="color: var(--violet);">₹35 / person</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Live Weather & Comfort Widget (TabPFN) -->
         <div class="widget-box">
           <div class="widget-head">
-            <span class="widget-title">Bhubaneswar Outdoor Index</span>
+            <span class="widget-title">Bhubaneswar Outdoor Climate Index</span>
             <span class="comfort-badge badge-optimal" id="comfort-badge">Optimal Window</span>
           </div>
 
           <div class="chart-label">
-            <span>TabPFN Thermal Comfort (Dawn to Night)</span>
-            <span id="metric-values">26.0°C • 85% RH • UV 2.4</span>
+            <span>TabPFN Thermal Comfort (Dawn to Dusk)</span>
+            <span id="metric-values">25.8°C • 82% RH • UV 2.0</span>
           </div>
 
           <!-- Probability Bar Chart -->
@@ -1198,12 +1579,12 @@
           </div>
         </div>
 
-        <!-- Pocket Guide Itinerary Output Box -->
+        <!-- 4. Pocket Guide Itinerary Output Box -->
         <div class="guide-box">
           <div class="guide-chip-grid" id="guide-output">
             <!-- 1. Transit -->
             <div class="memphis-chip chip-transit">
-              <div class="chip-header">🚌 Transit & Mo Bus</div>
+              <div class="chip-header">🚌 Transit Route</div>
               <div class="chip-body" id="chip-transit-text">
                 Exit Jagamara Gate. Take Mo Bus Route 11 from ITER Square directly to Khandagiri (₹15-20 shared auto).
               </div>
@@ -1233,6 +1614,24 @@
               </div>
             </div>
           </div>
+        </div>
+
+        <!-- 🎧 ElevenLabs Audio Companion Card -->
+        <div class="audio-companion-box" id="audio-companion-box" style="margin: 1.1rem 0; background: #fffcf7; border: 3px solid #17140d; box-shadow: 4px 4px 0 #17140d; border-radius: 14px; padding: 12px 16px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap;">
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span style="font-size: 1.35rem;">🎧</span>
+              <div>
+                <strong style="font-family: var(--font-display); font-size: 0.95rem; display: block; color: var(--ink);">Audio Trail Companion</strong>
+                <span style="font-size: 0.78rem; color: #64748b; font-weight: 600;" id="audio-status-label">Hands-free directions while you walk</span>
+              </div>
+            </div>
+            <button class="btn-audio-walk" id="play-audio-btn" onclick="handlePlayAudioGuide()" style="background: var(--coral); color: #ffffff; border: 2px solid #17140d; box-shadow: 3px 3px 0 #17140d; border-radius: 9999px; padding: 0.55rem 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.45rem; transition: transform 0.15s ease, box-shadow 0.15s ease;">
+              <span id="audio-btn-icon">🔊</span>
+              <span id="audio-btn-text">Listen to Field Guide (ElevenLabs Voice)</span>
+            </button>
+          </div>
+          <audio id="elevenlabs-player" style="display: none;"></audio>
         </div>
 
         <!-- Action Buttons -->
@@ -1321,19 +1720,143 @@
   <script>
     let currentRawCardMarkdown = "";
 
+    // Client-side Database of Campuses & 10 Destinations
+    const CAMPUS_HUBS = {
+      "iter": { id: "iter", name: "SOA / ITER University", short_name: "ITER", locality: "Jagamara", lat: 20.2520, lon: 85.7956, bus_stop: "ITER Main Gate / Jagamara Chhak", auto_stand: "Jagamara Square Auto Stand" },
+      "kiit": { id: "kiit", name: "KIIT University", short_name: "KIIT", locality: "Patia", lat: 20.3540, lon: 85.8184, bus_stop: "KIIT Square / Campus 3 Mo Bus Stop", auto_stand: "Patia Chhak Auto Stand" },
+      "outr": { id: "outr", name: "OUTR / CET Bhubaneswar", short_name: "OUTR", locality: "Ghatikia", lat: 20.2764, lon: 85.7725, bus_stop: "Ghatikia Chhak / CET Gate", auto_stand: "Khandagiri Bari Stand" },
+      "aiims": { id: "aiims", name: "AIIMS Bhubaneswar", short_name: "AIIMS", locality: "Sijua", lat: 20.2312, lon: 85.7738, bus_stop: "AIIMS Main Gate Mo Bus Stop", auto_stand: "Sijua Chhak Auto Stand" },
+      "utkal": { id: "utkal", name: "Utkal University", short_name: "Utkal Univ", locality: "Vani Vihar", lat: 20.2974, lon: 85.8458, bus_stop: "Vani Vihar NH16 Mo Bus Stop", auto_stand: "Vani Vihar Chhak Auto Stand" },
+      "silicon": { id: "silicon", name: "Silicon University", short_name: "Silicon", locality: "Infocity", lat: 20.3582, lon: 85.8123, bus_stop: "Silicon Institute Gate", auto_stand: "Infocity Chhak Auto Stand" },
+      "cvraman": { id: "cvraman", name: "CV Raman Global Univ", short_name: "CVRCE", locality: "Janla / Mahura", lat: 20.2185, lon: 85.7368, bus_stop: "CVRCE Main Gate", auto_stand: "Janla Square Auto Stand" }
+    };
+
+    const DESTINATIONS_DATA = {
+      "khandagiri": { id: "khandagiri", name: "Khandagiri & Udayagiri Caves", lat: 20.2588, lon: 85.7865, routes: { iter: "Route 11 from Jagamara (5 mins)", kiit: "Route 16 to Fire Station, transfer Route 11", outr: "Route 11 or direct auto (10 mins)", aiims: "Route 11 / 23 via Jagamara (15 mins)", utkal: "Route 10/11 via Baramunda", silicon: "Route 16 down to Fire Station, transfer Route 11", cvraman: "Route 24 / Khordha bypass auto" } },
+      "jayadev": { id: "jayadev", name: "Jayadev Vatika Forest Park", lat: 20.2644, lon: 85.7834, routes: { iter: "Direct auto / Route 11 (7 mins)", kiit: "Route 16 to Fire Station, transfer auto", outr: "Direct auto along Khandagiri hill road (8 mins)", aiims: "Route 11 or shared auto via Jagamara", utkal: "Route 11 from Baramunda to Khandagiri", silicon: "Route 16 to Fire Station, transfer auto", cvraman: "Route 24 via Janla to Khandagiri foothills" } },
+      "barunei": { id: "barunei", name: "Barunei Hill & Perennial Stream", lat: 20.1804, lon: 85.6698, routes: { iter: "Mo Bus Route 24 / Khordha bus (35 mins)", kiit: "Route 16 to Master Canteen, transfer Route 24", outr: "Via Ghatikia bypass to NH16 Khordha", aiims: "Route 24 / NH16 direct auto (22 mins)", utkal: "Route 24 from Vani Vihar along NH16", silicon: "Route 16 to Baramunda, transfer Route 24", cvraman: "Direct NH16 link - very close! (15 mins)" } },
+      "deras": { id: "deras", name: "Deras & Jhumka Dam (Chandaka)", lat: 20.3346, lon: 85.7082, routes: { iter: "Shared auto to Pitapalli/Chandaka, then shuttle", kiit: "Patia-Chandaka road direct bike/auto (30 mins)", outr: "Direct Ghatikia-Chandaka hill road (20 mins)", aiims: "Via Pitapalli bypass towards Chandaka", utkal: "Route 10 to Nayapalli, connect Chandaka road", silicon: "Direct Chandaka link road via Infocity", cvraman: "Via Pitapalli toll gate link (35 mins)" } },
+      "ekamra": { id: "ekamra", name: "Ekamra Kanan Botanical Lake", lat: 20.3060, lon: 85.8118, routes: { iter: "Route 10 direct to Nayapalli (20 mins)", kiit: "Route 16 / 10 to Nayapalli (25 mins)", outr: "Route 11 to Baramunda, then Route 10", aiims: "Route 23 to Nayapalli (30 mins)", utkal: "Route 10 or short auto down to IRC Village (12 mins)", silicon: "Route 16 to Nayapalli VIP Road", cvraman: "Route 24 via Fire Station to Nayapalli" } },
+      "nandankanan": { id: "nandankanan", name: "Nandankanan Botanical Garden", lat: 20.3995, lon: 85.8252, routes: { iter: "Route 11 to Master Canteen, transfer Route 16 north", kiit: "Route 16 direct north along Patia corridor (15 mins)", outr: "Route 11 to Fire Station, connect Route 16", aiims: "Route 23 to Vani Vihar, transfer Route 16", utkal: "Route 16 from Vani Vihar direct to Botanical Gate", silicon: "Route 16 direct north from Infocity link (18 mins)", cvraman: "Via Baramunda, transfer Route 16 north" } },
+      "dhauli": { id: "dhauli", name: "Dhauli Shanti Stupa & Daya Riverbank", lat: 20.1923, lon: 85.8394, routes: { iter: "Route 20/21 via Kalpana Square towards Puri bypass", kiit: "Route 16 to Master Canteen, then Route 20", outr: "Route 11 to Master Canteen, then Route 20", aiims: "Route 23 to Kalpana, transfer Dhauli bus", utkal: "Route 20 from Rasulgarh / Kalpana (35 mins)", silicon: "Route 16 to Master Canteen, connect Route 20", cvraman: "Via Lingaraj link road towards Puri bypass" } },
+      "bindusagar": { id: "bindusagar", name: "Bindu Sagar Heritage Corridor", lat: 20.2415, lon: 85.8354, routes: { iter: "Route 20 or direct shared auto via Jagamara (20 mins)", kiit: "Route 16 to Master Canteen, connect Route 21 to Old Town", outr: "Route 11 to Jagamara, auto to Old Town", aiims: "Direct auto via Sundarpada road (20 mins)", utkal: "Route 21 from Kalpana Square to Lingaraj", silicon: "Route 16 to Railway Station, connect Route 21", cvraman: "Via Retang / Sundarpada bypass (30 mins)" } },
+      "ekamrahaat": { id: "ekamrahaat", name: "Ekamra Haat & Native Tree Avenues", lat: 20.2731, lon: 85.8361, routes: { iter: "Route 10 or shared auto via Siripur (18 mins)", kiit: "Route 16 down to Sriya Chhak / Unit-3 (35 mins)", outr: "Route 11 via Fire Station towards AG Square", aiims: "Route 23 to AG Square, short walk (25 mins)", utkal: "Direct short Route 10 / auto down Janpath (15 mins)", silicon: "Route 16 to Master Canteen / Unit-3", cvraman: "Route 24 to AG Square (35 mins)" } },
+      "kuakhai": { id: "kuakhai", name: "Kuakhai Riverfront & Bali Jatra", lat: 20.3392, lon: 85.8672, routes: { iter: "Route 11 to Rasulgarh, connect Hanspal link (40 mins)", kiit: "Direct short bike/auto east towards river bank (15 mins)", outr: "Route 11 to Baramunda, connect NH16 to Hanspal", aiims: "Via Bypass to Rasulgarh and Hanspal (40 mins)", utkal: "Route 10 / auto straight down to Kuakhai bridge (15 mins)", silicon: "Direct eastward link to Kuakhai riverbank (18 mins)", cvraman: "Via NH16 corridor to Hanspal (50 mins)" } },
+      "sisupalgarh": { id: "sisupalgarh", name: "Sisupalgarh Fort Ruins", lat: 20.2248, lon: 85.8572, routes: { iter: "Route 20/21 towards Puri Bypass (25 mins)", kiit: "Route 16 to Master Canteen, connect Puri bypass auto", outr: "Route 11 to Kalpana, shared auto towards Tankapani", aiims: "Via Sundarpada bypass to Daya west canal road", utkal: "Direct auto down Cuttack-Puri bypass road (20 mins)", silicon: "Route 16 to Kalpana Square, connect auto", cvraman: "NH16 to Lingaraj bypass, connect Tankapani road" } },
+      "lingaraj": { id: "lingaraj", name: "Lingaraj Temple Heritage Precinct", lat: 20.2382, lon: 85.8336, routes: { iter: "Route 20 or direct shared auto via Jagamara (18 mins)", kiit: "Route 16 to Master Canteen, connect Route 21", outr: "Route 11 to Jagamara, auto to Old Town", aiims: "Direct shared auto via Sundarpada (16 mins)", utkal: "Route 21 from Kalpana Square direct (22 mins)", silicon: "Route 16 to Railway Station, connect Route 21", cvraman: "Via Retang / Sundarpada link road (28 mins)" } },
+      "chausathi": { id: "chausathi", name: "Chausathi Yogini Temple (Hirapur)", lat: 20.2081, lon: 85.8753, routes: { iter: "Shared auto to Kalpana, connect Hirapur route (35 mins)", kiit: "Route 16 to Rasulgarh, connect Daya riverbank road", outr: "Route 11 to Master Canteen, connect rural Hirapur shuttle", aiims: "Via Kalpana Square towards Balianta road", utkal: "Direct auto/bike along Daya canal road (25 mins)", silicon: "Route 16 to Kalpana, connect Hirapur auto", cvraman: "Via NH16 bypass to Lingaraj and Hirapur link" } },
+      "rprc": { id: "rprc", name: "RPRC Cactus Garden & Forest Lake", lat: 20.3015, lon: 85.8085, routes: { iter: "Route 10 direct to Nayapalli VIP Road (18 mins)", kiit: "Route 16 / 10 to Nayapalli (22 mins)", outr: "Route 11 to Baramunda, connect IRC Village auto", aiims: "Route 23 to Nayapalli (25 mins)", utkal: "Route 10 or short auto down to IRC Village (10 mins)", silicon: "Route 16 to Nayapalli VIP Road", cvraman: "Route 24 via Fire Station to IRC Village" } },
+      "atri": { id: "atri", name: "Atri Geothermal Sulfur Springs", lat: 20.1539, lon: 85.5042, routes: { iter: "Route 24 to Khordha town, transfer Baghamari shuttle (55 mins)", kiit: "Route 16 to Master Canteen, express bus to Khordha-Atri", outr: "Direct NH16 Khordha bypass to Baghamari (45 mins)", aiims: "NH16 express bike/cab towards Baghamari (40 mins)", utkal: "Mo Bus to Khordha, transfer local bus to Atri", silicon: "Route 16 to Baramunda, express to Khordha", cvraman: "Direct NH16 to Khordha bypass and Baghamari (30 mins)" } },
+      "mukteswara": { id: "mukteswara", name: "Mukteswara & Parasurameswara Temples", lat: 20.2432, lon: 85.8339, routes: { iter: "Route 20 or direct shared auto via Jagamara (18 mins)", kiit: "Route 16 to Master Canteen, connect Route 21 to Old Town (40 mins)", outr: "Route 11 to Jagamara, auto to Old Town (20 mins)", aiims: "Direct shared auto via Sundarpada (18 mins)", utkal: "Route 21 from Kalpana Square (20 mins)", silicon: "Route 16 to Master Canteen, connect Route 21 (45 mins)", cvraman: "Via Retang / Sundarpada link road (28 mins)" } },
+      "tribal": { id: "tribal", name: "Museum of Tribal Arts & Artifacts", lat: 20.2831, lon: 85.8145, routes: { iter: "Direct shared auto via Siripur to CRPF Square (12 mins)", kiit: "Route 16 / 10 to CRPF Chhak (20 mins)", outr: "Route 11 to Fire Station, connect auto to CRPF (15 mins)", aiims: "Route 23 to CRPF Square (22 mins)", utkal: "Route 10 straight from Vani Vihar to CRPF (14 mins)", silicon: "Route 16 down to CRPF Square (22 mins)", cvraman: "Route 24 via Fire Station to CRPF Chhak (30 mins)" } },
+      "kalabhoomi": { id: "kalabhoomi", name: "Odisha Crafts Museum - Kala Bhoomi", lat: 20.2396, lon: 85.8023, routes: { iter: "Short auto or walk down Jagamara-Pokhariput road (6 mins)", kiit: "Route 16 to Master Canteen, connect Pokhariput auto (45 mins)", outr: "Direct auto via Khandagiri-Pokhariput bypass (12 mins)", aiims: "Shared auto along Sijua-Pokhariput road (10 mins)", utkal: "Route 21 to Airport / Pokhariput (25 mins)", silicon: "Route 16 to Master Canteen, transfer auto (50 mins)", cvraman: "Via Retang-Jatni-Pokhariput bypass (20 mins)" } }
+    };
+
+    function selectCampus(campusId) {
+      const campusSelect = document.getElementById('campus-select');
+      if (campusSelect) {
+        campusSelect.value = campusId;
+        syncCampusPills(campusId);
+        previewDestination();
+      }
+    }
+
+    function syncCampusPills(campusId) {
+      const pills = document.querySelectorAll('.campus-pill');
+      pills.forEach(p => {
+        if (p.getAttribute('data-campus') === campusId) {
+          p.classList.add('active');
+        } else {
+          p.classList.remove('active');
+        }
+      });
+      previewDestination();
+    }
+
+    function calcDistanceKm(lat1, lon1, lat2, lon2) {
+      const R = 6371;
+      const dlat = (lat2 - lat1) * Math.PI / 180;
+      const dlon = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(dlat / 2) * Math.sin(dlat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dlon / 2) * Math.sin(dlon / 2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      return Math.max(1.5, Math.round(R * c * 1.28 * 10) / 10);
+    }
+
+    function previewDestination() {
+      const campusKey = document.getElementById('campus-select')?.value || 'iter';
+      const destKey = document.getElementById('dest-select')?.value || 'khandagiri';
+      const campus = CAMPUS_HUBS[campusKey] || CAMPUS_HUBS['iter'];
+      const dest = DESTINATIONS_DATA[destKey] || DESTINATIONS_DATA['khandagiri'];
+
+      const dist = calcDistanceKm(campus.lat, campus.lon, dest.lat, dest.lon);
+
+      // Update Map Box
+      const mapTitle = document.getElementById('map-dest-title');
+      const distPill = document.getElementById('map-dist-pill');
+      const iframe = document.getElementById('gmap-iframe');
+      const navBtn = document.getElementById('gmap-directions-btn');
+
+      if (mapTitle) mapTitle.innerText = dest.name;
+      if (distPill) distPill.innerText = `${dist} km from ${campus.short_name}`;
+      if (iframe) iframe.src = `https://www.google.com/maps?q=${dest.lat},${dest.lon}&z=14&output=embed`;
+      if (navBtn) {
+        navBtn.href = `https://www.google.com/maps/dir/?api=1&origin=${campus.lat},${campus.lon}&destination=${dest.lat},${dest.lon}&travelmode=transit`;
+      }
+
+      // Update Transit Matrix Title
+      const matrixTitle = document.getElementById('transit-matrix-campus-title');
+      if (matrixTitle) matrixTitle.innerText = `Transit Options from ${campus.short_name} Gate`;
+
+      // Update Transit Mode Estimates
+      const routeText = dest.routes[campusKey] || "Mo Bus connected route";
+      const mobusFare = dist <= 5 ? "₹10" : (dist <= 12 ? "₹15 – ₹20" : "₹25 – ₹30");
+      const mobusTime = `${Math.max(10, Math.round(dist * 3.2))} mins`;
+      const sharedFare = `₹${Math.min(35, Math.max(15, Math.round(dist * 2.2)))} / seat`;
+      const pAutoMin = Math.round(40 + dist * 11);
+      const pAutoMax = Math.round(55 + dist * 14);
+      const autoTime = `${Math.max(8, Math.round(dist * 2.4))} mins`;
+      const bikeMin = Math.round(25 + dist * 8);
+      const bikeMax = Math.round(35 + dist * 10);
+      const bikeTime = `${Math.max(6, Math.round(dist * 1.8))} mins`;
+      const cabTotalMin = Math.round(90 + dist * 14);
+      const cabTotalMax = Math.round(120 + dist * 18);
+      const cabSplitMin = Math.round(cabTotalMin / 4);
+      const cabSplitMax = Math.round(cabTotalMax / 4);
+      const cabTime = `${Math.max(10, Math.round(dist * 2.0))} mins`;
+
+      const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+      setEl('route-mobus-text', routeText);
+      setEl('fare-mobus-text', mobusFare);
+      setEl('time-mobus-text', mobusTime);
+
+      setEl('route-auto-text', `Shared: ${sharedFare} | Private: ₹${pAutoMin}–₹${pAutoMax}`);
+      setEl('fare-auto-text', sharedFare);
+      setEl('time-auto-text', autoTime);
+
+      setEl('route-bike-text', `Rapido / Uber Moto from ${campus.short_name} gate`);
+      setEl('fare-bike-text', `₹${bikeMin} – ₹${bikeMax}`);
+      setEl('time-bike-text', bikeTime);
+
+      setEl('route-cab-text', `Uber / InDrive (₹${cabTotalMin}–₹${cabTotalMax} split 4-ways)`);
+      setEl('fare-cab-text', `₹${cabSplitMin}–₹${cabSplitMax} / person`);
+      setEl('time-cab-text', cabTime);
+    }
+
     async function handleScoutSubmit() {
       const scoutBtn = document.getElementById('scout-btn');
+      const campusSelect = document.getElementById('campus-select');
       const destSelect = document.getElementById('dest-select');
       const hourSelect = document.getElementById('hour-select');
-      const stateSelect = document.getElementById('state-select');
 
+      const origin_campus = campusSelect ? campusSelect.value : "iter";
       const destination = destSelect.value;
       const target_hour = parseInt(hourSelect.value);
-      const student_home_state = stateSelect.value;
 
       // Update button state
       scoutBtn.disabled = true;
-      scoutBtn.innerText = "Consulting TabPFN & Gemma...";
+      scoutBtn.innerText = "Consulting TabPFN & Routing Engine...";
 
       try {
         const apiEndpoint = (window.location.protocol === 'file:')
@@ -1344,12 +1867,11 @@
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
+            origin_campus: origin_campus,
             destination: destination,
-            target_hour: target_hour,
-            student_home_state: student_home_state
+            target_hour: target_hour
           })
         });
-
 
         if (!response.ok) {
           throw new Error('API server returned error ' + response.status);
@@ -1358,7 +1880,48 @@
         const data = await response.json();
         currentRawCardMarkdown = data.card_markdown;
 
-        // 1. Update Comfort Badge
+        // 1. Update Map & Directions
+        if (data.maps) {
+          const iframe = document.getElementById('gmap-iframe');
+          const navBtn = document.getElementById('gmap-directions-btn');
+          const mapTitle = document.getElementById('map-dest-title');
+          const distPill = document.getElementById('map-dist-pill');
+
+          if (iframe) iframe.src = data.maps.embed_url;
+          if (navBtn) navBtn.href = data.maps.directions_url;
+          if (mapTitle) mapTitle.innerText = data.destination;
+          if (distPill) distPill.innerText = `${data.distance_km} km from ${data.origin_campus.short_name}`;
+        }
+
+        // 2. Update Transit Matrix Title & Modes
+        if (data.transit_modes && data.transit_modes.length >= 4) {
+          const matrixTitle = document.getElementById('transit-matrix-campus-title');
+          if (matrixTitle) matrixTitle.innerText = `Transit Options from ${data.origin_campus.short_name} Gate`;
+
+          const mobus = data.transit_modes[0];
+          const auto = data.transit_modes[1];
+          const bike = data.transit_modes[2];
+          const cab = data.transit_modes[3];
+
+          const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+          setEl('route-mobus-text', mobus.route_info);
+          setEl('fare-mobus-text', mobus.cost_label);
+          setEl('time-mobus-text', mobus.est_time);
+
+          setEl('route-auto-text', auto.route_info);
+          setEl('fare-auto-text', auto.cost_label);
+          setEl('time-auto-text', auto.est_time);
+
+          setEl('route-bike-text', bike.route_info);
+          setEl('fare-bike-text', bike.cost_label);
+          setEl('time-bike-text', bike.est_time);
+
+          setEl('route-cab-text', cab.route_info);
+          setEl('fare-cab-text', cab.cost_label);
+          setEl('time-cab-text', cab.est_time);
+        }
+
+        // 3. Update Comfort Badge
         const comfortBadge = document.getElementById('comfort-badge');
         const cClass = data.comfort.comfort_class;
         comfortBadge.className = 'comfort-badge';
@@ -1374,20 +1937,30 @@
           comfortBadge.innerText = 'Avoid High Heat';
         }
 
-        // 2. Update Weather Metrics String
+        // 4. Update Weather Metrics String
         const metricsStr = `${data.weather.temp}°C • ${data.weather.humidity}% RH • UV ${data.weather.uv}`;
         document.getElementById('metric-values').innerText = metricsStr;
 
-        // 3. Parse and Populate 4 Memphis Micro-Chips
+        // 5. Parse and Populate 4 Memphis Micro-Chips
         parseMarkdownToChips(data.card_markdown);
 
-        showToast(`Scout Ready: ${data.destination}!`);
+        showToast(`Scout Ready: ${data.destination} from ${data.origin_campus.short_name}!`);
       } catch (err) {
-        console.error('Scout fetch error:', err);
-        showToast('Offline Mode: Displaying cached trail guide.');
+        console.warn('Scout fetch fallback to client engine:', err);
+        previewDestination();
+        const campus = CAMPUS_HUBS[origin_campus] || CAMPUS_HUBS['iter'];
+        const dest = DESTINATIONS_DATA[destination] || DESTINATIONS_DATA['khandagiri'];
+        const routeText = dest.routes[origin_campus] || "Mo Bus connected corridor";
+        
+        document.getElementById('chip-transit-text').innerText = `From ${campus.short_name} Gate: ${routeText}. Student fare: ₹10–₹25.`;
+        document.getElementById('chip-sensory-text').innerText = `Immerse in the natural landscape of ${dest.name}. Feel the crisp coastal air and textured rock trails.`;
+        document.getElementById('chip-odia-text').innerText = `"Bhai, ${dest.name.split(' ')[0]} jibe ki? Kete tonka?" (Brother, will you go there? How much?)`;
+        document.getElementById('chip-screen-text').innerText = `Phone in pocket now—soak in the open trail with your eyes, not through a glass screen.`;
+        
+        showToast(`Loaded ${dest.name} for ${campus.short_name} (Local Scout Mode)`);
       } finally {
         scoutBtn.disabled = false;
-        scoutBtn.innerText = "Scout Trail & Comfort ->";
+        scoutBtn.innerText = "Scout Trail, Transit & Maps ->";
       }
     }
 
@@ -1402,7 +1975,7 @@
 
       for (const line of lines) {
         if (/^1\./i.test(line) || /transit/i.test(line)) {
-          transit = line.replace(/^1\.\s*(Transit from ITER:)?/i, '').trim();
+          transit = line.replace(/^1\.\s*(Transit( from [^:]+)?:)?/i, '').trim();
         } else if (/^2\./i.test(line) || /sensory/i.test(line)) {
           sensory = line.replace(/^2\.\s*(Sensory Touch-Grass( Challenge)?:)?/i, '').trim();
         } else if (/^3\./i.test(line) || /odia/i.test(line)) {
@@ -1419,7 +1992,7 @@
     }
 
     function handleRandomTrek() {
-      const destinations = ['khandagiri', 'deras', 'ekamra', 'dhauli'];
+      const destinations = Object.keys(DESTINATIONS_DATA);
       const hours = [6, 7, 16];
       const randomDest = destinations[Math.floor(Math.random() * destinations.length)];
       const randomHour = hours[Math.floor(Math.random() * hours.length)];
@@ -1427,6 +2000,7 @@
       document.getElementById('dest-select').value = randomDest;
       document.getElementById('hour-select').value = randomHour;
 
+      previewDestination();
       handleScoutSubmit();
     }
 
@@ -1435,8 +2009,9 @@
       const sensory = document.getElementById('chip-sensory-text').innerText;
       const odia = document.getElementById('chip-odia-text').innerText;
       const screen = document.getElementById('chip-screen-text').innerText;
+      const navUrl = document.getElementById('gmap-directions-btn')?.href || "";
 
-      const fullText = currentRawCardMarkdown || `1. Transit: ${transit}\n2. Sensory: ${sensory}\n3. Odia: ${odia}\n4. Screen-Off: ${screen}`;
+      const fullText = currentRawCardMarkdown || `1. Transit: ${transit}\n2. Sensory: ${sensory}\n3. Odia: ${odia}\n4. Screen-Off: ${screen}\nDirections: ${navUrl}`;
 
       navigator.clipboard.writeText(fullText).then(() => {
         const btn = document.getElementById('copy-card-btn');
@@ -1463,17 +2038,242 @@
       }, 3000);
     }
 
-    // Auto-select destination from query param (e.g. /?dest=khandagiri)
+    // =========================================================
+    // LIVE GPS AUTO-DETECTOR & DISTANCE CALCULATOR
+    // =========================================================
+    function handleDetectGpsLocation() {
+      const gpsBtn = document.getElementById('gps-btn');
+      const gpsIcon = document.getElementById('gps-icon');
+      const gpsLabel = document.getElementById('gps-label');
+      const resultBadge = document.getElementById('gps-result-badge');
+
+      if (!navigator.geolocation) {
+        showToast("Geolocation is not supported by your browser.");
+        return;
+      }
+
+      if (gpsLabel) gpsLabel.innerText = "Locating via GPS satellites...";
+      if (gpsIcon) gpsIcon.innerText = "🛰️";
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userLat = position.coords.latitude;
+          const userLon = position.coords.longitude;
+
+          // Find closest campus
+          let closestCampus = "iter";
+          let minCampusDist = Infinity;
+          for (const [id, campus] of Object.entries(CAMPUS_HUBS)) {
+            const d = calcDistanceKm(userLat, userLon, campus.lat, campus.lon);
+            if (d < minCampusDist) {
+              minCampusDist = d;
+              closestCampus = id;
+            }
+          }
+
+          // Find closest trail
+          let closestTrail = "khandagiri";
+          let minTrailDist = Infinity;
+          for (const [id, dest] of Object.entries(DESTINATIONS_DATA)) {
+            const d = calcDistanceKm(userLat, userLon, dest.lat, dest.lon);
+            if (d < minTrailDist) {
+              minTrailDist = d;
+              closestTrail = id;
+            }
+          }
+
+          // Auto-select campus and destination
+          selectCampus(closestCampus);
+          const destSelect = document.getElementById('dest-select');
+          if (destSelect) {
+            destSelect.value = closestTrail;
+            previewDestination();
+          }
+
+          if (gpsLabel) gpsLabel.innerText = "Location Synced!";
+          if (gpsIcon) gpsIcon.innerText = "✅";
+
+          if (resultBadge) {
+            const cObj = CAMPUS_HUBS[closestCampus];
+            const tObj = DESTINATIONS_DATA[closestTrail];
+            resultBadge.style.display = "block";
+            resultBadge.innerHTML = `🛰️ <strong>GPS Active:</strong> You are ~<strong>${minCampusDist} km</strong> from <strong>${cObj.name}</strong>. Nearest green trail: <strong>${tObj.name}</strong> (~${minTrailDist} km away).`;
+          }
+
+          showToast(`Located near ${CAMPUS_HUBS[closestCampus].short_name}!`);
+        },
+        (err) => {
+          console.warn("GPS error:", err);
+          if (gpsLabel) gpsLabel.innerText = "Detect Nearby Trails via My Location";
+          if (gpsIcon) gpsIcon.innerText = "🛰️";
+          if (resultBadge) {
+            resultBadge.style.display = "block";
+            resultBadge.innerHTML = `📍 <strong>Hostel Corridor:</strong> You are ~1.2 km from SOA / ITER. Nearest green trail: Khandagiri Caves (3.5 km).`;
+          }
+          showToast("GPS note: Using campus hostel default (SOA / ITER).");
+        },
+        { enableHighAccuracy: true, timeout: 8000 }
+      );
+    }
+
+    // =========================================================
+    // ELEVENLABS AUDIO COMPANION ("AUDIO WALK")
+    // =========================================================
+    let audioInstance = null;
+    let isAudioPlaying = false;
+
+    async function handlePlayAudioGuide() {
+      const playBtn = document.getElementById('play-audio-btn');
+      const btnIcon = document.getElementById('audio-btn-icon');
+      const btnText = document.getElementById('audio-btn-text');
+      const statusLabel = document.getElementById('audio-status-label');
+      const player = document.getElementById('elevenlabs-player');
+
+      // If already playing, stop it
+      if (isAudioPlaying) {
+        if (audioInstance) {
+          audioInstance.pause();
+          audioInstance.currentTime = 0;
+        }
+        if ('speechSynthesis' in window) {
+          window.speechSynthesis.cancel();
+        }
+        isAudioPlaying = false;
+        if (btnIcon) btnIcon.innerText = "🔊";
+        if (btnText) btnText.innerText = "Listen to Field Guide (ElevenLabs Voice)";
+        if (statusLabel) statusLabel.innerText = "Listen hands-free while walking";
+        showToast("Audio walk paused.");
+        return;
+      }
+
+      // Gather guide text
+      let guideText = currentRawCardMarkdown;
+      if (!guideText || guideText.trim().length === 0) {
+        const t1 = document.getElementById('chip-transit-text')?.innerText || "";
+        const t2 = document.getElementById('chip-sensory-text')?.innerText || "";
+        const t3 = document.getElementById('chip-odia-text')?.innerText || "";
+        const t4 = document.getElementById('chip-screen-text')?.innerText || "";
+        guideText = `Transit route: ${t1}. Sensory checkpoint: ${t2}. Odia phrase: ${t3}. Digital detox rule: ${t4}`;
+      }
+
+      if (btnIcon) btnIcon.innerText = "⏳";
+      if (btnText) btnText.innerText = "Synthesizing Companion Voice...";
+      if (statusLabel) statusLabel.innerText = "Streaming ElevenLabs voice companion...";
+
+      try {
+        const resp = await fetch('/api/speak', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text: guideText })
+        });
+
+        if (resp.ok) {
+          const data = await resp.json();
+          if (data.status === "success" && data.audio_url) {
+            player.src = data.audio_url;
+            audioInstance = player;
+            isAudioPlaying = true;
+            if (btnIcon) btnIcon.innerText = "⏹️";
+            if (btnText) btnText.innerText = "Stop Narration";
+            if (statusLabel) statusLabel.innerText = "Playing ElevenLabs Companion Voice (Pocket & Walk)";
+            player.play();
+            player.onended = () => {
+              isAudioPlaying = false;
+              if (btnIcon) btnIcon.innerText = "🔊";
+              if (btnText) btnText.innerText = "Listen to Field Guide (ElevenLabs Voice)";
+              if (statusLabel) statusLabel.innerText = "Narration finished. Enjoy your walk!";
+            };
+            showToast("🎧 ElevenLabs companion audio started!");
+            return;
+          }
+        }
+        // Fallback to browser Web Speech Synthesis
+        playBrowserSpeechFallback(guideText);
+      } catch (err) {
+        console.warn("ElevenLabs audio endpoint failed, falling back to Web Speech:", err);
+        playBrowserSpeechFallback(guideText);
+      }
+    }
+
+    function playBrowserSpeechFallback(guideText) {
+      const btnIcon = document.getElementById('audio-btn-icon');
+      const btnText = document.getElementById('audio-btn-text');
+      const statusLabel = document.getElementById('audio-status-label');
+
+      if (!('speechSynthesis' in window)) {
+        showToast("Speech audio not supported on this browser.");
+        if (btnIcon) btnIcon.innerText = "🔊";
+        if (btnText) btnText.innerText = "Listen to Field Guide (ElevenLabs Voice)";
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      const clean = guideText.replace(/[#*_`]/g, '').replace(/\n+/g, ' ');
+      const utterance = new SpeechSynthesisUtterance(clean);
+      utterance.rate = 0.92;
+      utterance.pitch = 1.0;
+
+      const voices = window.speechSynthesis.getVoices();
+      const naturalVoice = voices.find(v => v.lang.includes('IN') || v.lang.includes('en'));
+      if (naturalVoice) utterance.voice = naturalVoice;
+
+      utterance.onstart = () => {
+        isAudioPlaying = true;
+        if (btnIcon) btnIcon.innerText = "⏹️";
+        if (btnText) btnText.innerText = "Stop Narration";
+        if (statusLabel) statusLabel.innerText = "Playing Companion Voice (Browser Audio)";
+      };
+
+      utterance.onend = () => {
+        isAudioPlaying = false;
+        if (btnIcon) btnIcon.innerText = "🔊";
+        if (btnText) btnText.innerText = "Listen to Field Guide (ElevenLabs Voice)";
+        if (statusLabel) statusLabel.innerText = "Narration finished. Put phone in pocket!";
+      };
+
+      utterance.onerror = () => {
+        isAudioPlaying = false;
+        if (btnIcon) btnIcon.innerText = "🔊";
+        if (btnText) btnText.innerText = "Listen to Field Guide (ElevenLabs Voice)";
+      };
+
+      window.speechSynthesis.speak(utterance);
+      showToast("🔊 Playing trail companion audio walk!");
+    }
+
+    // Auto-select destination and campus from query params (e.g. index.html?dest=nandankanan&campus=kiit)
     window.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const destParam = urlParams.get('dest');
-      if (destParam) {
+      const campusParam = urlParams.get('campus');
+
+      if (campusParam && CAMPUS_HUBS[campusParam.toLowerCase()]) {
+        selectCampus(campusParam.toLowerCase());
+      }
+      if (destParam && DESTINATIONS_DATA[destParam.toLowerCase()]) {
         const destSelect = document.getElementById('dest-select');
-        if (destSelect) {
-          destSelect.value = destParam;
-          document.getElementById('scout-form')?.scrollIntoView({ behavior: 'smooth' });
-          handleScoutSubmit();
-        }
+        if (destSelect) destSelect.value = destParam.toLowerCase();
+      }
+
+      previewDestination();
+
+      // Ensure seamless navigation when browsing static files directly via file:// protocol
+      if (window.location.protocol === 'file:') {
+        document.querySelectorAll('a[href^="/"]').forEach(a => {
+          const path = a.getAttribute('href');
+          if (path === '/') {
+            a.setAttribute('href', 'index.html');
+          } else if (path.startsWith('/?')) {
+            a.setAttribute('href', path.replace('/?', 'index.html?'));
+          } else if (path.startsWith('/') && !path.includes('.html')) {
+            a.setAttribute('href', path.replace(/^\//, '') + '.html');
+          }
+        });
+      }
+
+      if (destParam || campusParam) {
+        document.getElementById('scout-form')?.scrollIntoView({ behavior: 'smooth' });
+        handleScoutSubmit();
       }
     });
   </script>

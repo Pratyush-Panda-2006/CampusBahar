@@ -75,32 +75,36 @@
       padding: 1.5rem 1.5rem 1rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     }
-    .brand-wrap {
+    .brand-wrap, .nav-brand {
       display: flex; align-items: center; gap: 0.85rem;
       text-decoration: none; color: var(--ink);
     }
-    .brand-tile {
+    .brand-tile, .logo-box {
       width: 44px; height: 44px;
       background: var(--mustard);
       border: var(--border-hard);
       box-shadow: var(--shadow-md);
       border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .brand-name {
+    .brand-tile:hover, .logo-box:hover {
+      transform: translate(2px, 2px); box-shadow: var(--shadow-active);
+    }
+    .brand-name, .nav-brand span {
       font-family: var(--font-display);
       font-weight: 800; font-size: 26px;
       letter-spacing: -0.02em;
     }
     .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
-    .nav-links a {
+    .nav-links a, .nav-link {
       color: var(--ink); font-weight: 700; font-size: 0.95rem;
       text-decoration: none; transition: color 0.15s ease;
     }
-    .nav-links a:hover, .nav-links a.active {
+    .nav-links a:hover, .nav-link:hover, .nav-links a.active, .nav-link.active {
       color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
     }
-    .btn-gate {
+    .btn-gate, .nav-cta-btn {
       background: var(--teal); color: var(--white);
       font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
       padding: 0.65rem 1.3rem;
@@ -109,7 +113,7 @@
       display: inline-flex; align-items: center; gap: 0.4rem;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .btn-gate:hover {
+    .btn-gate:hover, .nav-cta-btn:hover {
       transform: translate(3px, 3px); box-shadow: var(--shadow-active);
     }
 
@@ -387,35 +391,33 @@
 
   <!-- NAVIGATION BAR -->
   <nav class="nav-container">
-    <a href="index.html" class="brand-wrap">
-      <div class="brand-tile">
+    <a href="/" class="nav-brand">
+      <div class="logo-box">
         <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
           <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
         </svg>
       </div>
-      <span class="brand-name">PravasiTrail</span>
+      <span>PravasiTrail</span>
     </a>
 
-    <ul class="nav-links">
-      <li><a href="trails.html">Campus Trails</a></li>
-      <li><a href="weather.html" class="active">TabPFN Weather</a></li>
-      <li><a href="mobus.html">Mo Bus Guide</a></li>
-      <li><a href="odia.html">Odia Cheatsheet</a></li>
-    </ul>
+    <div class="nav-links">
+      <a href="/trails" class="nav-link">Campus Trails</a>
+      <a href="/weather" class="nav-link active">TabPFN Weather</a>
+      <a href="/mobus" class="nav-link">Mo Bus Guide</a>
+      <a href="/odia" class="nav-link">Odia Cheatsheet</a>
+    </div>
 
-    <a href="index.html" class="btn-gate">
-      <span>ITER Gate 1</span>
-    </a>
+    <a href="/" class="nav-cta-btn">ITER Gate 1</a>
   </nav>
 
   <!-- Mobile Quick Navigation Bar -->
   <div class="mobile-nav-bar">
-    <a href="index.html" class="mobile-nav-link">🏠 Scout</a>
-    <a href="trails.html" class="mobile-nav-link">🚶 Trails</a>
-    <a href="weather.html" class="mobile-nav-link active">☀️ Weather</a>
-    <a href="mobus.html" class="mobile-nav-link">🚌 Mo Bus</a>
-    <a href="odia.html" class="mobile-nav-link">🗣️ Odia</a>
+    <a href="/" class="mobile-nav-link">🏠 Scout</a>
+    <a href="/trails" class="mobile-nav-link">🚶 Trails</a>
+    <a href="/weather" class="mobile-nav-link active">☀️ Weather</a>
+    <a href="/mobus" class="mobile-nav-link">🚌 Mo Bus</a>
+    <a href="/odia" class="mobile-nav-link">🗣️ Odia</a>
   </div>
 
   <!-- HEADER -->
@@ -600,32 +602,32 @@
         <div class="explain-chip ec-mustard">⚡</div>
         <h3 class="explain-title">Why TabPFN?</h3>
         <p class="explain-text">TabPFN performs in-context prior-data classification without needing training loops or hyperparameter tuning. It accurately models micro-climate safety thresholds with instantaneous inference.</p>
-        <a href="index.html" style="font-weight: 800; font-size: 0.88rem; color: var(--coral); text-decoration: underline; margin-top: auto;">Test in Field Card ➔</a>
+        <a href="/" style="font-weight: 800; font-size: 0.88rem; color: var(--coral); text-decoration: underline; margin-top: auto;">Test in Field Card ➔</a>
       </div>
 
       <div class="explain-card">
         <div class="explain-chip ec-coral">🌡️</div>
         <h3 class="explain-title">Coastal Humidity Trap</h3>
         <p class="explain-text">Bhubaneswar sits 50 km from the Bay of Bengal. When 32°C combines with 70% humidity, the heat index exceeds 41°C. Opt for air-conditioned Mo Bus transport during afternoon transit.</p>
-        <a href="mobus.html" style="font-weight: 800; font-size: 0.88rem; color: var(--teal); text-decoration: underline; margin-top: auto;">View AC Mo Bus Routes ➔</a>
+        <a href="/mobus" style="font-weight: 800; font-size: 0.88rem; color: var(--teal); text-decoration: underline; margin-top: auto;">View AC Mo Bus Routes ➔</a>
       </div>
 
       <div class="explain-card">
         <div class="explain-chip ec-teal">🌅</div>
         <h3 class="explain-title">Golden Walking Windows</h3>
         <p class="explain-text">Two pristine slots exist daily: 5:30 AM to 8:00 AM (cool dawn mist) and 4:30 PM to 6:30 PM (sea breeze). Always plan departure times around these two windows.</p>
-        <a href="trails.html" style="font-weight: 800; font-size: 0.88rem; color: var(--violet); text-decoration: underline; margin-top: auto;">Browse Trail Destinations ➔</a>
+        <a href="/trails" style="font-weight: 800; font-size: 0.88rem; color: var(--violet); text-decoration: underline; margin-top: auto;">Browse Trail Destinations ➔</a>
       </div>
     </div>
   </main>
 
   <footer>
     <div class="footer-nav">
-      <a href="index.html">Home Scout</a>
-      <a href="trails.html">Campus Trails</a>
-      <a href="weather.html">TabPFN Weather</a>
-      <a href="mobus.html">Mo Bus Guide</a>
-      <a href="odia.html">Odia Cheatsheet</a>
+      <a href="/">Home Scout</a>
+      <a href="/trails">Campus Trails</a>
+      <a href="/weather">TabPFN Weather</a>
+      <a href="/mobus">Mo Bus Guide</a>
+      <a href="/odia">Odia Cheatsheet</a>
     </div>
     <p>PravasiTrail (CampusBahar) • Siksha 'O' Anusandhan ITER Jagamara • DEV "Touch Grass" Hacktoberfest 2026</p>
   </footer>
@@ -682,6 +684,22 @@
 
       document.getElementById('advisory-text').innerText = data.adv;
     }
+
+    // Ensure seamless navigation when browsing static files directly via file:// protocol
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.protocol === 'file:') {
+        document.querySelectorAll('a[href^="/"]').forEach(a => {
+          const path = a.getAttribute('href');
+          if (path === '/') {
+            a.setAttribute('href', 'index.html');
+          } else if (path.startsWith('/?')) {
+            a.setAttribute('href', path.replace('/?', 'index.html?'));
+          } else if (path.startsWith('/') && !path.includes('.html')) {
+            a.setAttribute('href', path.replace(/^\//, '') + '.html');
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>

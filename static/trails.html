@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Campus Trails | PravasiTrail (CampusBahar)</title>
+  <title>PravasiTrail • 15 Curated Outdoor Getaways in Bhubaneswar</title>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
       --bg-cream: #f5efe2;
@@ -18,17 +20,18 @@
       --sky: #3aa0ff;
       --white: #ffffff;
       
-      --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      
-      --border-hard: 3px solid #17140d;
-      --shadow-lg: 8px 8px 0 #17140d;
-      --shadow-md: 5px 5px 0 #17140d;
-      --shadow-sm: 4px 4px 0 #17140d;
-      --shadow-active: 2px 2px 0 #17140d;
+      --border-hard: 3px solid var(--ink);
+      --shadow-lg: 8px 8px 0 var(--ink);
+      --shadow-md: 5px 5px 0 var(--ink);
+      --shadow-sm: 4px 4px 0 var(--ink);
+      --shadow-active: 2px 2px 0 var(--ink);
+
+      --font-display: 'Bricolage Grotesque', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       background-color: var(--bg-cream);
@@ -37,236 +40,190 @@
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
-      line-height: 1.5;
-    }
-
-    ::selection { background: var(--mustard); color: var(--ink); }
-
-    /* CONFETTI ANIMATIONS */
-    @keyframes drift {
-      0% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-24px) rotate(15deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
-    }
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    @keyframes sway {
-      0% { transform: translateX(0px) rotate(0deg); }
-      50% { transform: translateX(18px) rotate(-10deg); }
-      100% { transform: translateX(0px) rotate(0deg); }
-    }
-    @keyframes bob {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-16px); }
-      100% { transform: translateY(0px); }
     }
 
     .confetti-layer {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 0; overflow: hidden;
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
     }
-    .confetti-item { position: absolute; pointer-events: none; }
-    .c-tri-coral { top: 90px; left: 4%; animation: drift 7s ease-in-out infinite; }
-    .c-arc-teal { top: 220px; right: 5%; animation: sway 9s ease-in-out infinite; }
-    .c-dots-mustard { top: 620px; left: 3%; animation: bob 6s ease-in-out infinite; }
-    .c-plus-violet { top: 140px; right: 28%; animation: spin 14s linear infinite; }
-    .c-squiggle-black { top: 500px; right: 4%; animation: sway 8s ease-in-out infinite; }
-    .c-half-mustard { top: 880px; left: 10%; animation: drift 10s ease-in-out infinite; }
+    .confetti-item { position: absolute; }
+    .c-tri-coral { top: 6%; right: 7%; }
+    .c-arc-teal { bottom: 12%; left: 4%; }
+    .c-dots-mustard { top: 22%; left: 8%; }
+    .c-plus-violet { top: 58%; right: 5%; }
+    .c-squiggle-black { bottom: 25%; right: 12%; }
+    .c-half-mustard { top: 40%; right: 18%; }
 
-    /* NAVBAR */
     .nav-container {
       position: relative; z-index: 10;
-      max-width: 1240px; margin: 0 auto;
-      padding: 1.5rem 1.5rem 1rem;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      border-bottom: var(--border-hard); background: var(--bg-cream);
     }
-    .brand-wrap {
-      display: flex; align-items: center; gap: 0.85rem;
-      text-decoration: none; color: var(--ink);
+    .brand-wrap, .nav-brand {
+      display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: var(--ink);
     }
-    .brand-tile {
-      width: 44px; height: 44px;
-      background: var(--mustard);
-      border: var(--border-hard);
-      box-shadow: var(--shadow-md);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
+    .brand-tile, .logo-box {
+      width: 44px; height: 44px; background: var(--mustard); border: var(--border-hard);
+      box-shadow: var(--shadow-sm); border-radius: 10px; display: grid; place-items: center;
     }
-    .brand-name {
-      font-family: var(--font-display);
-      font-weight: 800; font-size: 26px;
-      letter-spacing: -0.02em;
-    }
-    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
-    .nav-links a {
-      color: var(--ink); font-weight: 700; font-size: 0.95rem;
-      text-decoration: none; transition: color 0.15s ease;
-    }
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
-    }
-    .btn-gate {
-      background: var(--teal); color: var(--white);
-      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
-      padding: 0.65rem 1.3rem;
-      border: var(--border-hard); box-shadow: var(--shadow-md);
-      border-radius: 9999px; text-decoration: none;
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
-    }
-    .btn-gate:hover {
-      transform: translate(3px, 3px); box-shadow: var(--shadow-active);
+    .brand-tile svg, .logo-box svg { width: 24px; height: 24px; }
+    .brand-name, .nav-brand span {
+      font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; letter-spacing: -0.03em;
     }
 
-    /* HEADER */
+    .nav-links { display: flex; align-items: center; gap: 1rem; list-style: none; }
+    .nav-links a, .nav-link {
+      font-family: var(--font-display); font-weight: 700; font-size: 0.95rem; color: var(--ink);
+      text-decoration: none; padding: 0.5rem 1rem; border: var(--border-hard);
+      background: var(--white); box-shadow: var(--shadow-sm); border-radius: 9999px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+    .nav-links a:hover, .nav-links a.active, .nav-link:hover, .nav-link.active {
+      transform: translate(-2px, -2px); box-shadow: var(--shadow-md); background: var(--mustard);
+    }
+
+    .btn-gate, .nav-cta-btn {
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; color: var(--white);
+      background: var(--teal); border: var(--border-hard); padding: 0.55rem 1.25rem;
+      border-radius: 9999px; box-shadow: var(--shadow-sm); text-decoration: none;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn-gate:hover, .nav-cta-btn:hover { transform: translate(2px, 2px); box-shadow: var(--shadow-active); }
+
     .page-header {
-      position: relative; z-index: 1;
-      max-width: 1240px; margin: 2rem auto 2.5rem;
-      padding: 0 1.5rem; text-align: center;
+      position: relative; z-index: 10; text-align: center;
+      padding: 3.5rem 1.5rem 1.75rem; max-width: 960px; margin: 0 auto;
     }
     .eyebrow-pill {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--violet); color: var(--white);
-      border: var(--border-hard); box-shadow: var(--shadow-sm);
-      border-radius: 9999px; padding: 0.4rem 1.1rem;
-      font-family: var(--font-display); font-size: 0.85rem; font-weight: 800;
-      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.85rem;
+      background: var(--mustard); border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 9999px; padding: 0.35rem 0.9rem;
+      font-family: var(--font-mono); font-weight: 800; font-size: 0.78rem; margin-bottom: 1.25rem;
     }
     .eyebrow-dot {
-      width: 10px; height: 10px; background: var(--mustard);
-      border: 2px solid var(--ink); border-radius: 50%;
+      width: 10px; height: 10px; background: var(--coral); border-radius: 50%; border: 2px solid var(--ink);
     }
     .page-title {
-      font-family: var(--font-display);
-      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-      font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
-      margin-bottom: 0.8rem;
+      font-family: var(--font-display); font-weight: 800; font-size: 3rem; line-height: 1.05;
+      letter-spacing: -0.03em; margin-bottom: 1rem;
     }
     .page-lead {
-      font-size: 1.15rem; font-weight: 500;
-      max-width: 680px; margin: 0 auto; color: var(--ink);
+      font-size: 1.15rem; font-weight: 500; color: #475569; max-width: 720px; margin: 0 auto; line-height: 1.5;
     }
 
-    /* TRAIL CARDS GRID */
-    .trails-grid {
-      position: relative; z-index: 1;
-      max-width: 1240px; margin: 0 auto 5rem;
-      padding: 0 1.5rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
+    /* Category Filter Bar */
+    .category-filters {
+      position: relative; z-index: 10;
+      display: flex; justify-content: center; gap: 0.65rem; flex-wrap: wrap;
+      margin-bottom: 2.5rem; padding: 0 1.5rem;
     }
+    .filter-pill {
+      font-family: var(--font-display); font-weight: 800; font-size: 0.86rem;
+      padding: 0.45rem 1.1rem; background: var(--white); border: var(--border-hard);
+      box-shadow: var(--shadow-sm); border-radius: 9999px; cursor: pointer;
+      color: var(--ink); transition: all 0.15s ease;
+    }
+    .filter-pill:hover, .filter-pill.active {
+      background: var(--mustard); transform: translate(-2px, -2px); box-shadow: var(--shadow-md);
+    }
+
+    .trails-grid {
+      position: relative; z-index: 10;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2rem; max-width: 1280px; margin: 0 auto 4rem; padding: 0 2rem;
+    }
+
     .trail-card {
-      background: var(--white);
-      border: var(--border-hard);
-      box-shadow: var(--shadow-lg);
-      border-radius: 20px;
-      padding: 1.8rem;
-      display: flex; flex-direction: column; justify-content: space-between;
+      background: var(--white); border: var(--border-hard); box-shadow: var(--shadow-lg);
+      border-radius: 20px; padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .trail-card:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: 11px 11px 0 var(--ink);
+      transform: translate(-3px, -3px); box-shadow: 10px 10px 0 var(--ink);
     }
+
     .card-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 1rem;
-    }
-    .dist-badge {
-      font-family: var(--font-display); font-weight: 800; font-size: 0.85rem;
-      background: var(--mustard); color: var(--ink);
-      border: var(--border-hard); box-shadow: var(--shadow-sm);
-      border-radius: 9999px; padding: 0.25rem 0.8rem;
+      display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;
     }
     .trail-icon-box {
-      width: 50px; height: 50px;
-      border: var(--border-hard); box-shadow: var(--shadow-sm);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
+      width: 54px; height: 54px; border: var(--border-hard); border-radius: 14px;
+      display: grid; place-items: center; font-size: 1.6rem; box-shadow: var(--shadow-sm);
     }
-    .ibox-coral { background: var(--coral); color: var(--white); }
-    .ibox-teal { background: var(--teal); color: var(--white); }
-    .ibox-sky { background: var(--sky); color: var(--white); }
-    .ibox-violet { background: var(--violet); color: var(--white); }
+    .ibox-coral { background: var(--coral); }
+    .ibox-teal { background: var(--teal); }
+    .ibox-sky { background: var(--sky); }
+    .ibox-violet { background: var(--violet); }
+    .ibox-mustard { background: var(--mustard); }
+
+    .category-chip {
+      font-family: var(--font-display); font-weight: 800; font-size: 0.72rem;
+      text-transform: uppercase; padding: 0.25rem 0.65rem; border: 2px solid var(--ink);
+      border-radius: 9999px; background: #faf6ee; color: var(--ink);
+    }
 
     .trail-title {
-      font-family: var(--font-display); font-size: 1.4rem; font-weight: 800;
-      line-height: 1.15; margin-bottom: 0.75rem;
+      font-family: var(--font-display); font-weight: 800; font-size: 1.55rem;
+      line-height: 1.15; margin-bottom: 0.65rem;
     }
     .trail-desc {
-      font-size: 0.95rem; line-height: 1.5; color: var(--ink);
-      margin-bottom: 1.25rem; font-weight: 500;
+      font-size: 0.95rem; font-weight: 500; color: #475569; line-height: 1.45; margin-bottom: 1.25rem;
     }
+
     .specs-list {
-      list-style: none; margin-bottom: 1.5rem;
-      display: flex; flex-direction: column; gap: 0.5rem;
+      list-style: none; display: flex; flex-direction: column; gap: 0.55rem;
+      padding: 0.9rem; background: var(--bg-cream); border: 2px solid var(--ink);
+      border-radius: 12px; margin-bottom: 1.25rem;
     }
     .specs-item {
-      font-size: 0.88rem; font-weight: 700;
-      background: var(--bg-cream);
-      border: 2px solid var(--ink);
-      border-radius: 8px; padding: 0.45rem 0.75rem;
-      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.84rem; font-weight: 700; color: var(--ink);
+      display: flex; align-items: flex-start; gap: 0.45rem; line-height: 1.35;
     }
-    .specs-item span { color: var(--ink); font-weight: 500; }
+    .specs-item span { font-weight: 500; color: #334155; }
+
+    .card-links-row {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0.5rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+    }
+    .weather-check-link {
+      font-size: 0.82rem; font-weight: 800; color: var(--violet); text-decoration: underline;
+    }
+    .gmap-mini-link {
+      font-size: 0.82rem; font-weight: 800; color: var(--teal); text-decoration: underline;
+    }
 
     .btn-scout-trail {
-      background: var(--coral); color: var(--white);
-      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
-      padding: 0.85rem 1.4rem;
-      border: var(--border-hard); box-shadow: var(--shadow-md);
-      border-radius: 9999px; text-decoration: none;
-      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      display: block; width: 100%; text-align: center; text-decoration: none;
+      background: var(--mustard); color: var(--ink); font-family: var(--font-display);
+      font-weight: 800; font-size: 1rem; padding: 0.85rem; border: var(--border-hard);
+      box-shadow: var(--shadow-sm); border-radius: 12px;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     .btn-scout-trail:hover {
-      transform: translate(3px, 3px); box-shadow: var(--shadow-active);
-      background: var(--mustard); color: var(--ink);
+      transform: translate(2px, 2px); box-shadow: var(--shadow-active); background: var(--coral); color: var(--white);
     }
 
-    /* CAMPUS STRIP */
     .campus-strip {
-      background: var(--ink); color: var(--white);
-      border-top: var(--border-hard); border-bottom: var(--border-hard);
-      padding: 1.25rem 1.5rem; text-align: center;
-      font-family: var(--font-display); font-weight: 800; font-size: 1rem;
-      letter-spacing: 0.05em;
+      background: var(--ink); color: var(--white); padding: 1.2rem;
+      text-align: center; font-family: var(--font-display); font-weight: 800; font-size: 0.92rem;
+      letter-spacing: 0.05em; border-top: var(--border-hard); border-bottom: var(--border-hard);
     }
-    .campus-strip span { color: var(--mustard); }
+    .campus-strip span { color: var(--mustard); text-decoration: underline; }
 
     footer {
-      border-top: var(--border-hard); background: var(--bg-cream);
-      padding: 2.5rem 1.5rem; text-align: center;
-      font-weight: 700; font-size: 0.95rem;
+      background: var(--bg-cream); padding: 2.5rem 1.5rem; text-align: center;
+      border-top: var(--border-hard); font-weight: 600; font-size: 0.9rem;
     }
-
     .footer-nav {
-      display: flex; justify-content: center;
-      gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;
     }
     .footer-nav a {
       color: var(--ink); font-weight: 700; text-decoration: none; font-size: 0.9rem;
-      border: 2px solid var(--ink); background: var(--white);
-      padding: 0.35rem 0.85rem; border-radius: 9999px;
-      box-shadow: 3px 3px 0 var(--ink);
+      border: 2px solid var(--ink); background: var(--white); padding: 0.35rem 0.85rem;
+      border-radius: 9999px; box-shadow: 3px 3px 0 var(--ink);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     .footer-nav a:hover {
-      transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink);
-      background: var(--mustard);
-    }
-
-    .transit-link {
-      color: var(--teal); text-decoration: underline; font-weight: 700;
-    }
-    .weather-check-link {
-      display: inline-block; font-size: 0.85rem; font-weight: 700;
-      color: var(--violet); text-decoration: underline; margin-bottom: 0.75rem;
+      transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); background: var(--mustard);
     }
 
     .mobile-nav-bar { display: none; }
@@ -286,8 +243,9 @@
         border-radius: 9999px;
       }
       .mobile-nav-link:hover, .mobile-nav-link.active { background: var(--mustard); }
+      .page-title { font-size: 2.3rem; }
+      .trails-grid { grid-template-columns: 1fr; padding: 0 1.25rem; }
     }
-
   </style>
 </head>
 <body>
@@ -310,144 +268,496 @@
     <svg class="confetti-item c-squiggle-black" width="68" height="34" viewBox="0 0 68 34">
       <path d="M4 17 Q 16 0, 28 17 T 52 17 T 64 17" fill="none" stroke="#17140d" stroke-width="4" stroke-linecap="round"/>
     </svg>
-    <svg class="confetti-item c-half-mustard" width="52" height="30" viewBox="0 0 52 30">
-      <path d="M3 27 A23 23 0 0 1 49 27 Z" fill="#ffc531" stroke="#17140d" stroke-width="3"/>
-    </svg>
   </div>
 
   <!-- NAVIGATION BAR -->
   <nav class="nav-container">
-    <a href="index.html" class="brand-wrap">
-      <div class="brand-tile">
+    <a href="/" class="nav-brand">
+      <div class="logo-box">
         <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
           <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
         </svg>
       </div>
-      <span class="brand-name">PravasiTrail</span>
+      <span>PravasiTrail</span>
     </a>
 
-    <ul class="nav-links">
-      <li><a href="trails.html" class="active">Campus Trails</a></li>
-      <li><a href="weather.html">TabPFN Weather</a></li>
-      <li><a href="mobus.html">Mo Bus Guide</a></li>
-      <li><a href="odia.html">Odia Cheatsheet</a></li>
-    </ul>
+    <div class="nav-links">
+      <a href="/trails" class="nav-link active">Campus Trails</a>
+      <a href="/weather" class="nav-link">TabPFN Weather</a>
+      <a href="/mobus" class="nav-link">Mo Bus Guide</a>
+      <a href="/odia" class="nav-link">Odia Cheatsheet</a>
+    </div>
 
-    <a href="index.html" class="btn-gate">
-      <span>ITER Gate 1</span>
-    </a>
+    <a href="/" class="nav-cta-btn">ITER Gate 1</a>
   </nav>
 
   <!-- Mobile Quick Navigation Bar -->
   <div class="mobile-nav-bar">
-    <a href="index.html" class="mobile-nav-link">🏠 Scout</a>
-    <a href="trails.html" class="mobile-nav-link active">🚶 Trails</a>
-    <a href="weather.html" class="mobile-nav-link">☀️ Weather</a>
-    <a href="mobus.html" class="mobile-nav-link">🚌 Mo Bus</a>
-    <a href="odia.html" class="mobile-nav-link">🗣️ Odia</a>
+    <a href="/" class="mobile-nav-link">🏠 Scout</a>
+    <a href="/trails" class="mobile-nav-link active">🚶 Trails</a>
+    <a href="/weather" class="mobile-nav-link">☀️ Weather</a>
+    <a href="/mobus" class="mobile-nav-link">🚌 Mo Bus</a>
+    <a href="/odia" class="mobile-nav-link">🗣️ Odia</a>
   </div>
 
   <!-- PAGE HEADER -->
   <header class="page-header">
     <div class="eyebrow-pill">
       <span class="eyebrow-dot"></span>
-      <span>BH-1 TO BH-9 • DESTINATION GUIDE</span>
+      <span>BHUBANESWAR METRO • 18 CURATED ESCAPES</span>
     </div>
     <h1 class="page-title">Trails worth skipping weekend screen time for.</h1>
-    <p class="page-lead">Detailed breakdown of the four major nature & heritage escapes near campus. Pack your water bottle and step out before Monday mid-sems.</p>
+    <p class="page-lead">Curated outdoor getaways across Bhubaneswar for students at SOA, KIIT, OUTR, AIIMS, Utkal, Silicon, and CVRCE. Real transit routes, student fare benchmarks, and direct Google Maps navigation.</p>
   </header>
 
+  <!-- CATEGORY FILTER BAR -->
+  <div class="category-filters">
+    <button class="filter-pill active" onclick="filterCategory('all')">All Escapes (18)</button>
+    <button class="filter-pill" onclick="filterCategory('hills')">⛰️ Hills & Caves (4)</button>
+    <button class="filter-pill" onclick="filterCategory('lakes')">🌊 Lakes & Reserves (4)</button>
+    <button class="filter-pill" onclick="filterCategory('heritage')">🛕 Heritage & Culture (9)</button>
+    <button class="filter-pill" onclick="filterCategory('open')">🌅 Open Horizons (1)</button>
+  </div>
+
   <!-- TRAILS GRID -->
-  <main class="trails-grid">
-    <!-- Trail 1 -->
-    <div class="trail-card">
+  <main class="trails-grid" id="trails-list">
+    <!-- 1. Khandagiri -->
+    <div class="trail-card" data-category="hills">
       <div>
         <div class="card-top">
           <div class="trail-icon-box ibox-coral">🪨</div>
-          <span class="dist-badge">3.5 KM FROM ITER</span>
+          <span class="category-chip">⛰️ Hills & Caves</span>
         </div>
         <h2 class="trail-title">Khandagiri & Udayagiri Caves</h2>
-        <p class="trail-desc">2nd-century BCE rock-cut monastic caves of Emperor Kharavela. Expansive sandstone terraces, ancient inscriptions, and breezy hilltop panoramas overlooking the city.</p>
+        <p class="trail-desc">2nd-century BCE rock-cut monastic caves of Emperor Kharavela. Expansive sandstone terraces, ancient inscriptions, and breezy hilltop panoramas overlooking Bhubaneswar.</p>
         <ul class="specs-list">
-          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 11 (<a href="mobus.html" class="transit-link">View Bus Route</a>) / Auto ₹15–₹20</span></li>
-          <li class="specs-item">⏰ Best Window: <span>6:00 AM – 8:30 AM before heat escalates</span></li>
+          <li class="specs-item">📍 Corridor: <span>3.5 km from ITER • 11 km from KIIT • 2.5 km from OUTR</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 11 from Jagamara / Route 16 transfer Fire Station</span></li>
           <li class="specs-item">🌿 Grass Factor: <span>Rough ancient sandstone & hilltop pine breeze</span></li>
         </ul>
-        <a href="weather.html" class="weather-check-link">☀️ Check Live Comfort on TabPFN Matrix</a>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.2588,85.7865" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
       </div>
       <a href="index.html?dest=khandagiri" class="btn-scout-trail">
-        <span>Scout This Trail -&gt;</span>
+        <span>Scout Khandagiri from Your Campus ➔</span>
       </a>
     </div>
 
-    <!-- Trail 2 -->
-    <div class="trail-card">
+    <!-- 2. Deras Dam -->
+    <div class="trail-card" data-category="lakes">
       <div>
         <div class="card-top">
           <div class="trail-icon-box ibox-teal">🌲</div>
-          <span class="dist-badge">14 KM FROM ITER</span>
+          <span class="category-chip">🌊 Lakes & Reserves</span>
         </div>
-        <h2 class="trail-title">Deras Dam & Chandaka Canopy</h2>
-        <p class="trail-desc">Massive water reservoir bordering the Chandaka Wildlife Sanctuary. Raw earth embankments, complete silence away from campus horns, and dense teak & bamboo forest canopy.</p>
+        <h2 class="trail-title">Deras & Jhumka Dam (Chandaka)</h2>
+        <p class="trail-desc">Massive water reservoir bordering Chandaka Wildlife Sanctuary. Raw earthen embankments, pure silence away from traffic horns, and dense teak & bamboo forest canopy.</p>
         <ul class="specs-list">
-          <li class="specs-item">🚲 Transit: <span>Cycle trek or auto (<a href="mobus.html" class="transit-link">Transport Hacks</a>) ~₹60–₹80</span></li>
-          <li class="specs-item">⏰ Best Window: <span>Early morning dawn-to-dusk nature walks</span></li>
-          <li class="specs-item">🌿 Grass Factor: <span>Cold forest mist & deep bamboo shade</span></li>
+          <li class="specs-item">📍 Corridor: <span>14 km from ITER • 12 km from KIIT • 9 km from OUTR</span></li>
+          <li class="specs-item">🚌 Transit: <span>Direct bike/auto via Chandaka road or Pitapalli bypass</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Cold forest reservoir mist & deep bamboo shade</span></li>
         </ul>
-        <a href="weather.html" class="weather-check-link">☀️ Check Live Comfort on TabPFN Matrix</a>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.3346,85.7082" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
       </div>
       <a href="index.html?dest=deras" class="btn-scout-trail">
-        <span>Scout This Trail -&gt;</span>
+        <span>Scout Deras Dam from Your Campus ➔</span>
       </a>
     </div>
 
-    <!-- Trail 3 -->
-    <div class="trail-card">
+    <!-- 3. Ekamra Kanan Lake -->
+    <div class="trail-card" data-category="lakes">
       <div>
         <div class="card-top">
           <div class="trail-icon-box ibox-sky">🌺</div>
-          <span class="dist-badge">6 KM FROM ITER</span>
+          <span class="category-chip">🌊 Lakes & Reserves</span>
         </div>
         <h2 class="trail-title">Ekamra Kanan Botanical Lake</h2>
-        <p class="trail-desc">A 500-acre botanical sanctuary featuring a serene lake with pelicans, sweeping emerald grass lawns, rose gardens, and wide tree-shaded park avenues.</p>
+        <p class="trail-desc">A 500-acre botanical sanctuary featuring a serene lake with pelicans, sweeping emerald grass lawns, rose gardens, and wide tree-shaded park avenues in Nayapalli.</p>
         <ul class="specs-list">
-          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 10 (<a href="mobus.html" class="transit-link">View Route 10</a>) to Nayapalli</span></li>
-          <li class="specs-item">⏰ Best Window: <span>4:00 PM – 6:30 PM sunset breeze</span></li>
-          <li class="specs-item">🌿 Grass Factor: <span>Barefoot dew-soaked lawn walking</span></li>
+          <li class="specs-item">📍 Corridor: <span>6 km from ITER • 7 km from KIIT • 3 km from Utkal</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 10 to Nayapalli IRC Village Gate</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Barefoot dew-soaked lawn walking & lakeside pelicans</span></li>
         </ul>
-        <a href="weather.html" class="weather-check-link">☀️ Check Live Comfort on TabPFN Matrix</a>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.3060,85.8118" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
       </div>
       <a href="index.html?dest=ekamra" class="btn-scout-trail">
-        <span>Scout This Trail -&gt;</span>
+        <span>Scout Ekamra Lake from Your Campus ➔</span>
       </a>
     </div>
 
-    <!-- Trail 4 -->
-    <div class="trail-card">
+    <!-- 4. Dhauli Shanti Stupa -->
+    <div class="trail-card" data-category="heritage">
       <div>
         <div class="card-top">
           <div class="trail-icon-box ibox-violet">🕊️</div>
-          <span class="dist-badge">11 KM FROM ITER</span>
+          <span class="category-chip">🛕 Heritage & Culture</span>
         </div>
-        <h2 class="trail-title">Dhauli Shanti Stupa & Daya River</h2>
+        <h2 class="trail-title">Dhauli Shanti Stupa & Daya Riverbank</h2>
         <p class="trail-desc">Historic white peace pagoda atop Dhauli hill overlooking the emerald Daya River basin. Walk the quiet hill path where Emperor Ashoka renounced warfare 2,200 years ago.</p>
         <ul class="specs-list">
-          <li class="specs-item">🚌 Transit: <span>Auto/Bus (<a href="mobus.html" class="transit-link">Corridor 20/21</a>) via Kalpana / Puri bypass</span></li>
-          <li class="specs-item">⏰ Best Window: <span>5:00 PM – 6:45 PM golden hour sunset</span></li>
-          <li class="specs-item">🌿 Grass Factor: <span>Sweeping valley river breeze</span></li>
+          <li class="specs-item">📍 Corridor: <span>11 km from ITER • 18 km from KIIT • 12 km from Utkal</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 20/21 via Kalpana Square towards Puri bypass</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Sweeping valley river breeze & smooth pagoda marble</span></li>
         </ul>
-        <a href="weather.html" class="weather-check-link">☀️ Check Live Comfort on TabPFN Matrix</a>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.1923,85.8394" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
       </div>
       <a href="index.html?dest=dhauli" class="btn-scout-trail">
-        <span>Scout This Trail -&gt;</span>
+        <span>Scout Dhauli Stupa from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 5. Nandankanan Botanical -->
+    <div class="trail-card" data-category="lakes">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-mustard">🪷</div>
+          <span class="category-chip">🌊 Lakes & Reserves</span>
+        </div>
+        <h2 class="trail-title">Nandankanan Botanical Garden (Kanjia Lake)</h2>
+        <p class="trail-desc">Elevated forest boardwalks over wetlands and Kanjia Lake shores. Quiet nature trails away from the main zoo crowd with tall sal trees and sweet freshwater breeze.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>6 km from KIIT / Silicon • 17 km from ITER • 13 km from Utkal</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 16 direct north along Patia corridor</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Wetland boardwalk mist, egret calls & lotus lakes</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.3995,85.8252" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=nandankanan" class="btn-scout-trail">
+        <span>Scout Kanjia Lake from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 6. Jayadev Vatika -->
+    <div class="trail-card" data-category="hills">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-coral">🌿</div>
+          <span class="category-chip">⛰️ Hills & Caves</span>
+        </div>
+        <h2 class="trail-title">Jayadev Vatika Forest Park</h2>
+        <p class="trail-desc">A 50+ acre landscaped forest park right at the Khandagiri foothills. Dense tree canopies, natural rock ravines, perennial streamlets, and shaded walking paths.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>3.5 km from ITER • 12 km from KIIT • 2 km from OUTR</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 11 to Khandagiri Chhak, 3 min auto</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Babbling hill streams, shaded canopy & granite boulders</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.2644,85.7834" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=jayadev" class="btn-scout-trail">
+        <span>Scout Jayadev Vatika from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 7. Bindu Sagar -->
+    <div class="trail-card" data-category="heritage">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-sky">🛕</div>
+          <span class="category-chip">🛕 Heritage & Culture</span>
+        </div>
+        <h2 class="trail-title">Bindu Sagar Heritage Corridor</h2>
+        <p class="trail-desc">The spiritual heart of Old Town. A serene 1.5 km stone-paved stroll around the sacred Bindu Sagar tank, surrounded by 7th–11th century Kalinga temples including Lingaraj and Ananta Vasudeva.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>7 km from ITER • 14 km from KIIT • 6 km from Utkal</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 20 / 21 to Old Town Lingaraj Corridor</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Ancient carved laterite stone ghats & dawn lake reflections</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.2415,85.8354" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=bindusagar" class="btn-scout-trail">
+        <span>Scout Bindu Sagar from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 8. Ekamra Haat -->
+    <div class="trail-card" data-category="heritage">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-teal">🎨</div>
+          <span class="category-chip">🛕 Heritage & Culture</span>
+        </div>
+        <h2 class="trail-title">Ekamra Haat & Native Tree Avenues</h2>
+        <p class="trail-desc">Open-air cultural village shaded by decades-old mahogany and gulmohar trees in Unit-3. Brick walking avenues, local patachitra craft pavilions, and authentic Odia Chenna Poda stalls.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>5 km from ITER • 11 km from KIIT • 3 km from Utkal</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 10 to Siripur / Route 16 down to Sriya Chhak</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Rain-washed tree bark scent & open terracotta courtyards</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.2731,85.8361" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=ekamrahaat" class="btn-scout-trail">
+        <span>Scout Ekamra Haat from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 9. Barunei Hill -->
+    <div class="trail-card" data-category="hills">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-violet">⛰️</div>
+          <span class="category-chip">⛰️ Hills & Caves</span>
+        </div>
+        <h2 class="trail-title">Barunei Hill & Perennial Stream</h2>
+        <p class="trail-desc">A rugged hill trail on the Khordha border featuring natural freshwater springs, dense sal forest, and rock caves. A favorite morning trek for college students seeking genuine wilderness.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>18 km from ITER • 28 km from KIIT • 11 km from CV Raman</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 24 along NH16 to Khordha Barunei Gate</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Ice-cold mountain springs & untouched boulder climb</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.1804,85.6698" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=barunei" class="btn-scout-trail">
+        <span>Scout Barunei Hill from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 10. Kuakhai Riverfront -->
+    <div class="trail-card" data-category="open">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-mustard">🌅</div>
+          <span class="category-chip">🌅 Open Horizons</span>
+        </div>
+        <h2 class="trail-title">Kuakhai Riverfront & Bali Jatra Grounds</h2>
+        <p class="trail-desc">Expansive sandy riverbeds along the Kuakhai River bridge. Broad open skies, brisk sunset sea breezes, cycling dirt trails, and twilight reflection across water channels.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>5 km from KIIT • 4 km from Utkal • 13 km from ITER</span></li>
+          <li class="specs-item">🚌 Transit: <span>Route 16 / direct bike east towards Hanspal riverbank</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Barefoot sandbar strolls & unlimited sunset horizon</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.3392,85.8672" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=kuakhai" class="btn-scout-trail">
+        <span>Scout Kuakhai from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 11. Sisupalgarh Ruins -->
+    <div class="trail-card" data-category="heritage">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-coral">🏺</div>
+          <span class="category-chip">🛕 Heritage & Culture</span>
+        </div>
+        <h2 class="trail-title">Sisupalgarh 2000-Year Fort Ruins</h2>
+        <p class="trail-desc">Ancient Mauryan-Kharavela fortified citadel with towering stone pillars, moat earthen ramparts, and open grassland trails untouched by modern traffic.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>8 km from ITER • 14 km from KIIT • 6 km from Utkal</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 20/21 towards Puri Bypass / Tankapani Road</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Open red-mud ramparts & Mauryan monolith silence</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.2248,85.8572" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=sisupalgarh" class="btn-scout-trail">
+        <span>Scout Sisupalgarh from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 12. Lingaraj Temple Precinct -->
+    <div class="trail-card" data-category="heritage">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-mustard">🛕</div>
+          <span class="category-chip">🛕 Heritage & Culture</span>
+        </div>
+        <h2 class="trail-title">Lingaraj Temple Heritage Precinct</h2>
+        <p class="trail-desc">11th-century Kalinga sandstone architectural masterpiece. Stone-paved car street alleys, temple bells resonating at dusk, and timeless sacred geometry.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>5.5 km from ITER • 13 km from KIIT • 4 km from AIIMS</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 20/21 or shared auto via Old Town Jagamara</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Warm sunlit temple flagstones & chanting acoustic dusk</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.2382,85.8336" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=lingaraj" class="btn-scout-trail">
+        <span>Scout Lingaraj from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 13. Chausathi Yogini Temple -->
+    <div class="trail-card" data-category="heritage">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-violet">🏛️</div>
+          <span class="category-chip">🛕 Heritage & Culture</span>
+        </div>
+        <h2 class="trail-title">Chausathi Yogini Circular Temple (Hirapur)</h2>
+        <p class="trail-desc">9th-century hypaethral (roofless) circular shrine nestled among rural paddy fields. 64 intricate chlorite stone goddess statues under an open sky.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>11 km from ITER • 16 km from KIIT • 9 km from Utkal</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus to Kalpana Square, then rural shuttle/bike along Daya River</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Open-sky circular sandstone ring & tranquil rural paddy breeze</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.2081,85.8753" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=chausathi" class="btn-scout-trail">
+        <span>Scout Chausathi Yogini from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 14. RPRC Gardens -->
+    <div class="trail-card" data-category="lakes">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-teal">🌵</div>
+          <span class="category-chip">🌊 Lakes & Reserves</span>
+        </div>
+        <h2 class="trail-title">RPRC Cactus Garden & Forest Lake (Nayapalli)</h2>
+        <p class="trail-desc">Regional Plant Resource Centre featuring Asia's largest succulent conservatory, tranquil wetland birding trails, and shaded canopy walking tracks.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>6.5 km from ITER • 7.5 km from KIIT • 2.5 km from Utkal</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 10 to Nayapalli VIP Road / IRC Village</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Rare desert flora walking trails & morning lotus lake breeze</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.3015,85.8085" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=rprc" class="btn-scout-trail">
+        <span>Scout RPRC Gardens from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 15. Atri Springs -->
+    <div class="trail-card" data-category="hills">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-coral">♨️</div>
+          <span class="category-chip">⛰️ Hills & Caves</span>
+        </div>
+        <h2 class="trail-title">Atri Geothermal Sulfur Springs (Khordha Woods)</h2>
+        <p class="trail-desc">Natural medicinal thermal sulfur pools nestled in a rural wooded grove. Gentle steam rising at dawn, surrounding paddy tranquility, and ancient banyan shade.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>38 km from ITER • 48 km from KIIT • 28 km from CVRCE</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 24 to Khordha, transfer local Baghamari shuttle</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Natural 57°C geothermal warmth & rustling banyan groves</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.1539,85.5042" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=atri" class="btn-scout-trail">
+        <span>Scout Atri Springs from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 16. Mukteswara Temple -->
+    <div class="trail-card" data-category="heritage">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-coral">🛕</div>
+          <span class="category-chip">🛕 Heritage & Culture</span>
+        </div>
+        <h2 class="trail-title">Mukteswara & Parasurameswara Temples</h2>
+        <p class="trail-desc">10th-century Kalinga torana archway architectural masterpiece, peaceful red sandstone courtyards, and Marichi Kunda sacred water tank paths.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>5.5 km from ITER • 13 km from KIIT • 4 km from AIIMS</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 20 or direct shared auto via Jagamara Chhak</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Ornate sandstone torana shade & sacred tank reflections</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.2432,85.8339" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=mukteswara" class="btn-scout-trail">
+        <span>Scout Mukteswara from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 17. Museum of Tribal Arts -->
+    <div class="trail-card" data-category="heritage">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-teal">🛖</div>
+          <span class="category-chip">🛕 Heritage & Culture</span>
+        </div>
+        <h2 class="trail-title">Museum of Tribal Arts & Artifacts</h2>
+        <p class="trail-desc">Authentic full-scale tribal village dwellings, shaded green Sal tree canopies, organic mud-and-thatch courtyards, and open-air cultural trails.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>6 km from ITER • 9 km from KIIT • 3 km from Utkal</span></li>
+          <li class="specs-item">🚌 Transit: <span>Mo Bus Route 10/16 to CRPF Square or shared auto from Siripur</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Real straw-thatched verandas & thick Sal tree canopy walkways</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.2831,85.8145" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=tribal" class="btn-scout-trail">
+        <span>Scout Tribal Museum from Your Campus ➔</span>
+      </a>
+    </div>
+
+    <!-- 18. Odisha Crafts Museum - Kala Bhoomi -->
+    <div class="trail-card" data-category="heritage">
+      <div>
+        <div class="card-top">
+          <div class="trail-icon-box ibox-mustard">🏺</div>
+          <span class="category-chip">🛕 Heritage & Culture</span>
+        </div>
+        <h2 class="trail-title">Odisha Crafts Museum - Kala Bhoomi</h2>
+        <p class="trail-desc">12-acre terracotta courtyards, live master artisan workshops, lotus ponds, and breezy outdoor verandas located just minutes from ITER Jagamara.</p>
+        <ul class="specs-list">
+          <li class="specs-item">📍 Corridor: <span>2.2 km from ITER • 16 km from KIIT • 3.5 km from AIIMS</span></li>
+          <li class="specs-item">🚌 Transit: <span>Direct short auto or walk down Jagamara-Pokhariput road (6 mins)</span></li>
+          <li class="specs-item">🌿 Grass Factor: <span>Open terracotta brick courtyards & lotus pond evening breeze</span></li>
+        </ul>
+        <div class="card-links-row">
+          <a href="weather.html" class="weather-check-link">☀️ Check Live Weather Window</a>
+          <a href="https://www.google.com/maps?q=20.2396,85.8023" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
+        </div>
+      </div>
+      <a href="index.html?dest=kalabhoomi" class="btn-scout-trail">
+        <span>Scout Kala Bhoomi from Your Campus ➔</span>
       </a>
     </div>
   </main>
 
   <!-- CAMPUS STRIP -->
   <section class="campus-strip">
-    HOSTEL CHECKPOINT • RETURN TO ITER GATE BEFORE <span>8:00 PM GATE IN-TIME</span>
+    BHUBANESWAR STUDENT NETWORK • EXPLORE FROM <span>SOA, KIIT, OUTR, AIIMS, UTKAL & SILICON</span>
   </section>
 
   <footer>
@@ -458,10 +768,37 @@
       <a href="mobus.html">Mo Bus Guide</a>
       <a href="odia.html">Odia Cheatsheet</a>
     </div>
-    <p>PravasiTrail (CampusBahar) • Siksha 'O' Anusandhan ITER Jagamara • DEV "Touch Grass" Hacktoberfest 2026</p>
+    <p>PravasiTrail (CampusBahar) • City-wide Outdoor Exploration Engine for Bhubaneswar Students • DEV "Touch Grass" 2026</p>
   </footer>
 
+  <script>
+    function filterCategory(cat) {
+      document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      document.querySelectorAll('.trail-card').forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-category') === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
 
-
+    // Ensure seamless navigation when browsing static files directly via file:// protocol
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.protocol === 'file:') {
+        document.querySelectorAll('a[href^="/"]').forEach(a => {
+          const path = a.getAttribute('href');
+          if (path === '/') {
+            a.setAttribute('href', 'index.html');
+          } else if (path.startsWith('/?')) {
+            a.setAttribute('href', path.replace('/?', 'index.html?'));
+          } else if (path.startsWith('/') && !path.includes('.html')) {
+            a.setAttribute('href', path.replace(/^\//, '') + '.html');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

@@ -71,32 +71,37 @@
       padding: 1.5rem 1.5rem 1rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     }
-    .brand-wrap {
+    .brand-wrap, .nav-brand {
       display: flex; align-items: center; gap: 0.85rem;
       text-decoration: none; color: var(--ink);
     }
-    .brand-tile {
+    .brand-tile, .logo-box {
       width: 44px; height: 44px;
       background: var(--mustard);
       border: var(--border-hard);
       box-shadow: var(--shadow-md);
       border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .brand-name {
+    .brand-tile:hover, .logo-box:hover {
+      transform: translate(2px, 2px); box-shadow: var(--shadow-active);
+    }
+    .brand-tile svg, .logo-box svg { width: 24px; height: 24px; }
+    .brand-name, .nav-brand span {
       font-family: var(--font-display);
       font-weight: 800; font-size: 26px;
       letter-spacing: -0.02em;
     }
     .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
-    .nav-links a {
+    .nav-links a, .nav-link {
       color: var(--ink); font-weight: 700; font-size: 0.95rem;
       text-decoration: none; transition: color 0.15s ease;
     }
-    .nav-links a:hover, .nav-links a.active {
+    .nav-links a:hover, .nav-link:hover, .nav-links a.active, .nav-link.active {
       color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
     }
-    .btn-gate {
+    .btn-gate, .nav-cta-btn {
       background: var(--teal); color: var(--white);
       font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
       padding: 0.65rem 1.3rem;
@@ -105,7 +110,7 @@
       display: inline-flex; align-items: center; gap: 0.4rem;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .btn-gate:hover {
+    .btn-gate:hover, .nav-cta-btn:hover {
       transform: translate(3px, 3px); box-shadow: var(--shadow-active);
     }
 
@@ -318,35 +323,33 @@
 
   <!-- NAVBAR -->
   <nav class="nav-container">
-    <a href="index.html" class="brand-wrap">
-      <div class="brand-tile">
+    <a href="/" class="nav-brand">
+      <div class="logo-box">
         <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
           <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
         </svg>
       </div>
-      <span class="brand-name">PravasiTrail</span>
+      <span>PravasiTrail</span>
     </a>
 
-    <ul class="nav-links">
-      <li><a href="trails.html">Campus Trails</a></li>
-      <li><a href="weather.html">TabPFN Weather</a></li>
-      <li><a href="mobus.html" class="active">Mo Bus Guide</a></li>
-      <li><a href="odia.html">Odia Cheatsheet</a></li>
-    </ul>
+    <div class="nav-links">
+      <a href="/trails" class="nav-link">Campus Trails</a>
+      <a href="/weather" class="nav-link">TabPFN Weather</a>
+      <a href="/mobus" class="nav-link active">Mo Bus Guide</a>
+      <a href="/odia" class="nav-link">Odia Cheatsheet</a>
+    </div>
 
-    <a href="index.html" class="btn-gate">
-      <span>ITER Gate 1</span>
-    </a>
+    <a href="/" class="nav-cta-btn">ITER Gate 1</a>
   </nav>
 
   <!-- Mobile Quick Navigation Bar -->
   <div class="mobile-nav-bar">
-    <a href="index.html" class="mobile-nav-link">🏠 Scout</a>
-    <a href="trails.html" class="mobile-nav-link">🚶 Trails</a>
-    <a href="weather.html" class="mobile-nav-link">☀️ Weather</a>
-    <a href="mobus.html" class="mobile-nav-link active">🚌 Mo Bus</a>
-    <a href="odia.html" class="mobile-nav-link">🗣️ Odia</a>
+    <a href="/" class="mobile-nav-link">🏠 Scout</a>
+    <a href="/trails" class="mobile-nav-link">🚶 Trails</a>
+    <a href="/weather" class="mobile-nav-link">☀️ Weather</a>
+    <a href="/mobus" class="mobile-nav-link active">🚌 Mo Bus</a>
+    <a href="/odia" class="mobile-nav-link">🗣️ Odia</a>
   </div>
 
   <!-- HEADER -->
@@ -354,18 +357,18 @@
   <header class="page-header">
     <div class="eyebrow-pill">
       <span class="eyebrow-dot"></span>
-      <span>CRUT MO BUS TRANSIT HACKS</span>
+      <span>CRUT MO BUS TRANSIT HACKS • ALL CAMPUSES</span>
     </div>
     <h1 class="page-title">Navigate Bhubaneswar like a local.</h1>
-    <p class="page-lead">Transit routes, bus stop locations, and cash/card fares directly from ITER Gate 1 / Jagamara. Never pay ₹200 for a private auto again.</p>
+    <p class="page-lead">Transit routes, bus stop locations, and cash/card fares connecting SOA, KIIT, OUTR, AIIMS, and Utkal to outdoor trails. Never pay ₹200 for a private auto again.</p>
   </header>
 
   <!-- PRO TIP BANNER -->
   <div style="padding: 0 1.5rem;">
     <div class="protip-banner">
-      <div class="protip-badge">Hostel Hack</div>
+      <div class="protip-badge">CRUT Student Hack</div>
       <div class="protip-text">
-        Get an <span>Ama Bus card</span> or keep crisp ₹10/₹20 notes ready. Buses stop right outside Jagamara Chhak every 15–20 minutes.
+        <span>Get an Ama Bus Pass / Tap & Pay:</span> Students get up to 50% discount on 30-day CRUT monthly passes. Scan the QR code or use contactless UPI / Chalo card on the conductor's ETM for an instant cashless fare rebate. Arterial routes operate from 6:00 AM to 10:00 PM, with night schedules running until 10:30 PM on Routes 10, 11 & 16.
       </div>
     </div>
   </div>
@@ -379,16 +382,16 @@
           <span class="route-number-chip">ROUTE 11</span>
           <span class="fare-tag">FARE: ₹10 – ₹20</span>
         </div>
-        <h2 class="bus-corridor">ITER Square ➔ Khandagiri ➔ Master Canteen</h2>
-        <p class="bus-desc">The essential lifeline for ITER students. Runs east-west connecting college gates to ancient caves, railway station, and central market.</p>
+        <h2 class="bus-corridor">Master Canteen ⇄ ITER Jagamara ⇄ Khandagiri ⇄ Ghatikia (OUTR)</h2>
+        <p class="bus-desc">The essential west-east engineering lifeline. Directly connects Master Canteen, SOA/ITER, Khandagiri Caves, and OUTR/CET at Ghatikia with high frequency (every 10–12 min).</p>
         <ul class="stop-timeline">
+          <li class="stop-point">Master Canteen (Bhubaneswar Railway Station)</li>
           <li class="stop-point">ITER Main Gate (Jagamara Chhak)</li>
           <li class="stop-point">Khandagiri Caves Junction (Get off for trail!)</li>
-          <li class="stop-point">Fire Station Square / Baramunda</li>
-          <li class="stop-point">Master Canteen (Bhubaneswar Railway Station)</li>
+          <li class="stop-point">Ghatikia Chhak (OUTR / CET Campus)</li>
         </ul>
       </div>
-      <a href="index.html?dest=khandagiri" class="btn-trail-action">
+      <a href="/?dest=khandagiri&campus=iter" class="btn-trail-action">
         <span>Scout Khandagiri via Route 11 -&gt;</span>
       </a>
     </div>
@@ -398,40 +401,103 @@
       <div>
         <div class="bus-card-top">
           <span class="route-number-chip">ROUTE 10</span>
-          <span class="fare-tag">FARE: ₹15 – ₹25</span>
+          <span class="fare-tag">FARE: ₹15 – ₹30</span>
         </div>
-        <h2 class="bus-corridor">ITER ➔ Nayapalli ➔ Utkal University (Vani Vihar)</h2>
-        <p class="bus-desc">Direct green-belt transit corridor heading north. Drop off at Nayapalli for Ekamra Kanan Botanical Lake and Regional Plant Center.</p>
+        <h2 class="bus-corridor">Nandankanan ⇄ KIIT ⇄ Jayadev Vihar ⇄ Nayapalli ⇄ Master Canteen</h2>
+        <p class="bus-desc">Direct green-belt transit corridor heading north-south. Perfect for reaching Ekamra Kanan Botanical Lake, RPRC Cactus Garden, and KIIT campus.</p>
         <ul class="stop-timeline">
-          <li class="stop-point">ITER Jagamara Bus Stop</li>
-          <li class="stop-point">Gandamunda Link Road</li>
+          <li class="stop-point">Master Canteen Square</li>
           <li class="stop-point">Nayapalli IRC Village (Ekamra Lake Gate)</li>
-          <li class="stop-point">Vani Vihar / Utkal University Gate</li>
+          <li class="stop-point">Jayadev Vihar Overbridge (Mayfair & Lake)</li>
+          <li class="stop-point">KIIT Square / Nandankanan Zoo Gate</li>
         </ul>
       </div>
-      <a href="index.html?dest=ekamra" class="btn-trail-action">
+      <a href="/?dest=ekamra&campus=kiit" class="btn-trail-action">
         <span>Scout Ekamra Lake via Route 10 -&gt;</span>
       </a>
     </div>
 
-    <!-- Route 20 & 21 -->
+    <!-- Route 16 / 16A -->
     <div class="bus-card">
       <div>
         <div class="bus-card-top">
-          <span class="route-number-chip">ROUTE 20 & 21</span>
+          <span class="route-number-chip">ROUTE 16 / 16A</span>
           <span class="fare-tag">FARE: ₹10 – ₹25</span>
         </div>
-        <h2 class="bus-corridor">ITER ➔ Old Town ➔ Lingaraj Temple Corridor</h2>
-        <p class="bus-desc">Southern heritage corridor connecting SOA campus to the ancient temple district, Bindu Sagar sacred lake, and Biju Patnaik Airport.</p>
+        <h2 class="bus-corridor">Master Canteen ⇄ Patia (KIIT) ⇄ Nandankanan Zoo</h2>
+        <p class="bus-desc">The north educational and wildlife corridor. Connects Utkal University, Silicon, and KIIT students straight north to Nandankanan Botanical Garden and Kanjia Lake boardwalks.</p>
         <ul class="stop-timeline">
-          <li class="stop-point">Jagamara South Link</li>
-          <li class="stop-point">Airfield / Airport South Gate</li>
-          <li class="stop-point">Old Town Bindu Sagar Ghats</li>
-          <li class="stop-point">Lingaraj Temple South Entrance</li>
+          <li class="stop-point">Master Canteen Square</li>
+          <li class="stop-point">Vani Vihar (Utkal University NH16 Stop)</li>
+          <li class="stop-point">Patia / KIIT Square</li>
+          <li class="stop-point">Nandankanan Zoological Sanctuary Gate</li>
         </ul>
       </div>
-      <a href="index.html?dest=dhauli" class="btn-trail-action">
-        <span>Scout Heritage Corridor -&gt;</span>
+      <a href="/?dest=nandankanan&campus=kiit" class="btn-trail-action">
+        <span>Scout Kanjia Lake via Route 16 -&gt;</span>
+      </a>
+    </div>
+
+    <!-- Route 20 / 21 -->
+    <div class="bus-card">
+      <div>
+        <div class="bus-card-top">
+          <span class="route-number-chip">ROUTE 20 / 21</span>
+          <span class="fare-tag">FARE: ₹10 – ₹20</span>
+        </div>
+        <h2 class="bus-corridor">Master Canteen ⇄ Airport ⇄ Lingaraja Temple (Old Town) ⇄ Kalpana</h2>
+        <p class="bus-desc">Southern heritage corridor connecting central city, Biju Patnaik Airport, sacred Bindusagar Lake, Mukteswara Temple, and Lingaraja Temple precinct.</p>
+        <ul class="stop-timeline">
+          <li class="stop-point">Master Canteen / Kalpana Square</li>
+          <li class="stop-point">Biju Patnaik Airport Gate</li>
+          <li class="stop-point">Mukteswara & Parasurameswara Temples</li>
+          <li class="stop-point">Old Town Bindusagar Ghats / Lingaraja</li>
+        </ul>
+      </div>
+      <a href="/?dest=lingaraja&campus=iter" class="btn-trail-action">
+        <span>Scout Old Town via Route 20/21 -&gt;</span>
+      </a>
+    </div>
+
+    <!-- Route 22 / 22A -->
+    <div class="bus-card">
+      <div>
+        <div class="bus-card-top">
+          <span class="route-number-chip">ROUTE 22 / 22A</span>
+          <span class="fare-tag">FARE: ₹15 – ₹25</span>
+        </div>
+        <h2 class="bus-corridor">Master Canteen ⇄ Sisupalgarh ⇄ Dhauli Shanti Stupa</h2>
+        <p class="bus-desc">Scenic southern heritage route along Puri Highway. Passes the ancient ruined fortress of Sisupalgarh and drops directly at the foothills of Dhauli Peace Pagoda.</p>
+        <ul class="stop-timeline">
+          <li class="stop-point">Master Canteen Bus Terminal</li>
+          <li class="stop-point">Kalpana Square / Ravi Talkies</li>
+          <li class="stop-point">Sisupalgarh Fort Archaeological Site</li>
+          <li class="stop-point">Dhauli Shanti Stupa Foothills</li>
+        </ul>
+      </div>
+      <a href="/?dest=dhauli&campus=iter" class="btn-trail-action">
+        <span>Scout Dhauli Peace Pagoda -&gt;</span>
+      </a>
+    </div>
+
+    <!-- Route 33 -->
+    <div class="bus-card">
+      <div>
+        <div class="bus-card-top">
+          <span class="route-number-chip">ROUTE 33</span>
+          <span class="fare-tag">FARE: ₹15 – ₹30</span>
+        </div>
+        <h2 class="bus-corridor">Master Canteen ⇄ AIIMS Bhubaneswar ⇄ Pipili</h2>
+        <p class="bus-desc">South-western medical and handicraft corridor. Connects central transit hubs to AIIMS Bhubaneswar campus at Sijua and the famous Pipili applique village.</p>
+        <ul class="stop-timeline">
+          <li class="stop-point">Master Canteen Railway Station</li>
+          <li class="stop-point">Khandagiri Square / Baramunda</li>
+          <li class="stop-point">AIIMS Bhubaneswar Main Hospital Gate (Sijua)</li>
+          <li class="stop-point">Pipili Applique Village Bypass</li>
+        </ul>
+      </div>
+      <a href="/?dest=dhauli&campus=aiims" class="btn-trail-action">
+        <span>Scout from AIIMS via Route 33 -&gt;</span>
       </a>
     </div>
   </main>
@@ -446,21 +512,21 @@
           <p style="font-weight: 500; font-size: 0.95rem;">
             Peak sun hours (Mo Buses are fully air-conditioned), traveling towards Nayapalli or Railway Station, and solo expeditions on tight budgets. Fares start at just ₹10.
           </p>
-          <a href="weather.html" style="color: var(--teal); font-weight: 700; text-decoration: underline; display: inline-block; margin-top: 0.6rem; font-size: 0.88rem;">Check Afternoon Heat Index ➔</a>
+          <a href="/weather" style="color: var(--teal); font-weight: 700; text-decoration: underline; display: inline-block; margin-top: 0.6rem; font-size: 0.88rem;">Check Afternoon Heat Index ➔</a>
         </div>
         <div class="decision-box">
           <h3 class="decision-head" style="color: var(--coral);">🛺 When to take Shared Auto</h3>
           <p style="font-weight: 500; font-size: 0.95rem;">
             Short quick hops from ITER Gate to Khandagiri Chhak (₹15–₹20 flat), dawn trips before 6:30 AM when bus frequency is light, or returning close to 8:00 PM curfew.
           </p>
-          <a href="odia.html" style="color: var(--coral); font-weight: 700; text-decoration: underline; display: inline-block; margin-top: 0.6rem; font-size: 0.88rem;">Learn Auto Driver Odia Phrases ➔</a>
+          <a href="/odia" style="color: var(--coral); font-weight: 700; text-decoration: underline; display: inline-block; margin-top: 0.6rem; font-size: 0.88rem;">Learn Auto Driver Odia Phrases ➔</a>
         </div>
         <div class="decision-box">
           <h3 class="decision-head" style="color: var(--violet);">🚲 When to use Mo Cycle</h3>
           <p style="font-weight: 500; font-size: 0.95rem;">
             Early morning dawn rides to Khandagiri (3.5 km). Dedicated stands exist right near ITER SOA Gate 1 and Khandagiri Square foothills.
           </p>
-          <a href="trails.html" style="color: var(--violet); font-weight: 700; text-decoration: underline; display: inline-block; margin-top: 0.6rem; font-size: 0.88rem;">View All Campus Trails ➔</a>
+          <a href="/trails" style="color: var(--violet); font-weight: 700; text-decoration: underline; display: inline-block; margin-top: 0.6rem; font-size: 0.88rem;">View All Campus Trails ➔</a>
         </div>
       </div>
     </div>
@@ -468,15 +534,32 @@
 
   <footer>
     <div class="footer-nav">
-      <a href="index.html">Home Scout</a>
-      <a href="trails.html">Campus Trails</a>
-      <a href="weather.html">TabPFN Weather</a>
-      <a href="mobus.html">Mo Bus Guide</a>
-      <a href="odia.html">Odia Cheatsheet</a>
+      <a href="/">Home Scout</a>
+      <a href="/trails">Campus Trails</a>
+      <a href="/weather">TabPFN Weather</a>
+      <a href="/mobus">Mo Bus Guide</a>
+      <a href="/odia">Odia Cheatsheet</a>
     </div>
     <p>PravasiTrail (CampusBahar) • Siksha 'O' Anusandhan ITER Jagamara • DEV "Touch Grass" Hacktoberfest 2026</p>
   </footer>
 
 
+  <script>
+    // Ensure seamless navigation when browsing static files directly via file:// protocol
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.protocol === 'file:') {
+        document.querySelectorAll('a[href^="/"]').forEach(a => {
+          const path = a.getAttribute('href');
+          if (path === '/') {
+            a.setAttribute('href', 'index.html');
+          } else if (path.startsWith('/?')) {
+            a.setAttribute('href', path.replace('/?', 'index.html?'));
+          } else if (path.startsWith('/') && !path.includes('.html')) {
+            a.setAttribute('href', path.replace(/^\//, '') + '.html');
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

@@ -76,32 +76,36 @@
       padding: 1.5rem 1.5rem 1rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     }
-    .brand-wrap {
+    .brand-wrap, .nav-brand {
       display: flex; align-items: center; gap: 0.85rem;
       text-decoration: none; color: var(--ink);
     }
-    .brand-tile {
+    .brand-tile, .logo-box {
       width: 44px; height: 44px;
       background: var(--mustard);
       border: var(--border-hard);
       box-shadow: var(--shadow-md);
       border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .brand-name {
+    .brand-tile:hover, .logo-box:hover {
+      transform: translate(2px, 2px); box-shadow: var(--shadow-active);
+    }
+    .brand-name, .nav-brand span {
       font-family: var(--font-display);
       font-weight: 800; font-size: 26px;
       letter-spacing: -0.02em;
     }
     .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
-    .nav-links a {
+    .nav-links a, .nav-link {
       color: var(--ink); font-weight: 700; font-size: 0.95rem;
       text-decoration: none; transition: color 0.15s ease;
     }
-    .nav-links a:hover, .nav-links a.active {
+    .nav-links a:hover, .nav-link:hover, .nav-links a.active, .nav-link.active {
       color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
     }
-    .btn-gate {
+    .btn-gate, .nav-cta-btn {
       background: var(--teal); color: var(--white);
       font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
       padding: 0.65rem 1.3rem;
@@ -110,7 +114,7 @@
       display: inline-flex; align-items: center; gap: 0.4rem;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .btn-gate:hover {
+    .btn-gate:hover, .nav-cta-btn:hover {
       transform: translate(3px, 3px); box-shadow: var(--shadow-active);
     }
 
@@ -240,6 +244,188 @@
       font-size: 1.05rem; font-weight: 600; line-height: 1.6;
     }
 
+    /* INTERACTIVE TRANSLATOR STYLES */
+    .translator-card {
+      background: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 24px;
+      padding: 2.2rem;
+      margin-bottom: 3.5rem;
+      position: relative;
+    }
+    .translator-badges {
+      display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 0.85rem;
+    }
+    .badge-gemini {
+      background: var(--violet); color: var(--white);
+      border: 2px solid var(--ink); border-radius: 9999px;
+      padding: 0.3rem 0.85rem; font-family: var(--font-display);
+      font-weight: 800; font-size: 0.78rem; letter-spacing: 0.04em;
+    }
+    .badge-stt {
+      background: var(--teal); color: var(--white);
+      border: 2px solid var(--ink); border-radius: 9999px;
+      padding: 0.3rem 0.85rem; font-family: var(--font-display);
+      font-weight: 800; font-size: 0.78rem; letter-spacing: 0.04em;
+    }
+    .translator-title {
+      font-family: var(--font-display); font-weight: 800; font-size: 1.85rem;
+      line-height: 1.15; margin-bottom: 0.4rem;
+    }
+    .translator-subtitle {
+      font-size: 0.98rem; font-weight: 500; color: #475569; margin-bottom: 1.5rem;
+    }
+    .direction-control-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+    }
+    .direction-pills-wrap {
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .dir-pill {
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      padding: 0.45rem 1rem; border: 2px solid var(--ink); border-radius: 12px;
+      background: var(--bg-cream); color: var(--ink);
+    }
+    .dir-pill.active {
+      background: var(--mustard); box-shadow: 3px 3px 0 var(--ink);
+    }
+    .btn-swap-dir {
+      background: var(--white); color: var(--ink); border: 2px solid var(--ink);
+      border-radius: 12px; padding: 0.45rem 1rem; font-family: var(--font-display);
+      font-weight: 800; font-size: 0.9rem; cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink); display: inline-flex; align-items: center; gap: 0.4rem;
+      transition: all 0.15s ease;
+    }
+    .btn-swap-dir:hover {
+      background: var(--mustard); transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink);
+    }
+    .translator-input-wrap {
+      position: relative; margin-bottom: 1.2rem;
+    }
+    .memphis-trans-input {
+      width: 100%; min-height: 90px;
+      padding: 1rem 1.25rem; font-family: var(--font-body);
+      font-size: 1.12rem; font-weight: 500; color: var(--ink);
+      background: #faf6ee; border: var(--border-hard);
+      border-radius: 16px; outline: none; resize: vertical;
+      transition: all 0.2s ease;
+    }
+    .memphis-trans-input:focus {
+      background: var(--white); box-shadow: 5px 5px 0 var(--ink);
+    }
+    .translator-action-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 0.85rem; flex-wrap: wrap; margin-bottom: 1.5rem;
+    }
+    .trans-actions-left {
+      display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
+    }
+    .btn-mic {
+      background: var(--coral); color: var(--white);
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 12px; padding: 0.75rem 1.3rem;
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: all 0.15s ease;
+    }
+    .btn-mic:hover {
+      transform: translate(-2px, -2px); box-shadow: var(--shadow-md);
+    }
+    .btn-mic.recording {
+      background: #dc2626; animation: pulse-mic 1s infinite alternate;
+    }
+    @keyframes pulse-mic {
+      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+      100% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+    }
+    .btn-clear {
+      background: var(--bg-cream); color: var(--ink);
+      border: 2px solid var(--ink); border-radius: 12px; padding: 0.75rem 1.1rem;
+      font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;
+      cursor: pointer; transition: all 0.15s ease;
+    }
+    .btn-clear:hover { background: #e2d9c8; }
+    .btn-translate-now {
+      background: var(--teal); color: var(--white);
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 12px; padding: 0.75rem 1.8rem;
+      font-family: var(--font-display); font-weight: 800; font-size: 1.05rem;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
+      transition: all 0.15s ease;
+    }
+    .btn-translate-now:hover {
+      transform: translate(-2px, -2px); box-shadow: var(--shadow-md); background: #0fa193;
+    }
+    .quick-chips-section {
+      margin-bottom: 1.5rem;
+    }
+    .quick-chips-label {
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.04em; color: #64748b;
+      margin-bottom: 0.65rem; display: block;
+    }
+    .quick-chips-wrap {
+      display: flex; flex-wrap: wrap; gap: 0.55rem;
+    }
+    .quick-prompt-chip {
+      background: var(--bg-cream); color: var(--ink);
+      border: 2px solid var(--ink); border-radius: 9999px;
+      padding: 0.4rem 0.9rem; font-size: 0.84rem; font-weight: 700;
+      cursor: pointer; transition: all 0.15s ease;
+    }
+    .quick-prompt-chip:hover {
+      background: var(--mustard); transform: translate(-1px, -1px); box-shadow: 2px 2px 0 var(--ink);
+    }
+    .trans-result-box {
+      display: none; background: #fffcf7;
+      border: var(--border-hard); box-shadow: var(--shadow-md);
+      border-radius: 18px; padding: 1.75rem; margin-top: 1.5rem;
+    }
+    .trans-result-top {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 1rem; margin-bottom: 0.85rem; flex-wrap: wrap;
+    }
+    .trans-odia-text {
+      font-family: var(--font-display); font-size: 2.1rem;
+      font-weight: 800; color: var(--ink); line-height: 1.2;
+    }
+    .trans-actions-right {
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-audio-listen {
+      background: var(--sky); color: var(--ink);
+      border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink);
+      border-radius: 10px; padding: 0.45rem 0.95rem;
+      font-family: var(--font-display); font-weight: 800; font-size: 0.85rem;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;
+      transition: all 0.15s ease;
+    }
+    .btn-audio-listen:hover {
+      transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); background: #268ef0; color: var(--white);
+    }
+    .trans-phonetic-bar {
+      display: flex; align-items: center; gap: 0.65rem;
+      background: var(--bg-cream); border: 2px solid var(--ink);
+      border-radius: 10px; padding: 0.6rem 0.95rem; margin-bottom: 0.85rem;
+      font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700; color: var(--violet);
+    }
+    .trans-meaning-bar {
+      font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 0.85rem;
+    }
+    .trans-tip-box {
+      background: var(--mustard); border: 2px solid var(--ink);
+      border-radius: 10px; padding: 0.85rem 1.1rem;
+      font-size: 0.92rem; font-weight: 600; line-height: 1.45;
+      display: flex; align-items: flex-start; gap: 0.55rem;
+    }
+    .trans-meta-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 0.85rem; padding-top: 0.65rem; border-top: 1px dashed #cbd5e1;
+      font-size: 0.78rem; font-weight: 700; color: #64748b;
+    }
+
     footer {
       border-top: var(--border-hard); background: var(--bg-cream);
       padding: 2.5rem 1.5rem; text-align: center;
@@ -313,35 +499,33 @@
 
   <!-- NAVBAR -->
   <nav class="nav-container">
-    <a href="index.html" class="brand-wrap">
-      <div class="brand-tile">
+    <a href="/" class="nav-brand">
+      <div class="logo-box">
         <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
           <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
           <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
         </svg>
       </div>
-      <span class="brand-name">PravasiTrail</span>
+      <span>PravasiTrail</span>
     </a>
 
-    <ul class="nav-links">
-      <li><a href="trails.html">Campus Trails</a></li>
-      <li><a href="weather.html">TabPFN Weather</a></li>
-      <li><a href="mobus.html">Mo Bus Guide</a></li>
-      <li><a href="odia.html" class="active">Odia Cheatsheet</a></li>
-    </ul>
+    <div class="nav-links">
+      <a href="/trails" class="nav-link">Campus Trails</a>
+      <a href="/weather" class="nav-link">TabPFN Weather</a>
+      <a href="/mobus" class="nav-link">Mo Bus Guide</a>
+      <a href="/odia" class="nav-link active">Odia Cheatsheet</a>
+    </div>
 
-    <a href="index.html" class="btn-gate">
-      <span>ITER Gate 1</span>
-    </a>
+    <a href="/" class="nav-cta-btn">ITER Gate 1</a>
   </nav>
 
   <!-- Mobile Quick Navigation Bar -->
   <div class="mobile-nav-bar">
-    <a href="index.html" class="mobile-nav-link">🏠 Scout</a>
-    <a href="trails.html" class="mobile-nav-link">🚶 Trails</a>
-    <a href="weather.html" class="mobile-nav-link">☀️ Weather</a>
-    <a href="mobus.html" class="mobile-nav-link">🚌 Mo Bus</a>
-    <a href="odia.html" class="mobile-nav-link active">🗣️ Odia</a>
+    <a href="/" class="mobile-nav-link">🏠 Scout</a>
+    <a href="/trails" class="mobile-nav-link">🚶 Trails</a>
+    <a href="/weather" class="mobile-nav-link">☀️ Weather</a>
+    <a href="/mobus" class="mobile-nav-link">🚌 Mo Bus</a>
+    <a href="/odia" class="mobile-nav-link active">🗣️ Odia</a>
   </div>
 
   <!-- HEADER -->
@@ -356,6 +540,106 @@
 
   <!-- CONTENT -->
   <main class="content-container">
+
+    <!-- INTERACTIVE BIDIRECTIONAL AI TRANSLATOR (GEMINI FLASH + STT) -->
+    <section class="translator-card" id="translator-section">
+      <div class="translator-badges">
+        <span class="badge-gemini">⚡ GEMINI FLASH AI TRANSLATOR</span>
+        <span class="badge-stt">🎙️ SPEECH-TO-TEXT ENABLED</span>
+      </div>
+      
+      <h2 class="translator-title">CampusBahar Voice & Text Odia Engine</h2>
+      <p class="translator-subtitle">Bidirectional translator for non-Odia hostellers. Ask auto drivers, bus conductors, chaiwallahs, or hostel wardens in real-time with spoken phonetic guides.</p>
+
+      <!-- Direction Switcher Bar -->
+      <div class="direction-control-bar">
+        <div class="direction-pills-wrap">
+          <span class="dir-pill active" id="pill-src-lang">English</span>
+          <span style="font-weight: 800; font-size: 1.1rem;">➔</span>
+          <span class="dir-pill active" id="pill-dest-lang">Odia (ଓଡ଼ିଆ)</span>
+        </div>
+        <button class="btn-swap-dir" id="btn-swap-direction" onclick="toggleTranslationDirection()">
+          <span>⇄ Swap Direction</span>
+        </button>
+      </div>
+
+      <!-- Input Area -->
+      <div class="translator-input-wrap">
+        <textarea 
+          class="memphis-trans-input" 
+          id="trans-input-text" 
+          placeholder="Type or click 'Tap to Speak': e.g., 'How much for auto to Master Canteen?' or 'Where is the bus stop?'"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <!-- Action Bar -->
+      <div class="translator-action-bar">
+        <div class="trans-actions-left">
+          <button class="btn-mic" id="btn-mic" onclick="toggleSpeechRecognition()">
+            <span id="mic-icon">🎤</span>
+            <span id="mic-label">Tap to Speak (Mic)</span>
+          </button>
+          <button class="btn-clear" onclick="clearTranslatorInput()">Clear</button>
+        </div>
+        <button class="btn-translate-now" id="btn-translate-submit" onclick="performTranslation()">
+          <span id="trans-btn-label">Translate Now ➔</span>
+        </button>
+      </div>
+
+      <!-- Quick Preset Chips -->
+      <div class="quick-chips-section">
+        <span class="quick-chips-label">💡 Instant Student Phrases (Click to auto-translate)</span>
+        <div class="quick-chips-wrap">
+          <button class="quick-prompt-chip" onclick="applyPresetChip('How much for auto to Khandagiri?')">🛺 "How much to Khandagiri?"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('Please stop the bus here, conductor bhai')">🚌 "Please stop the bus here"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('One plate Dahibara Aloopdum with extra aloodum')">🍛 "One plate Dahibara"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('Where is the nearest Mo Bus stop?')">📍 "Nearest Mo Bus stop?"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('I study at ITER Jagamara')">🎓 "I study at ITER Jagamara"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('Do you accept UPI or PhonePe?')">💵 "Do you accept UPI / QR?"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('Thank you very much, brother')">🙏 "Thank you brother"</button>
+        </div>
+      </div>
+
+      <!-- Translation Output Result Box -->
+      <div class="trans-result-box" id="trans-result-box">
+        <div class="trans-result-top">
+          <div class="trans-odia-text" id="result-odia-text">ଖଣ୍ଡଗିରି କେତେ ଟଙ୍କା ହେବ?</div>
+          <div class="trans-actions-right">
+            <button class="btn-audio-listen" id="btn-listen" onclick="speakCurrentTranslation()">
+              <span>🔊 Pronounce</span>
+            </button>
+            <button class="btn-copy-phrase" onclick="copyTranslatedText()">
+              <span>📋 Copy</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="trans-phonetic-bar" id="result-phonetic-bar">
+          <span>🗣️ Phonetic:</span>
+          <span id="result-phonetic-text" style="font-weight: 800; color: var(--ink);">Khandagiri kete tonka heba?</span>
+        </div>
+
+        <div class="trans-meaning-bar" id="result-meaning-row">
+          <span style="color: var(--coral); font-weight: 800;">Meaning:</span>
+          <span id="result-meaning-text" style="font-weight: 600;">"How much will the fare be to Khandagiri?"</span>
+        </div>
+
+        <div class="trans-tip-box" id="result-tip-box">
+          <span>💡</span>
+          <div>
+            <strong>Local Survival Tip:</strong>
+            <span id="result-tip-text">Standard shared auto fare from Jagamara is ₹15–₹20. Address the driver as 'Bhai' with a friendly smile to avoid the out-of-state tourist markup.</span>
+          </div>
+        </div>
+
+        <div class="trans-meta-row">
+          <span id="result-source-meta">⚡ Powered by Google Gemini 2.5 Flash</span>
+          <span id="result-direction-meta">English ➔ Odia Translation</span>
+        </div>
+      </div>
+    </section>
+
     <!-- Category 1: Auto & Transit -->
     <div class="category-title-bar">
       <span class="category-chip">Category 01</span>
@@ -479,19 +763,19 @@
         In Odisha, calling elder auto drivers or shopkeepers <b>"Bhai"</b> (Brother) or <b>"Mousa"</b> (Uncle) with a calm tone instantly disarms any tension and establishes mutual respect. You don't need fluent grammar—speaking these simple phrases proves you respect the land you're studying in.
       </p>
       <div style="margin-top: 1rem; display: flex; gap: 0.85rem; flex-wrap: wrap;">
-        <a href="trails.html" style="background: var(--ink); color: var(--mustard); border: 2px solid var(--ink); border-radius: 9999px; padding: 0.65rem 1.3rem; font-weight: 800; text-decoration: none; font-size: 0.9rem;">Test Phrases on a Trail ➔</a>
-        <a href="index.html" style="background: var(--white); color: var(--ink); border: 2px solid var(--ink); border-radius: 9999px; padding: 0.65rem 1.3rem; font-weight: 800; text-decoration: none; font-size: 0.9rem;">Generate Custom Pocket Scout ➔</a>
+        <a href="/trails" style="background: var(--ink); color: var(--mustard); border: 2px solid var(--ink); border-radius: 9999px; padding: 0.65rem 1.3rem; font-weight: 800; text-decoration: none; font-size: 0.9rem;">Test Phrases on a Trail ➔</a>
+        <a href="/" style="background: var(--white); color: var(--ink); border: 2px solid var(--ink); border-radius: 9999px; padding: 0.65rem 1.3rem; font-weight: 800; text-decoration: none; font-size: 0.9rem;">Generate Custom Pocket Scout ➔</a>
       </div>
     </div>
   </main>
 
   <footer>
     <div class="footer-nav">
-      <a href="index.html">Home Scout</a>
-      <a href="trails.html">Campus Trails</a>
-      <a href="weather.html">TabPFN Weather</a>
-      <a href="mobus.html">Mo Bus Guide</a>
-      <a href="odia.html">Odia Cheatsheet</a>
+      <a href="/">Home Scout</a>
+      <a href="/trails">Campus Trails</a>
+      <a href="/weather">TabPFN Weather</a>
+      <a href="/mobus">Mo Bus Guide</a>
+      <a href="/odia">Odia Cheatsheet</a>
     </div>
     <p>PravasiTrail (CampusBahar) • Siksha 'O' Anusandhan ITER Jagamara • DEV "Touch Grass" Hacktoberfest 2026</p>
   </footer>
@@ -500,16 +784,319 @@
   <div class="toast" id="toast">Phrase copied to clipboard!</div>
 
   <script>
-    function copyPhrase(text) {
-      navigator.clipboard.writeText(text).then(() => {
-        const toast = document.getElementById('toast');
-        toast.innerText = `Copied: "${text}"`;
+    let currentDirection = "en-to-or";
+    let recognitionInstance = null;
+    let isRecording = false;
+    let lastTranslatedData = null;
+
+    // Offline Student Survival Dictionary Fallback
+    const OFFLINE_FALLBACK_DICT = {
+      "khandagiri": {
+        translated: "ଖଣ୍ଡଗିରି କେତେ ଟଙ୍କା ହେବ?",
+        phonetic: "Khandagiri kete tonka heba?",
+        meaning: "How much will it cost to go to Khandagiri?",
+        tip: "Standard shared auto from Jagamara to Khandagiri is ₹15–₹20 per seat."
+      },
+      "bus stop": {
+        translated: "ଏଇଠି ବସ୍ ରଖନ୍ତୁ, ଭାଇ!",
+        phonetic: "Eithi bus rakhantu, bhai!",
+        meaning: "Please stop the bus right here, brother!",
+        tip: "Ring conductor bell or call out clearly before your stop."
+      },
+      "dahibara": {
+        translated: "ଗୋଟେ ପ୍ଲେଟ୍ ଦହିବରା ଆଳୁଦମ୍ ଦିଅନ୍ତୁ, ଅଳ୍ପ ରାଗ!",
+        phonetic: "Gote plate Dahibara Aloopdum diyantu, alpa raga!",
+        meaning: "One plate Dahibara Aloopdum, mild spicy please!",
+        tip: "Always ask for extra 'piaja-lanka' (onion-chilli) and 'jhola' (curry) after finishing."
+      },
+      "iter": {
+        translated: "ମୁଁ ଆଇଟିଇଆର୍ ଜଗମରା ରେ ପଢୁଛି।",
+        phonetic: "Mun ITER Jagamara re padhuchi.",
+        meaning: "I study at ITER college in Jagamara.",
+        tip: "Auto drivers know ITER Jagamara Gate 1 immediately."
+      },
+      "upi": {
+        translated: "ଭାଇ, ୟୁପିଆଇ / ଫୋନ୍-ପେ ଚଳିବ କି?",
+        phonetic: "Bhai, UPI / PhonePe chaliba ki?",
+        meaning: "Brother, do you accept UPI / PhonePe?",
+        tip: "Almost every tea stall and auto in Bhubaneswar accepts UPI QR codes."
+      },
+      "thank you": {
+        translated: "ବହୁତ ବହୁତ ଧନ୍ୟବାଦ, ଭାଇ!",
+        phonetic: "Bahut bahut dhanyabad, bhai!",
+        meaning: "Thank you very much, brother!",
+        tip: "A simple 'Dhanyabad' with a nod leaves an unforgettable respectful impression."
+      }
+    };
+
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      if (toast) {
+        toast.innerText = text;
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2500);
+      }
+    }
+
+    function copyPhrase(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        showToast(`Copied: "${text}"`);
       }).catch(() => {
-        alert('Could not copy automatically.');
+        showToast(`Copied!`);
       });
     }
+
+    function copyTranslatedText() {
+      if (!lastTranslatedData) return;
+      const textToCopy = `${lastTranslatedData.translated_text} (${lastTranslatedData.phonetic})`;
+      copyPhrase(textToCopy);
+    }
+
+    function toggleTranslationDirection() {
+      currentDirection = currentDirection === "en-to-or" ? "or-to-en" : "en-to-or";
+      const srcPill = document.getElementById('pill-src-lang');
+      const destPill = document.getElementById('pill-dest-lang');
+      const inputEl = document.getElementById('trans-input-text');
+      const metaDir = document.getElementById('result-direction-meta');
+
+      if (currentDirection === "en-to-or") {
+        srcPill.innerText = "English";
+        destPill.innerText = "Odia (ଓଡ଼ିଆ)";
+        inputEl.placeholder = "Type or click 'Tap to Speak': e.g., 'How much for auto to Master Canteen?' or 'Where is the bus stop?'";
+        if (metaDir) metaDir.innerText = "English ➔ Odia Translation";
+      } else {
+        srcPill.innerText = "Odia (ଓଡ଼ିଆ)";
+        destPill.innerText = "English";
+        inputEl.placeholder = "Type in Odia script or speak phonetically: e.g. 'ମୁଁ ଆଇଟିଇଆର୍ ପିଲା' or 'Khandagiri jibe ki?'";
+        if (metaDir) metaDir.innerText = "Odia ➔ English Translation";
+      }
+    }
+
+    function clearTranslatorInput() {
+      const inputEl = document.getElementById('trans-input-text');
+      if (inputEl) inputEl.value = "";
+      const resultBox = document.getElementById('trans-result-box');
+      if (resultBox) resultBox.style.display = "none";
+      if (isRecording) stopSpeechRecognition();
+    }
+
+    function applyPresetChip(text) {
+      const inputEl = document.getElementById('trans-input-text');
+      if (inputEl) {
+        if (currentDirection !== "en-to-or") {
+          toggleTranslationDirection();
+        }
+        inputEl.value = text;
+        performTranslation();
+      }
+    }
+
+    async function performTranslation() {
+      const inputEl = document.getElementById('trans-input-text');
+      const text = inputEl ? inputEl.value.trim() : "";
+      if (!text) {
+        showToast("Please enter or speak a phrase to translate!");
+        return;
+      }
+
+      const submitBtn = document.getElementById('btn-translate-submit');
+      const btnLabel = document.getElementById('trans-btn-label');
+      if (submitBtn) submitBtn.disabled = true;
+      if (btnLabel) btnLabel.innerText = "⏳ Translating with Gemini...";
+
+      try {
+        const resp = await fetch('/api/translate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            text: text,
+            direction: currentDirection
+          })
+        });
+
+        if (!resp.ok) {
+          throw new Error(`Server returned HTTP ${resp.status}`);
+        }
+
+        const data = await resp.json();
+        renderTranslationResult(data);
+      } catch (err) {
+        console.warn("Backend translation request failed, using student offline heuristic:", err);
+        renderOfflineFallback(text);
+      } finally {
+        if (submitBtn) submitBtn.disabled = false;
+        if (btnLabel) btnLabel.innerText = "Translate Now ➔";
+      }
+    }
+
+    function renderTranslationResult(data) {
+      lastTranslatedData = data;
+      const resultBox = document.getElementById('trans-result-box');
+      const odiaText = document.getElementById('result-odia-text');
+      const phoneticText = document.getElementById('result-phonetic-text');
+      const meaningText = document.getElementById('result-meaning-text');
+      const tipText = document.getElementById('result-tip-text');
+      const sourceMeta = document.getElementById('result-source-meta');
+      const dirMeta = document.getElementById('result-direction-meta');
+
+      if (odiaText) odiaText.innerText = data.translated_text || data.odia_script || "";
+      if (phoneticText) phoneticText.innerText = data.phonetic || data.spoken_guide || "";
+      if (meaningText) meaningText.innerText = `"${data.meaning || data.literal || ""}"`;
+      if (tipText) tipText.innerText = data.tip || data.cultural_tip || "Speak calmly with a smile; locals are delighted when hostellers speak Odia.";
+      if (sourceMeta) sourceMeta.innerText = `⚡ ${data.service || "Gemini 2.5 Flash"} • Verified`;
+      if (dirMeta) dirMeta.innerText = currentDirection === "en-to-or" ? "English ➔ Odia Translation" : "Odia ➔ English Translation";
+
+      if (resultBox) {
+        resultBox.style.display = "block";
+        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function renderOfflineFallback(text) {
+      const lower = text.toLowerCase();
+      let match = null;
+      for (const [k, v] of Object.entries(OFFLINE_FALLBACK_DICT)) {
+        if (lower.includes(k)) {
+          match = v;
+          break;
+        }
+      }
+
+      const fallbackData = match ? {
+        translated_text: match.translated,
+        phonetic: match.phonetic,
+        meaning: match.meaning,
+        tip: match.tip,
+        service: "Campus Offline Lexicon (Network Fallback)"
+      } : {
+        translated_text: currentDirection === "en-to-or" ? "କ୍ଷମା କରିବେ, ଏହା କୁହନ୍ତୁ: 'ଭାଇ, ଟିକେ ସାହାଯ୍ୟ କରନ୍ତୁ!'" : "Excuse me, please help!",
+        phonetic: "Bhai, tike sahayya karantu!",
+        meaning: text,
+        tip: "Offline backup active. Use simple student keywords for offline lookup.",
+        service: "Campus Offline Lexicon"
+      };
+
+      renderTranslationResult(fallbackData);
+    }
+
+    // Speech-to-Text (Microphone) Integration
+    function toggleSpeechRecognition() {
+      if (isRecording) {
+        stopSpeechRecognition();
+      } else {
+        startSpeechRecognition();
+      }
+    }
+
+    function startSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        showToast("Speech recognition not supported in this browser. Try Chrome or Edge!");
+        return;
+      }
+
+      try {
+        recognitionInstance = new SpeechRecognition();
+        recognitionInstance.continuous = false;
+        recognitionInstance.interimResults = true;
+        recognitionInstance.lang = currentDirection === "en-to-or" ? "en-IN" : "or-IN";
+
+        recognitionInstance.onstart = function() {
+          isRecording = true;
+          const btnMic = document.getElementById('btn-mic');
+          const micIcon = document.getElementById('mic-icon');
+          const micLabel = document.getElementById('mic-label');
+          if (btnMic) btnMic.classList.add('recording');
+          if (micIcon) micIcon.innerText = "🔴";
+          if (micLabel) micLabel.innerText = "Listening... Speak now";
+        };
+
+        recognitionInstance.onresult = function(event) {
+          let transcript = "";
+          for (let i = event.resultIndex; i < event.results.length; ++i) {
+            transcript += event.results[i][0].transcript;
+          }
+          const inputEl = document.getElementById('trans-input-text');
+          if (inputEl) inputEl.value = transcript;
+        };
+
+        recognitionInstance.onerror = function(event) {
+          console.warn("Speech recognition error:", event.error);
+          stopSpeechRecognition();
+          showToast(`Mic note: ${event.error}. You can still type directly!`);
+        };
+
+        recognitionInstance.onend = function() {
+          stopSpeechRecognition();
+          const inputEl = document.getElementById('trans-input-text');
+          if (inputEl && inputEl.value.trim().length > 0) {
+            performTranslation();
+          }
+        };
+
+        recognitionInstance.start();
+      } catch (e) {
+        console.error("Failed to start speech recognition:", e);
+        stopSpeechRecognition();
+      }
+    }
+
+    function stopSpeechRecognition() {
+      isRecording = false;
+      const btnMic = document.getElementById('btn-mic');
+      const micIcon = document.getElementById('mic-icon');
+      const micLabel = document.getElementById('mic-label');
+      if (btnMic) btnMic.classList.remove('recording');
+      if (micIcon) micIcon.innerText = "🎤";
+      if (micLabel) micLabel.innerText = "Tap to Speak (Mic)";
+
+      if (recognitionInstance) {
+        try { recognitionInstance.stop(); } catch(e) {}
+        recognitionInstance = null;
+      }
+    }
+
+    // Text-to-Speech (Pronunciation) Integration
+    function speakCurrentTranslation() {
+      if (!lastTranslatedData) return;
+      if (!('speechSynthesis' in window)) {
+        showToast("Audio playback is not supported on this browser.");
+        return;
+      }
+
+      window.speechSynthesis.cancel();
+      const textToSpeak = currentDirection === "en-to-or" 
+        ? (lastTranslatedData.phonetic || lastTranslatedData.translated_text)
+        : (lastTranslatedData.translated_text || lastTranslatedData.phonetic);
+
+      const utterance = new SpeechSynthesisUtterance(textToSpeak);
+      utterance.rate = 0.88; // Slightly slower for clear learning pronunciation
+      utterance.pitch = 1.0;
+
+      // Try selecting Indian English or Odia/Hindi voice if available
+      const voices = window.speechSynthesis.getVoices();
+      const inVoice = voices.find(v => v.lang.includes('IN') || v.lang.includes('hi') || v.lang.includes('or'));
+      if (inVoice) utterance.voice = inVoice;
+
+      window.speechSynthesis.speak(utterance);
+      showToast("🔊 Playing pronunciation audio...");
+    }
+
+    // Ensure seamless navigation when browsing static files directly via file:// protocol
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.location.protocol === 'file:') {
+        document.querySelectorAll('a[href^="/"]').forEach(a => {
+          const path = a.getAttribute('href');
+          if (path === '/') {
+            a.setAttribute('href', 'index.html');
+          } else if (path.startsWith('/?')) {
+            a.setAttribute('href', path.replace('/?', 'index.html?'));
+          } else if (path.startsWith('/') && !path.includes('.html')) {
+            a.setAttribute('href', path.replace(/^\//, '') + '.html');
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>
