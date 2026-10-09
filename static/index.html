@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PravasiTrail | CampusBahar - Touch Grass Before Monday Classes</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
     /* =========================================================
@@ -21,10 +24,10 @@
       --violet: #6b5be6;
       --sky: #3aa0ff;
       --white: #ffffff;
-      
+
       --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      
+
       --border-hard: 3px solid #17140d;
       --shadow-lg: 8px 8px 0 #17140d;
       --shadow-md: 5px 5px 0 #17140d;
@@ -58,26 +61,55 @@
        2. ANIMATED MEMPHIS CONFETTI (CSS KEYFRAMES ONLY)
        ========================================================= */
     @keyframes drift {
-      0% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-24px) rotate(15deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-24px) rotate(15deg);
+      }
+
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes sway {
-      0% { transform: translateX(0px) rotate(0deg); }
-      50% { transform: translateX(18px) rotate(-10deg); }
-      100% { transform: translateX(0px) rotate(0deg); }
+      0% {
+        transform: translateX(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateX(18px) rotate(-10deg);
+      }
+
+      100% {
+        transform: translateX(0px) rotate(0deg);
+      }
     }
 
     @keyframes bob {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-16px); }
-      100% { transform: translateY(0px); }
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-16px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
     }
 
     .confetti-layer {
@@ -103,36 +135,43 @@
       left: 4%;
       animation: drift 7s ease-in-out infinite;
     }
+
     .c-arc-teal {
       top: 220px;
       right: 6%;
       animation: sway 9s ease-in-out infinite;
     }
+
     .c-dots-mustard {
       top: 540px;
       left: 2%;
       animation: bob 6s ease-in-out infinite;
     }
+
     .c-plus-violet {
       top: 130px;
       right: 28%;
       animation: spin 14s linear infinite;
     }
+
     .c-squiggle-black {
       top: 470px;
       right: 4%;
       animation: sway 8s ease-in-out infinite;
     }
+
     .c-half-mustard {
       top: 780px;
       left: 12%;
       animation: drift 10s ease-in-out infinite;
     }
+
     .c-zigzag-sky {
       top: 860px;
       right: 15%;
       animation: bob 7s ease-in-out infinite;
     }
+
     .c-striped-coral {
       top: 360px;
       left: 48%;
@@ -154,7 +193,8 @@
       gap: 1rem;
     }
 
-    .brand-wrap, .nav-brand {
+    .brand-wrap,
+    .nav-brand {
       display: flex;
       align-items: center;
       gap: 0.85rem;
@@ -162,7 +202,8 @@
       color: var(--ink);
     }
 
-    .brand-tile, .logo-box {
+    .brand-tile,
+    .logo-box {
       width: 44px;
       height: 44px;
       background: var(--mustard);
@@ -175,17 +216,21 @@
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .brand-tile:hover, .logo-box:hover {
+    .brand-tile:hover,
+    .logo-box:hover {
       transform: translate(2px, 2px);
       box-shadow: var(--shadow-active);
     }
 
-    .brand-tile svg, .logo-box svg {
+    .brand-tile svg,
+    .logo-box svg {
       width: 24px;
       height: 24px;
     }
 
-    .brand-name, .brand-text, .nav-brand span {
+    .brand-name,
+    .brand-text,
+    .nav-brand span {
       font-family: var(--font-display);
       font-weight: 800;
       font-size: 26px;
@@ -199,7 +244,8 @@
       list-style: none;
     }
 
-    .nav-links a, .nav-link {
+    .nav-links a,
+    .nav-link {
       color: var(--ink);
       font-weight: 700;
       font-size: 0.95rem;
@@ -207,13 +253,16 @@
       transition: color 0.15s ease;
     }
 
-    .nav-links a:hover, .nav-link:hover {
+    .nav-links a:hover,
+    .nav-link:hover {
       color: var(--coral);
       text-decoration: underline;
       text-underline-offset: 4px;
     }
 
-    .nav-link.active, .nav-links a.active, .mobile-nav-link.active {
+    .nav-link.active,
+    .nav-links a.active,
+    .mobile-nav-link.active {
       background: #ff5b57 !important;
       color: #ffffff !important;
       box-shadow: 3px 3px 0 #17140d !important;
@@ -224,7 +273,8 @@
       font-weight: 800 !important;
     }
 
-    .btn-gate, .nav-cta-btn {
+    .btn-gate,
+    .nav-cta-btn {
       background: var(--teal);
       color: var(--white);
       font-family: var(--font-display);
@@ -242,7 +292,8 @@
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .btn-gate:hover, .nav-cta-btn:hover {
+    .btn-gate:hover,
+    .nav-cta-btn:hover {
       transform: translate(3px, 3px);
       box-shadow: var(--shadow-active);
     }
@@ -361,7 +412,10 @@
       letter-spacing: 0.05em;
     }
 
-    select, input, textarea, .memphis-select {
+    select,
+    input,
+    textarea,
+    .memphis-select {
       width: 100%;
       outline: none !important;
       border: 3px solid #17140d !important;
@@ -383,7 +437,10 @@
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    select:focus, input:focus, textarea:focus, .memphis-select:focus {
+    select:focus,
+    input:focus,
+    textarea:focus,
+    .memphis-select:focus {
       outline: none !important;
       border-color: #17140d !important;
       box-shadow: 4px 4px 0 #17140d !important;
@@ -410,7 +467,8 @@
       font-family: var(--font-display) !important;
       padding: 8px 10px !important;
     }
-      padding: 8px 10px !important;
+
+    padding: 8px 10px !important;
     }
 
     /* Dual CTA Row */
@@ -510,10 +568,22 @@
       margin-left: 0;
     }
 
-    .av-coral { background: var(--coral); }
-    .av-teal { background: var(--teal); }
-    .av-violet { background: var(--violet); }
-    .av-mustard { background: var(--mustard); color: var(--ink); }
+    .av-coral {
+      background: var(--coral);
+    }
+
+    .av-teal {
+      background: var(--teal);
+    }
+
+    .av-violet {
+      background: var(--violet);
+    }
+
+    .av-mustard {
+      background: var(--mustard);
+      color: var(--ink);
+    }
 
     .trust-text {
       font-size: 0.9rem;
@@ -562,9 +632,17 @@
       border: 2px solid var(--ink);
     }
 
-    .tdot-coral { background: var(--coral); }
-    .tdot-mustard { background: var(--mustard); }
-    .tdot-teal { background: var(--teal); }
+    .tdot-coral {
+      background: var(--coral);
+    }
+
+    .tdot-mustard {
+      background: var(--mustard);
+    }
+
+    .tdot-teal {
+      background: var(--teal);
+    }
 
     .chrome-title {
       font-family: var(--font-display);
@@ -668,10 +746,25 @@
       margin-top: 3px;
     }
 
-    .bar-1 { height: 95%; background: var(--teal); }
-    .bar-2 { height: 80%; background: var(--mustard); }
-    .bar-3 { height: 25%; background: var(--coral); }
-    .bar-4 { height: 88%; background: var(--violet); }
+    .bar-1 {
+      height: 95%;
+      background: var(--teal);
+    }
+
+    .bar-2 {
+      height: 80%;
+      background: var(--mustard);
+    }
+
+    .bar-3 {
+      height: 25%;
+      background: var(--coral);
+    }
+
+    .bar-4 {
+      height: 88%;
+      background: var(--violet);
+    }
 
     /* Pocket Guide Itinerary Output Box */
     .guide-box {
@@ -708,10 +801,21 @@
       gap: 0.4rem;
     }
 
-    .chip-transit .chip-header { color: var(--sky); }
-    .chip-sensory .chip-header { color: var(--teal); }
-    .chip-odia .chip-header { color: var(--violet); }
-    .chip-screen .chip-header { color: var(--coral); }
+    .chip-transit .chip-header {
+      color: var(--sky);
+    }
+
+    .chip-sensory .chip-header {
+      color: var(--teal);
+    }
+
+    .chip-odia .chip-header {
+      color: var(--violet);
+    }
+
+    .chip-screen .chip-header {
+      color: var(--coral);
+    }
 
     .chip-body {
       font-size: 0.88rem;
@@ -790,7 +894,8 @@
       user-select: none;
     }
 
-    .campus-pill:hover, .campus-pill.active {
+    .campus-pill:hover,
+    .campus-pill.active {
       background: var(--mustard);
       transform: translate(-1px, -1px);
       box-shadow: 3px 3px 0 var(--ink);
@@ -1104,9 +1209,20 @@
       font-size: 1.6rem;
     }
 
-    .chip-icon-coral { background: var(--coral); color: var(--white); }
-    .chip-icon-teal { background: var(--teal); color: var(--white); }
-    .chip-icon-violet { background: var(--violet); color: var(--white); }
+    .chip-icon-coral {
+      background: var(--coral);
+      color: var(--white);
+    }
+
+    .chip-icon-teal {
+      background: var(--teal);
+      color: var(--white);
+    }
+
+    .chip-icon-violet {
+      background: var(--violet);
+      color: var(--white);
+    }
 
     .feature-title {
       font-family: var(--font-display);
@@ -1249,8 +1365,15 @@
     }
 
     @keyframes pulse-audio {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.15); }
+
+      0%,
+      100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
     }
 
     .audio-toast-text {
@@ -1317,14 +1440,17 @@
       .hero-section {
         grid-template-columns: 1fr;
       }
+
       .nav-links {
         display: none;
       }
+
       .tilted-dashboard {
         transform: rotate(0deg);
         max-width: 600px;
         margin: 0 auto;
       }
+
       .mobile-nav-bar {
         display: flex;
         align-items: center;
@@ -1336,6 +1462,7 @@
         position: relative;
         z-index: 10;
       }
+
       .mobile-nav-link {
         font-family: var(--font-display);
         font-weight: 800;
@@ -1348,52 +1475,55 @@
         padding: 0.35rem 0.75rem;
         border-radius: 9999px;
       }
+
       .mobile-nav-link:hover {
         background: var(--mustard);
       }
     }
-
   </style>
 </head>
+
 <body>
 
   <!-- BACKGROUND CONFETTI (CSS KEYFRAMES ONLY) -->
   <div class="confetti-layer" aria-hidden="true">
     <!-- Coral Triangle -->
     <svg class="confetti-item c-tri-coral" width="46" height="46" viewBox="0 0 46 46">
-      <polygon points="23,4 42,40 4,40" fill="#ff5b57" stroke="#17140d" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="23,4 42,40 4,40" fill="#ff5b57" stroke="#17140d" stroke-width="3" stroke-linejoin="round" />
     </svg>
     <!-- Teal Quarter Arc -->
     <svg class="confetti-item c-arc-teal" width="56" height="56" viewBox="0 0 56 56">
-      <path d="M4 52 A48 48 0 0 1 52 4 L52 52 Z" fill="#12b3a4" stroke="#17140d" stroke-width="3"/>
+      <path d="M4 52 A48 48 0 0 1 52 4 L52 52 Z" fill="#12b3a4" stroke="#17140d" stroke-width="3" />
     </svg>
     <!-- Mustard Dotted Circle -->
     <svg class="confetti-item c-dots-mustard" width="44" height="44" viewBox="0 0 44 44">
-      <circle cx="22" cy="22" r="18" fill="#ffc531" stroke="#17140d" stroke-width="3" stroke-dasharray="6,4"/>
+      <circle cx="22" cy="22" r="18" fill="#ffc531" stroke="#17140d" stroke-width="3" stroke-dasharray="6,4" />
     </svg>
     <!-- Violet Spinning Plus -->
     <svg class="confetti-item c-plus-violet" width="40" height="40" viewBox="0 0 40 40">
-      <rect x="14" y="2" width="12" height="36" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
-      <rect x="2" y="14" width="36" height="12" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
+      <rect x="14" y="2" width="12" height="36" fill="#6b5be6" stroke="#17140d" stroke-width="3" />
+      <rect x="2" y="14" width="36" height="12" fill="#6b5be6" stroke="#17140d" stroke-width="3" />
     </svg>
     <!-- Black Bacteria Squiggle -->
     <svg class="confetti-item c-squiggle-black" width="68" height="34" viewBox="0 0 68 34">
-      <path d="M4 17 Q 16 0, 28 17 T 52 17 T 64 17" fill="none" stroke="#17140d" stroke-width="4" stroke-linecap="round"/>
+      <path d="M4 17 Q 16 0, 28 17 T 52 17 T 64 17" fill="none" stroke="#17140d" stroke-width="4"
+        stroke-linecap="round" />
     </svg>
     <!-- Mustard Half Circle -->
     <svg class="confetti-item c-half-mustard" width="52" height="30" viewBox="0 0 52 30">
-      <path d="M3 27 A23 23 0 0 1 49 27 Z" fill="#ffc531" stroke="#17140d" stroke-width="3"/>
+      <path d="M3 27 A23 23 0 0 1 49 27 Z" fill="#ffc531" stroke="#17140d" stroke-width="3" />
     </svg>
     <!-- Sky Blue Zigzag -->
     <svg class="confetti-item c-zigzag-sky" width="54" height="36" viewBox="0 0 54 36">
-      <polyline points="4,28 16,8 28,28 40,8 50,28" fill="none" stroke="#3aa0ff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+      <polyline points="4,28 16,8 28,28 40,8 50,28" fill="none" stroke="#3aa0ff" stroke-width="4" stroke-linecap="round"
+        stroke-linejoin="round" />
     </svg>
     <!-- Coral Striped Circle -->
     <svg class="confetti-item c-striped-coral" width="42" height="42" viewBox="0 0 42 42">
-      <circle cx="21" cy="21" r="18" fill="#ff5b57" stroke="#17140d" stroke-width="3"/>
-      <line x1="10" y1="14" x2="32" y2="14" stroke="#ffffff" stroke-width="3"/>
-      <line x1="6" y1="21" x2="36" y2="21" stroke="#ffffff" stroke-width="3"/>
-      <line x1="10" y1="28" x2="32" y2="28" stroke="#ffffff" stroke-width="3"/>
+      <circle cx="21" cy="21" r="18" fill="#ff5b57" stroke="#17140d" stroke-width="3" />
+      <line x1="10" y1="14" x2="32" y2="14" stroke="#ffffff" stroke-width="3" />
+      <line x1="6" y1="21" x2="36" y2="21" stroke="#ffffff" stroke-width="3" />
+      <line x1="10" y1="28" x2="32" y2="28" stroke="#ffffff" stroke-width="3" />
     </svg>
   </div>
 
@@ -1402,8 +1532,8 @@
     <a href="/" class="nav-brand">
       <div class="logo-box">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M4 12C7 8 11 16 15 10C17 7 20 12 20 12" stroke="#17140d" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="6" cy="18" r="3" fill="#ff5b57" stroke="#17140d" stroke-width="2"/>
+          <path d="M4 12C7 8 11 16 15 10C17 7 20 12 20 12" stroke="#17140d" stroke-width="3" stroke-linecap="round" />
+          <circle cx="6" cy="18" r="3" fill="#ff5b57" stroke="#17140d" stroke-width="2" />
         </svg>
       </div>
       <span class="brand-text">PravasiTrail</span>
@@ -1445,7 +1575,8 @@
       </h1>
 
       <p class="hero-lead">
-        City-wide outdoor scout for college students across Bhubaneswar. Interactive Google Maps, multi-campus transit routing, dynamic fare matrices across 4 transit modes, and 10 outdoor getaways.
+        City-wide outdoor scout for college students across Bhubaneswar. Interactive Google Maps, multi-campus transit
+        routing, dynamic fare matrices across 4 transit modes, and 10 outdoor getaways.
       </p>
 
       <!-- Interactive Scout Form Card -->
@@ -1547,23 +1678,30 @@
       </div>
 
       <!-- 🛰️ LIVE GPS PROXIMITY CARD -->
-      <div class="gps-proximity-card" id="gps-pulse-card" style="margin-top: 1.5rem; background: #ffffff; border: 3px solid #17140d; box-shadow: 8px 8px 0 #17140d; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 0.85rem;">
+      <div class="gps-proximity-card" id="gps-pulse-card"
+        style="margin-top: 1.5rem; background: #ffffff; border: 3px solid #17140d; box-shadow: 8px 8px 0 #17140d; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 0.85rem;">
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
-          <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: #6b5be6; color: #ffffff; border: 3px solid #17140d; box-shadow: 3px 3px 0 #17140d; border-radius: 9999px; padding: 0.35rem 0.95rem; font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.04em;">
+          <div
+            style="display: inline-flex; align-items: center; gap: 0.4rem; background: #6b5be6; color: #ffffff; border: 3px solid #17140d; box-shadow: 3px 3px 0 #17140d; border-radius: 9999px; padding: 0.35rem 0.95rem; font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.04em;">
             <span>🛰️ LIVE GPS COMPASS</span>
           </div>
-          <strong style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; color: var(--ink);">Find Nearest Outdoor Spot</strong>
+          <strong
+            style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; color: var(--ink);">Find
+            Nearest Outdoor Spot</strong>
         </div>
         <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.4;">
-          Step outside your hostel. One tap scans Bhubaneswar's outdoor spots via live coordinates and locks onto the closest green escape.
+          Step outside your hostel. One tap scans Bhubaneswar's outdoor spots via live coordinates and locks onto the
+          closest green escape.
         </p>
         <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-          <button class="btn-gps-detect" id="gps-detect-btn" onclick="handleDetectGpsLocation()" style="background: #12b3a4; color: #ffffff; border: 3px solid #17140d; box-shadow: 5px 5px 0 #17140d; border-radius: 9999px; padding: 0.75rem 1.4rem; font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: transform 0.15s ease, box-shadow 0.15s ease;">
+          <button class="btn-gps-detect" id="gps-detect-btn" onclick="handleDetectGpsLocation()"
+            style="background: #12b3a4; color: #ffffff; border: 3px solid #17140d; box-shadow: 5px 5px 0 #17140d; border-radius: 9999px; padding: 0.75rem 1.4rem; font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: transform 0.15s ease, box-shadow 0.15s ease;">
             <span id="gps-icon">📍</span>
             <span id="gps-label">Detect My Location &amp; Closest Trail</span>
           </button>
         </div>
-        <div id="gps-result" style="display: none; background: #faf6ee; border: 3px solid #17140d; box-shadow: 4px 4px 0 #17140d; border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.88rem; font-weight: 700; color: var(--ink); line-height: 1.4;">
+        <div id="gps-result"
+          style="display: none; background: #faf6ee; border: 3px solid #17140d; box-shadow: 4px 4px 0 #17140d; border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.88rem; font-weight: 700; color: var(--ink); line-height: 1.4;">
           <!-- Dynamic GPS status chip -->
         </div>
       </div>
@@ -1592,20 +1730,13 @@
             <span class="map-dist-pill" id="map-dist-pill">3.5 km from ITER</span>
           </div>
           <div class="map-iframe-wrap">
-            <iframe
-              id="gmap-iframe"
-              title="Interactive Google Maps Trail View"
-              src="https://www.google.com/maps?q=20.2588,85.7865&z=14&output=embed"
-              loading="lazy"
-              allowfullscreen>
+            <iframe id="gmap-iframe" title="Interactive Google Maps Trail View"
+              src="https://www.google.com/maps?q=20.2588,85.7865&z=14&output=embed" loading="lazy" allowfullscreen>
             </iframe>
           </div>
-          <a
-            id="gmap-directions-btn"
+          <a id="gmap-directions-btn"
             href="https://www.google.com/maps/dir/?api=1&origin=20.2520,85.7956&destination=20.2588,85.7865&travelmode=transit"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn-map-nav">
+            target="_blank" rel="noopener noreferrer" class="btn-map-nav">
             <span>Open Live Google Maps Navigation ➔</span>
           </a>
         </div>
@@ -1719,7 +1850,8 @@
             <div class="memphis-chip chip-sensory">
               <div class="chip-header">🌿 Sensory Checkpoint (Touch & See)</div>
               <div class="chip-body" id="chip-sensory-text">
-                Run your palms over the cool, rough 2nd-century BCE sandstone inside Rani Gumpha; feel the hilltop sea breeze over the horizon.
+                Run your palms over the cool, rough 2nd-century BCE sandstone inside Rani Gumpha; feel the hilltop sea
+                breeze over the horizon.
               </div>
             </div>
 
@@ -1742,16 +1874,22 @@
         </div>
 
         <!-- 🎧 ElevenLabs Audio Companion Card -->
-        <div class="audio-companion-box" id="audio-companion-box" style="margin: 1.1rem 0; background: #fffcf7; border: 3px solid #17140d; box-shadow: 4px 4px 0 #17140d; border-radius: 14px; padding: 12px 16px;">
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap;">
+        <div class="audio-companion-box" id="audio-companion-box"
+          style="margin: 1.1rem 0; background: #fffcf7; border: 3px solid #17140d; box-shadow: 4px 4px 0 #17140d; border-radius: 14px; padding: 12px 16px;">
+          <div
+            style="display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; flex-wrap: wrap;">
             <div style="display: flex; align-items: center; gap: 0.6rem;">
               <span style="font-size: 1.35rem;">🎧</span>
               <div>
-                <strong style="font-family: var(--font-display); font-size: 0.95rem; display: block; color: var(--ink);">Audio Trail Companion</strong>
-                <span style="font-size: 0.78rem; color: #64748b; font-weight: 600;" id="audio-status-label">Hands-free directions while you walk</span>
+                <strong
+                  style="font-family: var(--font-display); font-size: 0.95rem; display: block; color: var(--ink);">Audio
+                  Trail Companion</strong>
+                <span style="font-size: 0.78rem; color: #64748b; font-weight: 600;" id="audio-status-label">Hands-free
+                  directions while you walk</span>
               </div>
             </div>
-            <button class="btn-audio-walk" id="play-audio-btn" onclick="handlePlayAudioGuide()" style="background: var(--coral); color: #ffffff; border: 2px solid #17140d; box-shadow: 3px 3px 0 #17140d; border-radius: 9999px; padding: 0.55rem 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.45rem; transition: transform 0.15s ease, box-shadow 0.15s ease;">
+            <button class="btn-audio-walk" id="play-audio-btn" onclick="handlePlayAudioGuide()"
+              style="background: var(--coral); color: #ffffff; border: 2px solid #17140d; box-shadow: 3px 3px 0 #17140d; border-radius: 9999px; padding: 0.55rem 1.25rem; font-family: var(--font-display); font-weight: 800; font-size: 0.88rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.45rem; transition: transform 0.15s ease, box-shadow 0.15s ease;">
               <span id="audio-btn-icon">🔊</span>
               <span id="audio-btn-text">Listen to Field Guide (ElevenLabs Voice)</span>
             </button>
@@ -1776,10 +1914,14 @@
   <section class="campus-strip">
     <div class="strip-label">POPULAR EXPEDITIONS FROM ITER</div>
     <ul class="strip-items">
-      <li><a href="index.html?dest=khandagiri" style="color: inherit; text-decoration: none;">Khandagiri Caves</a> <span class="strip-dot">•</span></li>
-      <li><a href="index.html?dest=deras" style="color: inherit; text-decoration: none;">Deras Dam</a> <span class="strip-dot">•</span></li>
-      <li><a href="index.html?dest=ekamra" style="color: inherit; text-decoration: none;">Ekamra Lake</a> <span class="strip-dot">•</span></li>
-      <li><a href="index.html?dest=dhauli" style="color: inherit; text-decoration: none;">Dhauli Stupa</a> <span class="strip-dot">•</span></li>
+      <li><a href="index.html?dest=khandagiri" style="color: inherit; text-decoration: none;">Khandagiri Caves</a> <span
+          class="strip-dot">•</span></li>
+      <li><a href="index.html?dest=deras" style="color: inherit; text-decoration: none;">Deras Dam</a> <span
+          class="strip-dot">•</span></li>
+      <li><a href="index.html?dest=ekamra" style="color: inherit; text-decoration: none;">Ekamra Lake</a> <span
+          class="strip-dot">•</span></li>
+      <li><a href="index.html?dest=dhauli" style="color: inherit; text-decoration: none;">Dhauli Stupa</a> <span
+          class="strip-dot">•</span></li>
       <li><a href="trails.html" style="color: var(--mustard); text-decoration: underline;">Browse All Trails ➔</a></li>
     </ul>
   </section>
@@ -1795,7 +1937,8 @@
         <div class="feature-chip-icon chip-icon-coral">📊</div>
         <h3 class="feature-title">TabPFN Foundation Model</h3>
         <p class="feature-desc">
-          Zero-shot prior-data fitted tabular classifier trained on coastal Bhubaneswar climate cycles. Instant prediction of wet-bulb temperature, heat, and solar radiation comfort windows.
+          Zero-shot prior-data fitted tabular classifier trained on coastal Bhubaneswar climate cycles. Instant
+          prediction of wet-bulb temperature, heat, and solar radiation comfort windows.
         </p>
         <a href="weather.html" class="feature-action-link">Open Diurnal Weather Matrix ➔</a>
       </div>
@@ -1805,7 +1948,8 @@
         <div class="feature-chip-icon chip-icon-teal">⚡</div>
         <h3 class="feature-title">Gemma 2 Open-Weights</h3>
         <p class="feature-desc">
-          Synthesizes concise pocket itineraries specifically tailored for hostellers from Jharkhand, Bihar, and UP. Delivers exact Mo Bus transit routes and conversational Odia survival phrases.
+          Synthesizes concise pocket itineraries specifically tailored for hostellers from Jharkhand, Bihar, and UP.
+          Delivers exact Mo Bus transit routes and conversational Odia survival phrases.
         </p>
         <a href="mobus.html" class="feature-action-link">Explore Mo Bus Routes & Hacks ➔</a>
       </div>
@@ -1815,7 +1959,8 @@
         <div class="feature-chip-icon chip-icon-violet">🌿</div>
         <h3 class="feature-title">Zero Screen-Time Rule</h3>
         <p class="feature-desc">
-          Designed to be viewed for under 20 seconds, noted or copied, and closed. Built for the DEV Hacktoberfest Touch Grass Challenge to pull engineers away from screens.
+          Designed to be viewed for under 20 seconds, noted or copied, and closed. Built for the DEV Hacktoberfest Touch
+          Grass Challenge to pull engineers away from screens.
         </p>
         <a href="odia.html" class="feature-action-link">Read Odia Survival Phrases ➔</a>
       </div>
@@ -1923,8 +2068,8 @@
       const dlat = (lat2 - lat1) * Math.PI / 180;
       const dlon = (lon2 - lon1) * Math.PI / 180;
       const a = Math.sin(dlat / 2) * Math.sin(dlat / 2) +
-                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                Math.sin(dlon / 2) * Math.sin(dlon / 2);
+        Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+        Math.sin(dlon / 2) * Math.sin(dlon / 2);
       const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       return Math.max(1.5, Math.round(R * c * 1.28 * 10) / 10);
     }
@@ -2096,12 +2241,12 @@
         const campus = CAMPUS_HUBS[origin_campus] || CAMPUS_HUBS['iter'];
         const dest = DESTINATIONS_DATA[destination] || DESTINATIONS_DATA['khandagiri'];
         const routeText = dest.routes[origin_campus] || "Mo Bus connected corridor";
-        
+
         document.getElementById('chip-transit-text').innerText = `From ${campus.short_name} Gate: ${routeText}. Student fare: ₹10–₹25.`;
         document.getElementById('chip-sensory-text').innerText = `Immerse in the natural landscape of ${dest.name}. Feel the crisp coastal air and textured rock trails.`;
         document.getElementById('chip-odia-text').innerText = `"Bhai, ${dest.name.split(' ')[0]} jibe ki? Kete tonka?" (Brother, will you go there? How much?)`;
         document.getElementById('chip-screen-text').innerText = `Phone in pocket now—soak in the open trail with your eyes, not through a glass screen.`;
-        
+
         showToast(`Loaded ${dest.name} for ${campus.short_name} (Local Scout Mode)`);
       } finally {
         scoutBtn.disabled = false;
@@ -2538,5 +2683,5 @@
     });
   </script>
 </body>
-</html>
 
+</html>

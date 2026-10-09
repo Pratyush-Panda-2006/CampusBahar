@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Odia Cheatsheet | PravasiTrail (CampusBahar)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@600;700;800&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
     :root {
@@ -18,11 +21,11 @@
       --violet: #6b5be6;
       --sky: #3aa0ff;
       --white: #ffffff;
-      
+
       --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-      
+
       --border-hard: 3px solid #17140d;
       --shadow-lg: 8px 8px 0 #17140d;
       --shadow-md: 5px 5px 0 #17140d;
@@ -30,7 +33,11 @@
       --shadow-active: 2px 2px 0 #17140d;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       background-color: var(--bg-cream);
@@ -42,64 +49,144 @@
       line-height: 1.5;
     }
 
-    ::selection { background: var(--mustard); color: var(--ink); }
+    ::selection {
+      background: var(--mustard);
+      color: var(--ink);
+    }
 
     /* CONFETTI ANIMATIONS */
     @keyframes drift {
-      0% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-24px) rotate(15deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
+      0% {
+        transform: translateY(0px) rotate(0deg);
+      }
+
+      50% {
+        transform: translateY(-24px) rotate(15deg);
+      }
+
+      100% {
+        transform: translateY(0px) rotate(0deg);
+      }
     }
+
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
+
     @keyframes bob {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-16px); }
-      100% { transform: translateY(0px); }
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-16px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
     }
 
     .confetti-layer {
-      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      pointer-events: none; z-index: 0; overflow: hidden;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
     }
-    .confetti-item { position: absolute; pointer-events: none; }
-    .c-tri-coral { top: 90px; left: 4%; animation: drift 7s ease-in-out infinite; }
-    .c-arc-teal { top: 240px; right: 5%; animation: drift 9s ease-in-out infinite; }
-    .c-plus-violet { top: 130px; right: 28%; animation: spin 14s linear infinite; }
-    .c-half-mustard { top: 620px; left: 3%; animation: bob 8s ease-in-out infinite; }
+
+    .confetti-item {
+      position: absolute;
+      pointer-events: none;
+    }
+
+    .c-tri-coral {
+      top: 90px;
+      left: 4%;
+      animation: drift 7s ease-in-out infinite;
+    }
+
+    .c-arc-teal {
+      top: 240px;
+      right: 5%;
+      animation: drift 9s ease-in-out infinite;
+    }
+
+    .c-plus-violet {
+      top: 130px;
+      right: 28%;
+      animation: spin 14s linear infinite;
+    }
+
+    .c-half-mustard {
+      top: 620px;
+      left: 3%;
+      animation: bob 8s ease-in-out infinite;
+    }
 
     /* NAVBAR */
     .nav-container {
-      position: relative; z-index: 10;
-      max-width: 1240px; margin: 0 auto;
+      position: relative;
+      z-index: 10;
+      max-width: 1240px;
+      margin: 0 auto;
       padding: 1.5rem 1.5rem 1rem;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
-    .brand-wrap, .nav-brand {
-      display: flex; align-items: center; gap: 0.85rem;
-      text-decoration: none; color: var(--ink);
+
+    .brand-wrap,
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--ink);
     }
-    .brand-tile, .logo-box {
-      width: 44px; height: 44px;
+
+    .brand-tile,
+    .logo-box {
+      width: 44px;
+      height: 44px;
       background: var(--mustard);
       border: var(--border-hard);
       box-shadow: var(--shadow-md);
       border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .brand-tile:hover, .logo-box:hover {
-      transform: translate(2px, 2px); box-shadow: var(--shadow-active);
+
+    .brand-tile:hover,
+    .logo-box:hover {
+      transform: translate(2px, 2px);
+      box-shadow: var(--shadow-active);
     }
-    .brand-name, .brand-text, .nav-brand span {
+
+    .brand-name,
+    .brand-text,
+    .nav-brand span {
       font-family: var(--font-display);
-      font-weight: 800; font-size: 26px;
+      font-weight: 800;
+      font-size: 26px;
       letter-spacing: -0.02em;
     }
 
-    select, input, textarea {
+    select,
+    input,
+    textarea {
       outline: none !important;
       border: 3px solid #17140d !important;
       background-color: #f5efe2 !important;
@@ -111,24 +198,45 @@
       border-radius: 12px;
       padding: 10px 14px;
     }
-    select:focus, input:focus, textarea:focus {
+
+    select:focus,
+    input:focus,
+    textarea:focus {
       outline: none !important;
       border-color: #17140d !important;
       box-shadow: 6px 6px 0 #17140d !important;
     }
+
     option {
       background-color: #f5efe2 !important;
       color: #17140d !important;
     }
-    .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
-    .nav-links a, .nav-link {
-      color: var(--ink); font-weight: 700; font-size: 0.95rem;
-      text-decoration: none; transition: color 0.15s ease;
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      list-style: none;
     }
-    .nav-links a:hover, .nav-link:hover {
-      color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
+
+    .nav-links a,
+    .nav-link {
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: color 0.15s ease;
     }
-    .nav-links a.active, .nav-link.active {
+
+    .nav-links a:hover,
+    .nav-link:hover {
+      color: var(--coral);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .nav-links a.active,
+    .nav-link.active {
       background: #ff5b57 !important;
       color: #ffffff !important;
       padding: 0.45rem 0.95rem !important;
@@ -137,67 +245,117 @@
       box-shadow: 3px 3px 0 #17140d !important;
       text-decoration: none !important;
     }
-    .btn-gate, .nav-cta-btn {
-      background: var(--teal); color: var(--white);
-      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
+
+    .btn-gate,
+    .nav-cta-btn {
+      background: var(--teal);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.95rem;
       padding: 0.65rem 1.3rem;
-      border: var(--border-hard); box-shadow: var(--shadow-md);
-      border-radius: 9999px; text-decoration: none;
-      display: inline-flex; align-items: center; gap: 0.4rem;
+      border: var(--border-hard);
+      box-shadow: var(--shadow-md);
+      border-radius: 9999px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    .btn-gate:hover, .nav-cta-btn:hover {
-      transform: translate(3px, 3px); box-shadow: var(--shadow-active);
+
+    .btn-gate:hover,
+    .nav-cta-btn:hover {
+      transform: translate(3px, 3px);
+      box-shadow: var(--shadow-active);
     }
 
     /* HEADER */
     .page-header {
-      position: relative; z-index: 1;
-      max-width: 1240px; margin: 2rem auto 2.5rem;
-      padding: 0 1.5rem; text-align: center;
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 2rem auto 2.5rem;
+      padding: 0 1.5rem;
+      text-align: center;
     }
+
     .eyebrow-pill {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: var(--violet); color: var(--white);
-      border: var(--border-hard); box-shadow: var(--shadow-sm);
-      border-radius: 9999px; padding: 0.4rem 1.1rem;
-      font-family: var(--font-display); font-size: 0.85rem; font-weight: 800;
-      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--violet);
+      color: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-sm);
+      border-radius: 9999px;
+      padding: 0.4rem 1.1rem;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
     }
+
     .eyebrow-dot {
-      width: 10px; height: 10px; background: var(--mustard);
-      border: 2px solid var(--ink); border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      background: var(--mustard);
+      border: 2px solid var(--ink);
+      border-radius: 50%;
     }
+
     .page-title {
       font-family: var(--font-display);
       font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-      font-weight: 800; line-height: 1.05; letter-spacing: -0.02em;
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
       margin-bottom: 0.8rem;
     }
+
     .page-lead {
-      font-size: 1.15rem; font-weight: 500;
-      max-width: 720px; margin: 0 auto; color: var(--ink);
+      font-size: 1.15rem;
+      font-weight: 500;
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--ink);
     }
 
     /* PHRASE SECTION */
     .content-container {
-      position: relative; z-index: 1;
-      max-width: 1240px; margin: 0 auto 5rem;
+      position: relative;
+      z-index: 1;
+      max-width: 1240px;
+      margin: 0 auto 5rem;
       padding: 0 1.5rem;
     }
 
     .category-title-bar {
-      display: flex; align-items: center; gap: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
       margin: 2rem 0 1.25rem;
     }
+
     .category-chip {
-      background: var(--ink); color: var(--mustard);
-      font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;
-      border: var(--border-hard); border-radius: 8px;
-      padding: 0.35rem 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
+      background: var(--ink);
+      color: var(--mustard);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.9rem;
+      border: var(--border-hard);
+      border-radius: 8px;
+      padding: 0.35rem 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
+
     .category-heading {
-      font-family: var(--font-display); font-size: 1.45rem; font-weight: 800;
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 800;
     }
 
     .phrase-grid {
@@ -212,10 +370,13 @@
       box-shadow: var(--shadow-lg);
       border-radius: 18px;
       padding: 1.5rem;
-      display: flex; flex-direction: column; justify-content: space-between;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       gap: 0.9rem;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+
     .phrase-card:hover {
       transform: translate(-3px, -3px);
       box-shadow: 11px 11px 0 var(--ink);
@@ -223,7 +384,9 @@
 
     .phrase-odia {
       font-family: var(--font-display);
-      font-size: 1.35rem; font-weight: 800; color: var(--ink);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--ink);
       line-height: 1.25;
     }
 
@@ -237,27 +400,48 @@
       font-size: 0.88rem;
       font-weight: 700;
       color: var(--violet);
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .phrase-meaning {
-      font-size: 0.95rem; font-weight: 600; color: var(--ink);
-      display: flex; align-items: baseline; gap: 0.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
     }
-    .phrase-meaning span { color: var(--coral); font-weight: 800; }
+
+    .phrase-meaning span {
+      color: var(--coral);
+      font-weight: 800;
+    }
 
     .card-footer-tip {
-      font-size: 0.82rem; font-weight: 500; color: #64748b;
-      border-top: 1px dashed #cbd5e1; padding-top: 0.5rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #64748b;
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 0.5rem;
     }
 
     .btn-copy-phrase {
-      background: var(--bg-cream); border: 2px solid var(--ink);
-      border-radius: 6px; padding: 0.2rem 0.6rem;
-      font-family: var(--font-display); font-weight: 800; font-size: 0.75rem;
-      cursor: pointer; transition: background 0.15s ease;
+      background: var(--bg-cream);
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      padding: 0.2rem 0.6rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: background 0.15s ease;
     }
-    .btn-copy-phrase:hover { background: var(--mustard); }
+
+    .btn-copy-phrase:hover {
+      background: var(--mustard);
+    }
 
     /* CULTURAL PRO TIP BOX */
     .culture-card {
@@ -267,13 +451,21 @@
       border-radius: 20px;
       padding: 2rem;
       margin-top: 3.5rem;
-      display: flex; flex-direction: column; gap: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
+
     .culture-title {
-      font-family: var(--font-display); font-size: 1.5rem; font-weight: 800;
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
     }
+
     .culture-text {
-      font-size: 1.05rem; font-weight: 600; line-height: 1.6;
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.6;
     }
 
     /* INTERACTIVE TRANSLATOR STYLES */
@@ -286,225 +478,432 @@
       margin-bottom: 3.5rem;
       position: relative;
     }
+
     .translator-badges {
-      display: flex; gap: 0.65rem; flex-wrap: wrap; margin-bottom: 0.85rem;
+      display: flex;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.85rem;
     }
+
     .badge-gemini {
-      background: var(--violet); color: var(--white);
-      border: 2px solid var(--ink); border-radius: 9999px;
-      padding: 0.3rem 0.85rem; font-family: var(--font-display);
-      font-weight: 800; font-size: 0.78rem; letter-spacing: 0.04em;
+      background: var(--violet);
+      color: var(--white);
+      border: 2px solid var(--ink);
+      border-radius: 9999px;
+      padding: 0.3rem 0.85rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
     }
+
     .badge-stt {
-      background: var(--teal); color: var(--white);
-      border: 2px solid var(--ink); border-radius: 9999px;
-      padding: 0.3rem 0.85rem; font-family: var(--font-display);
-      font-weight: 800; font-size: 0.78rem; letter-spacing: 0.04em;
+      background: var(--teal);
+      color: var(--white);
+      border: 2px solid var(--ink);
+      border-radius: 9999px;
+      padding: 0.3rem 0.85rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
     }
+
     .translator-title {
-      font-family: var(--font-display); font-weight: 800; font-size: 1.85rem;
-      line-height: 1.15; margin-bottom: 0.4rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.85rem;
+      line-height: 1.15;
+      margin-bottom: 0.4rem;
     }
+
     .translator-subtitle {
-      font-size: 0.98rem; font-weight: 500; color: #475569; margin-bottom: 1.5rem;
+      font-size: 0.98rem;
+      font-weight: 500;
+      color: #475569;
+      margin-bottom: 1.5rem;
     }
+
     .direction-control-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
     }
+
     .direction-pills-wrap {
-      display: flex; align-items: center; gap: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
+
     .dir-pill {
-      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
-      padding: 0.45rem 1rem; border: 2px solid var(--ink); border-radius: 12px;
-      background: var(--bg-cream); color: var(--ink);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.95rem;
+      padding: 0.45rem 1rem;
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      background: var(--bg-cream);
+      color: var(--ink);
     }
+
     .dir-pill.active {
-      background: var(--mustard); box-shadow: 3px 3px 0 var(--ink);
+      background: var(--mustard);
+      box-shadow: 3px 3px 0 var(--ink);
     }
+
     .btn-swap-dir {
-      background: var(--white); color: var(--ink); border: 2px solid var(--ink);
-      border-radius: 12px; padding: 0.45rem 1rem; font-family: var(--font-display);
-      font-weight: 800; font-size: 0.9rem; cursor: pointer;
-      box-shadow: 3px 3px 0 var(--ink); display: inline-flex; align-items: center; gap: 0.4rem;
+      background: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 12px;
+      padding: 0.45rem 1rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 var(--ink);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       transition: all 0.15s ease;
     }
+
     .btn-swap-dir:hover {
-      background: var(--mustard); transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--ink);
+      background: var(--mustard);
+      transform: translate(-2px, -2px);
+      box-shadow: 5px 5px 0 var(--ink);
     }
+
     .translator-input-wrap {
-      position: relative; margin-bottom: 1.2rem;
+      position: relative;
+      margin-bottom: 1.2rem;
     }
+
     .memphis-trans-input {
-      width: 100%; min-height: 90px;
-      padding: 1rem 1.25rem; font-family: var(--font-body);
-      font-size: 1.12rem; font-weight: 500; color: var(--ink);
-      background: #faf6ee; border: var(--border-hard);
-      border-radius: 16px; outline: none; resize: vertical;
+      width: 100%;
+      min-height: 90px;
+      padding: 1rem 1.25rem;
+      font-family: var(--font-body);
+      font-size: 1.12rem;
+      font-weight: 500;
+      color: var(--ink);
+      background: #faf6ee;
+      border: var(--border-hard);
+      border-radius: 16px;
+      outline: none;
+      resize: vertical;
       transition: all 0.2s ease;
     }
+
     .memphis-trans-input:focus {
-      background: var(--white); box-shadow: 5px 5px 0 var(--ink);
+      background: var(--white);
+      box-shadow: 5px 5px 0 var(--ink);
     }
+
     .translator-action-bar {
-      display: flex; align-items: center; justify-content: flex-start;
-      gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
     }
+
     .btn-clear {
-      background: var(--white); color: var(--ink);
-      border: var(--border-hard); box-shadow: var(--shadow-sm);
-      border-radius: 9999px; padding: 0.75rem 1.6rem;
-      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
-      cursor: pointer; transition: all 0.15s ease;
-    }
-    .btn-clear:hover {
-      background: var(--bg-cream); transform: translate(-2px, -2px); box-shadow: var(--shadow-md);
-    }
-    .btn-translate-now {
-      background: var(--coral); color: var(--white);
-      border: var(--border-hard); box-shadow: var(--shadow-sm);
-      border-radius: 9999px; padding: 0.75rem 2rem;
-      font-family: var(--font-display); font-weight: 800; font-size: 1.05rem;
-      cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--white);
+      color: var(--ink);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-sm);
+      border-radius: 9999px;
+      padding: 0.75rem 1.6rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.95rem;
+      cursor: pointer;
       transition: all 0.15s ease;
     }
+
+    .btn-clear:hover {
+      background: var(--bg-cream);
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-translate-now {
+      background: var(--coral);
+      color: var(--white);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-sm);
+      border-radius: 9999px;
+      padding: 0.75rem 2rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.15s ease;
+    }
+
     .btn-translate-now:hover {
-      transform: translate(-2px, -2px); box-shadow: var(--shadow-md); background: #f04844;
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-md);
+      background: #f04844;
     }
+
     .btn-translate-now:disabled {
-      opacity: 0.65; cursor: not-allowed; transform: none; box-shadow: var(--shadow-sm);
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: var(--shadow-sm);
     }
+
     .quick-chips-section {
       margin-bottom: 1.5rem;
     }
+
     .quick-chips-label {
-      font-family: var(--font-display); font-size: 0.85rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 0.04em; color: #64748b;
-      margin-bottom: 0.65rem; display: block;
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #64748b;
+      margin-bottom: 0.65rem;
+      display: block;
     }
+
     .quick-chips-wrap {
-      display: flex; flex-wrap: wrap; gap: 0.55rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
     }
+
     .quick-prompt-chip {
-      background: var(--bg-cream); color: var(--ink);
-      border: 2px solid var(--ink); border-radius: 9999px;
-      padding: 0.4rem 0.9rem; font-size: 0.84rem; font-weight: 700;
-      cursor: pointer; transition: all 0.15s ease;
+      background: var(--bg-cream);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 9999px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
     }
+
     .quick-prompt-chip:hover {
-      background: var(--mustard); transform: translate(-1px, -1px); box-shadow: 2px 2px 0 var(--ink);
+      background: var(--mustard);
+      transform: translate(-1px, -1px);
+      box-shadow: 2px 2px 0 var(--ink);
     }
+
     .trans-result-box {
-      display: none; background: #fffcf7;
-      border: var(--border-hard); box-shadow: var(--shadow-md);
-      border-radius: 18px; padding: 1.75rem; margin-top: 1.5rem;
+      display: none;
+      background: #fffcf7;
+      border: var(--border-hard);
+      box-shadow: var(--shadow-md);
+      border-radius: 18px;
+      padding: 1.75rem;
+      margin-top: 1.5rem;
     }
+
     .trans-result-top {
-      display: flex; align-items: flex-start; justify-content: space-between;
-      gap: 1rem; margin-bottom: 0.85rem; flex-wrap: wrap;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+      flex-wrap: wrap;
     }
+
     .trans-odia-text {
-      font-family: var(--font-display); font-size: 2.1rem;
-      font-weight: 800; color: var(--ink); line-height: 1.2;
+      font-family: var(--font-display);
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.2;
     }
+
     .trans-actions-right {
-      display: flex; align-items: center; gap: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
+
     .trans-phonetic-bar {
-      display: flex; align-items: center; gap: 0.65rem;
-      background: var(--bg-cream); border: 2px solid var(--ink);
-      border-radius: 10px; padding: 0.6rem 0.95rem; margin-bottom: 0.85rem;
-      font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700; color: var(--violet);
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      background: var(--bg-cream);
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      padding: 0.6rem 0.95rem;
+      margin-bottom: 0.85rem;
+      font-family: var(--font-mono);
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--violet);
     }
+
     .trans-meaning-bar {
-      font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 0.85rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.85rem;
     }
+
     .trans-tip-box {
-      background: var(--mustard); border: 2px solid var(--ink);
-      border-radius: 10px; padding: 0.85rem 1.1rem;
-      font-size: 0.92rem; font-weight: 600; line-height: 1.45;
-      display: flex; align-items: flex-start; gap: 0.55rem;
+      background: var(--mustard);
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      line-height: 1.45;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.55rem;
     }
+
     .trans-meta-row {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-top: 0.85rem; padding-top: 0.65rem; border-top: 1px dashed #cbd5e1;
-      font-size: 0.78rem; font-weight: 700; color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.85rem;
+      padding-top: 0.65rem;
+      border-top: 1px dashed #cbd5e1;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #64748b;
     }
 
     footer {
-      border-top: var(--border-hard); background: var(--bg-cream);
-      padding: 2.5rem 1.5rem; text-align: center;
-      font-weight: 700; font-size: 0.95rem;
+      border-top: var(--border-hard);
+      background: var(--bg-cream);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.95rem;
     }
 
     .footer-nav {
-      display: flex; justify-content: center;
-      gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
     }
+
     .footer-nav a {
-      color: var(--ink); font-weight: 700; text-decoration: none; font-size: 0.9rem;
-      border: 2px solid var(--ink); background: var(--white);
-      padding: 0.35rem 0.85rem; border-radius: 9999px;
+      color: var(--ink);
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 0.9rem;
+      border: 2px solid var(--ink);
+      background: var(--white);
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
       box-shadow: 3px 3px 0 var(--ink);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
+
     .footer-nav a:hover {
-      transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink);
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--ink);
       background: var(--mustard);
     }
 
-    .mobile-nav-bar { display: none; }
+    .mobile-nav-bar {
+      display: none;
+    }
 
     .toast {
-      position: fixed; bottom: 2rem; left: 50%;
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: var(--mustard); color: var(--ink);
-      border: var(--border-hard); box-shadow: var(--shadow-lg);
-      font-family: var(--font-display); font-weight: 800; font-size: 1rem;
-      padding: 0.75rem 1.6rem; border-radius: 9999px;
-      z-index: 9999; opacity: 0; transition: all 0.25s ease;
+      background: var(--mustard);
+      color: var(--ink);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1rem;
+      padding: 0.75rem 1.6rem;
+      border-radius: 9999px;
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.25s ease;
       pointer-events: none;
     }
-    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
 
     @media (max-width: 960px) {
-      .nav-links { display: none; }
-      .mobile-nav-bar {
-        display: flex; align-items: center; justify-content: center;
-        gap: 0.6rem; flex-wrap: wrap; margin: 0.5rem auto 1.5rem;
-        padding: 0 1rem; position: relative; z-index: 10;
+      .nav-links {
+        display: none;
       }
+
+      .mobile-nav-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        margin: 0.5rem auto 1.5rem;
+        padding: 0 1rem;
+        position: relative;
+        z-index: 10;
+      }
+
       .mobile-nav-link {
-        font-family: var(--font-display); font-weight: 800; font-size: 0.82rem;
-        color: var(--ink); text-decoration: none;
-        background: var(--white); border: 2px solid var(--ink);
-        box-shadow: 3px 3px 0 var(--ink); padding: 0.35rem 0.75rem;
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 0.82rem;
+        color: var(--ink);
+        text-decoration: none;
+        background: var(--white);
+        border: 2px solid var(--ink);
+        box-shadow: 3px 3px 0 var(--ink);
+        padding: 0.35rem 0.75rem;
         border-radius: 9999px;
       }
-      .mobile-nav-link:hover { background: var(--mustard); }
+
+      .mobile-nav-link:hover {
+        background: var(--mustard);
+      }
+
       .mobile-nav-link.active {
         background: #ff5b57 !important;
         color: #ffffff !important;
         box-shadow: 3px 3px 0 var(--ink) !important;
       }
     }
-
   </style>
 </head>
+
 <body>
 
   <!-- BACKGROUND CONFETTI -->
   <div class="confetti-layer" aria-hidden="true">
     <svg class="confetti-item c-tri-coral" width="46" height="46" viewBox="0 0 46 46">
-      <polygon points="23,4 42,40 4,40" fill="#ff5b57" stroke="#17140d" stroke-width="3" stroke-linejoin="round"/>
+      <polygon points="23,4 42,40 4,40" fill="#ff5b57" stroke="#17140d" stroke-width="3" stroke-linejoin="round" />
     </svg>
     <svg class="confetti-item c-arc-teal" width="56" height="56" viewBox="0 0 56 56">
-      <path d="M4 52 A48 48 0 0 1 52 4 L52 52 Z" fill="#12b3a4" stroke="#17140d" stroke-width="3"/>
+      <path d="M4 52 A48 48 0 0 1 52 4 L52 52 Z" fill="#12b3a4" stroke="#17140d" stroke-width="3" />
     </svg>
     <svg class="confetti-item c-plus-violet" width="40" height="40" viewBox="0 0 40 40">
-      <rect x="14" y="2" width="12" height="36" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
-      <rect x="2" y="14" width="36" height="12" fill="#6b5be6" stroke="#17140d" stroke-width="3"/>
+      <rect x="14" y="2" width="12" height="36" fill="#6b5be6" stroke="#17140d" stroke-width="3" />
+      <rect x="2" y="14" width="36" height="12" fill="#6b5be6" stroke="#17140d" stroke-width="3" />
     </svg>
   </div>
 
@@ -513,8 +912,8 @@
     <a href="/" class="nav-brand">
       <div class="logo-box">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M4 12C7 8 11 16 15 10C17 7 20 12 20 12" stroke="#17140d" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="6" cy="18" r="3" fill="#ff5b57" stroke="#17140d" stroke-width="2"/>
+          <path d="M4 12C7 8 11 16 15 10C17 7 20 12 20 12" stroke="#17140d" stroke-width="3" stroke-linecap="round" />
+          <circle cx="6" cy="18" r="3" fill="#ff5b57" stroke="#17140d" stroke-width="2" />
         </svg>
       </div>
       <span class="brand-text">PravasiTrail</span>
@@ -547,7 +946,8 @@
       <span>HOSTEL TO STREET SURVIVAL GUIDE</span>
     </div>
     <h1 class="page-title">Odia phrases so autos don't overcharge you.</h1>
-    <p class="page-lead">Transliterated everyday phrases for non-Odia hostellers from Jharkhand, Bihar, UP, and Bengal. Speak with confidence and unlock genuine local hospitality.</p>
+    <p class="page-lead">Transliterated everyday phrases for non-Odia hostellers from Jharkhand, Bihar, UP, and Bengal.
+      Speak with confidence and unlock genuine local hospitality.</p>
   </header>
 
   <!-- CONTENT -->
@@ -558,9 +958,10 @@
       <div class="translator-badges">
         <span class="badge-gemini">⚡ GEMINI FLASH AI TRANSLATOR</span>
       </div>
-      
+
       <h2 class="translator-title">CampusBahar Voice & Text Odia Engine</h2>
-      <p class="translator-subtitle">Bidirectional colloquial translator for non-Odia hostellers. Communicate naturally with auto drivers, bus conductors, and locals across Bhubaneswar.</p>
+      <p class="translator-subtitle">Bidirectional colloquial translator for non-Odia hostellers. Communicate naturally
+        with auto drivers, bus conductors, and locals across Bhubaneswar.</p>
 
       <!-- Direction Switcher Bar -->
       <div class="direction-control-bar">
@@ -576,12 +977,9 @@
 
       <!-- Input Area -->
       <div class="translator-input-wrap">
-        <textarea 
-          class="memphis-trans-input" 
-          id="trans-input" 
+        <textarea class="memphis-trans-input" id="trans-input"
           placeholder="Type in English (or Odia): e.g., 'How much for auto to Master Canteen?' or 'Where is the bus stop?'"
-          rows="3"
-        ></textarea>
+          rows="3"></textarea>
       </div>
 
       <!-- Action Bar: Two clean Memphis buttons side by side -->
@@ -594,13 +992,20 @@
       <div class="quick-chips-section">
         <span class="quick-chips-label">💡 Instant Student Phrases (Click to auto-translate)</span>
         <div class="quick-chips-wrap">
-          <button class="quick-prompt-chip" onclick="applyPresetChip('How much for auto to Khandagiri?')">🛺 "How much to Khandagiri?"</button>
-          <button class="quick-prompt-chip" onclick="applyPresetChip('Please stop the bus here, conductor bhai')">🚌 "Please stop the bus here"</button>
-          <button class="quick-prompt-chip" onclick="applyPresetChip('One plate Dahibara Aloopdum with extra aloodum')">🍛 "One plate Dahibara"</button>
-          <button class="quick-prompt-chip" onclick="applyPresetChip('Where is the nearest Mo Bus stop?')">📍 "Nearest Mo Bus stop?"</button>
-          <button class="quick-prompt-chip" onclick="applyPresetChip('I study at ITER Jagamara')">🎓 "I study at ITER Jagamara"</button>
-          <button class="quick-prompt-chip" onclick="applyPresetChip('Do you accept UPI or PhonePe?')">💵 "Do you accept UPI / QR?"</button>
-          <button class="quick-prompt-chip" onclick="applyPresetChip('Thank you very much, brother')">🙏 "Thank you brother"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('How much for auto to Khandagiri?')">🛺 "How much
+            to Khandagiri?"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('Please stop the bus here, conductor bhai')">🚌
+            "Please stop the bus here"</button>
+          <button class="quick-prompt-chip"
+            onclick="applyPresetChip('One plate Dahibara Aloopdum with extra aloodum')">🍛 "One plate Dahibara"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('Where is the nearest Mo Bus stop?')">📍 "Nearest
+            Mo Bus stop?"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('I study at ITER Jagamara')">🎓 "I study at ITER
+            Jagamara"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('Do you accept UPI or PhonePe?')">💵 "Do you accept
+            UPI / QR?"</button>
+          <button class="quick-prompt-chip" onclick="applyPresetChip('Thank you very much, brother')">🙏 "Thank you
+            brother"</button>
         </div>
       </div>
 
@@ -629,7 +1034,8 @@
           <span>💡</span>
           <div>
             <strong>Local Survival Tip:</strong>
-            <span id="output-tip">Standard shared auto fare from Jagamara is ₹15–₹20. Address the driver as 'Bhai' with a friendly smile to avoid the out-of-state tourist markup.</span>
+            <span id="output-tip">Standard shared auto fare from Jagamara is ₹15–₹20. Address the driver as 'Bhai' with
+              a friendly smile to avoid the out-of-state tourist markup.</span>
           </div>
         </div>
 
@@ -644,7 +1050,9 @@
     <div class="category-title-bar">
       <span class="category-chip">Category 01</span>
       <h2 class="category-heading">Auto & Transit Negotiation</h2>
-      <a href="mobus.html" style="color: var(--teal); font-weight: 700; font-size: 0.9rem; text-decoration: underline; margin-left: auto;">🚌 View Mo Bus Guide ➔</a>
+      <a href="mobus.html"
+        style="color: var(--teal); font-weight: 700; font-size: 0.9rem; text-decoration: underline; margin-left: auto;">🚌
+        View Mo Bus Guide ➔</a>
     </div>
 
 
@@ -656,7 +1064,8 @@
           <button class="btn-copy-phrase" onclick="copyPhrase('Khandagiri jibe ki?')">Copy</button>
         </div>
         <div class="phrase-meaning"><span>Meaning:</span> "Will you go to Khandagiri?"</div>
-        <div class="card-footer-tip">Tip: Look directly at the driver and speak clearly. Shared autos queue right outside ITER Gate 1.</div>
+        <div class="card-footer-tip">Tip: Look directly at the driver and speak clearly. Shared autos queue right
+          outside ITER Gate 1.</div>
       </div>
 
       <div class="phrase-card">
@@ -694,7 +1103,8 @@
           <button class="btn-copy-phrase" onclick="copyPhrase('Dahi Bara Aloo Dum gote plate diantu.')">Copy</button>
         </div>
         <div class="phrase-meaning"><span>Meaning:</span> "Please give one plate of Dahi Bara Aloo Dum."</div>
-        <div class="card-footer-tip">Tip: Bhubaneswar's holy grail snack. Always ask for complimentary spicy 'Dahi Paani' at the end!</div>
+        <div class="card-footer-tip">Tip: Bhubaneswar's holy grail snack. Always ask for complimentary spicy 'Dahi
+          Paani' at the end!</div>
       </div>
 
       <div class="phrase-card">
@@ -714,7 +1124,8 @@
           <button class="btn-copy-phrase" onclick="copyPhrase('Piaji tikke besi debe.')">Copy</button>
         </div>
         <div class="phrase-meaning"><span>Meaning:</span> "Please add a bit more chopped onions."</div>
-        <div class="card-footer-tip">Tip: Works wonders at Ghugni, Chaat, and Bara stalls outside Khandagiri square.</div>
+        <div class="card-footer-tip">Tip: Works wonders at Ghugni, Chaat, and Bara stalls outside Khandagiri square.
+        </div>
       </div>
     </div>
 
@@ -732,7 +1143,8 @@
           <button class="btn-copy-phrase" onclick="copyPhrase('Mo college ITER Jagamara re achi.')">Copy</button>
         </div>
         <div class="phrase-meaning"><span>Meaning:</span> "My college is at ITER Jagamara."</div>
-        <div class="card-footer-tip">Tip: If an auto driver is confused, mention 'SOA ITER Jagamara Gate 1' or 'SUM Hospital road'.</div>
+        <div class="card-footer-tip">Tip: If an auto driver is confused, mention 'SOA ITER Jagamara Gate 1' or 'SUM
+          Hospital road'.</div>
       </div>
 
       <div class="phrase-card">
@@ -752,7 +1164,8 @@
           <button class="btn-copy-phrase" onclick="copyPhrase('Mun bahara pila, Odia sikhuchi.')">Copy</button>
         </div>
         <div class="phrase-meaning"><span>Meaning:</span> "I am from outside state, learning Odia."</div>
-        <div class="card-footer-tip">Tip: Instant smile guaranteed. Odia locals are extraordinarily welcoming when you try.</div>
+        <div class="card-footer-tip">Tip: Instant smile guaranteed. Odia locals are extraordinarily welcoming when you
+          try.</div>
       </div>
     </div>
 
@@ -760,11 +1173,17 @@
     <div class="culture-card">
       <h3 class="culture-title">Cultural Pro-Tip for Hostellers</h3>
       <p class="culture-text">
-        In Odisha, calling elder auto drivers or shopkeepers <b>"Bhai"</b> (Brother) or <b>"Mousa"</b> (Uncle) with a calm tone instantly disarms any tension and establishes mutual respect. You don't need fluent grammar—speaking these simple phrases proves you respect the land you're studying in.
+        In Odisha, calling elder auto drivers or shopkeepers <b>"Bhai"</b> (Brother) or <b>"Mousa"</b> (Uncle) with a
+        calm tone instantly disarms any tension and establishes mutual respect. You don't need fluent grammar—speaking
+        these simple phrases proves you respect the land you're studying in.
       </p>
       <div style="margin-top: 1rem; display: flex; gap: 0.85rem; flex-wrap: wrap;">
-        <a href="/trails" style="background: var(--ink); color: var(--mustard); border: 2px solid var(--ink); border-radius: 9999px; padding: 0.65rem 1.3rem; font-weight: 800; text-decoration: none; font-size: 0.9rem;">Test Phrases on a Trail ➔</a>
-        <a href="/" style="background: var(--white); color: var(--ink); border: 2px solid var(--ink); border-radius: 9999px; padding: 0.65rem 1.3rem; font-weight: 800; text-decoration: none; font-size: 0.9rem;">Generate Custom Pocket Scout ➔</a>
+        <a href="/trails"
+          style="background: var(--ink); color: var(--mustard); border: 2px solid var(--ink); border-radius: 9999px; padding: 0.65rem 1.3rem; font-weight: 800; text-decoration: none; font-size: 0.9rem;">Test
+          Phrases on a Trail ➔</a>
+        <a href="/"
+          style="background: var(--white); color: var(--ink); border: 2px solid var(--ink); border-radius: 9999px; padding: 0.65rem 1.3rem; font-weight: 800; text-decoration: none; font-size: 0.9rem;">Generate
+          Custom Pocket Scout ➔</a>
       </div>
     </div>
   </main>
@@ -929,4 +1348,5 @@
     });
   </script>
 </body>
+
 </html>

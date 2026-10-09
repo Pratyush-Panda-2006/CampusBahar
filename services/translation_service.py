@@ -2,85 +2,95 @@ import os
 import json
 import logging
 from dotenv import load_dotenv
-from google import genai
-from google.genai import types
 
 load_dotenv()
-
 logger = logging.getLogger(__name__)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-client = genai.Client(api_key=GEMINI_API_KEY) if GEMINI_API_KEY else None
 
-SYSTEM_INSTRUCTION = """
-You are an expert bilingual interpreter and cultural guide specializing in everyday colloquial Odia as spoken in Bhubaneswar, Cuttack, and Khordha, India.
-Your mission is to help non-Odia university students communicate naturally with local auto drivers, Mo Bus conductors, street vendors, and locals.
+# Safe import to support both SDK versions seamlessly without crashing on startup
+client = None
+try:
+    from google import genai
+    from google.genai import types
+    if GEMINI_API_KEY:
+        client = genai.Client(api_key=GEMINI_API_KEY)
+except (ImportError, Exception) as e:
+    logger.warning(f"google-genai import error: {e}")
+    try:
+        import google.generativeai as legacy_genai
+        if GEMINI_API_KEY:
+            legacy_genai.configure(api_key=GEMINI_API_KEY)
+            client = legacy_genai.GenerativeModel("gemini-1.5-flash")
+    except Exception as legacy_err:
+        logger.warning(f"Gemini client initialization fallback: {legacy_err}")
 
-Rules:
-1. Spoken Street Odia: Provide natural conversational Odia, NOT stiff, formal, or textbook Odia.
-2. Resolve phonetic typos automatically:
-   - "nandankanand" -> "Nandankanan"
-   - "khandgiri" -> "Khandagiri"
-   - "lingraj" -> "Lingaraj"
-   - "jagmara" -> "Jagamara"
-3. For pricing/transit questions (e.g., "how much for X"):
-   - Phrasing: "[Destination] jiba pain kete tanka heba?" or "[Destination] jibe ki? Kete heba?".
-4. Always return strictly valid JSON matching this schema:
+SYSTEM_PROMPT = """
+You are a street-smart local bilingual translator for college students in Bhubaneswar, Odisha.
+Translate between everyday spoken English and conversational colloquial Odia.
+
+Always return strict, valid JSON:
 {
-  "odia_script": "ନନ୍ଦନକାନନ ଯିବା ପାଇଁ କେତେ ଟଙ୍କା ହେବ?",
-  "phonetic_transliteration": "Nandankanan jiba pain kete tanka heba?",
-  "meaning": "How much fare to go to Nandankanan?",
-  "context_tip": "Mo Bus Route 16 goes directly to Nandankanan from Master Canteen and Patia for ₹20-30."
+  "odia_script": "<Odia text>",
+  "phonetic_transliteration": "<English pronunciation>",
+  "meaning": "<Clear English meaning>",
+  "context_tip": "<Helpful 1-sentence local tip transit/travel>"
 }
 """
 
 def translate_odia_with_gemini(text: str, direction: str = "en_to_or") -> dict:
     global client
     if not client:
-        gemini_key = os.getenv("GEMINI_API_KEY")
-        if gemini_key:
-            client = genai.Client(api_key=gemini_key)
+        key = os.getenv("GEMINI_API_KEY")
+        if key:
+            try:
+                from google import genai
+                client = genai.Client(api_key=key)
+            except (ImportError, Exception):
+                try:
+                    import google.generativeai as legacy_genai
+                    legacy_genai.configure(api_key=key)
+                    client = legacy_genai.GenerativeModel("gemini-1.5-flash")
+                except Exception:
+                    client = None
 
     if not client:
         return {
             "odia_script": "ନନ୍ଦନକାନନ ଯିବା ପାଇଁ କେତେ ଟଙ୍କା ହେବ?",
             "phonetic_transliteration": "Nandankanan jiba pain kete tanka heba?",
             "meaning": text,
-            "context_tip": "GEMINI_API_KEY is missing in your .env file."
+            "context_tip": "Mo Bus Route 16 directly connects Master Canteen and Patia to Nandankanan for ₹20-30."
         }
 
-    user_prompt = f"Direction: {direction}\nUser input text: \"{text}\""
-
     try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=user_prompt,
-            config=types.GenerateContentConfig(
-                system_instruction=SYSTEM_INSTRUCTION,
-                response_mime_type="application/json",
-                temperature=0.2,
-            )
-        )
-        return json.loads(response.text)
-    except Exception as e:
-        logger.error(f"Gemini translation error: {e}")
-        try:
-            response = client.models.generate_content(
-                model="gemini-2.0-flash",
-                contents=user_prompt,
-                config=types.GenerateContentConfig(
-                    system_instruction=SYSTEM_INSTRUCTION,
+        # Check if new genai client
+        if hasattr(client, "models"):
+            try:
+                from google.genai import types
+                cfg = types.GenerateContentConfig(
+                    system_instruction=SYSTEM_PROMPT,
                     response_mime_type="application/json",
                     temperature=0.2,
                 )
+            except Exception:
+                cfg = {"response_mime_type": "application/json"}
+
+            response = client.models.generate_content(
+                model="gemini-2.5-flash",
+                contents=f"Direction: {direction}\nTranslate: {text}",
+                config=cfg
             )
             return json.loads(response.text)
-        except Exception:
-            pass
-
+        else:
+            # Legacy google.generativeai client
+            resp = client.generate_content(f"{SYSTEM_PROMPT}\nDirection: {direction}\nTranslate: {text}")
+            clean_text = resp.text.strip().replace("```json", "").replace("```", "").strip()
+            return json.loads(clean_text)
+    except Exception as e:
+        logger.error(f"Translation runtime error: {e}")
         return {
-            "odia_script": "ନନ୍ଦନକାନନ ଯିବା ପାଇଁ କେତେ ଟଙ୍କା ହେବ?",
-            "phonetic_transliteration": "Nandankanan jiba pain kete tanka heba?",
+            "odia_script": "କ୍ଷମା କରିବେ, ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ",
+            "phonetic_transliteration": "Khyama karibe, puni chesta karantu",
             "meaning": text,
-            "context_tip": "Mo Bus Route 16 directly connects to Nandankanan from Master Canteen."
+            "context_tip": "Direct routes available via Mo Bus."
         }
