@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "outputDirectory": "static",
+  "framework": null,
+  "rewrites": [
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/trails", "destination": "/trails.html" },
+    { "source": "/weather", "destination": "/weather.html" },
+    { "source": "/mobus", "destination": "/mobus.html" },
+    { "source": "/odia", "destination": "/odia.html" }
+  ]
+}

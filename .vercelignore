@@ -1,0 +1,10 @@
+requirements.txt
+pyproject.toml
+main.py
+config.py
+services/
+routers/
+data/
+venv/
+.venv/
+__pycache__/
