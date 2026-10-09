@@ -2008,6 +2008,9 @@
        7. FRONTEND JAVASCRIPT (/api/scout Integration)
        ========================================================= -->
   <script>
+    // Live Render API Base URL for production & Vercel deployment
+    const API_BASE_URL = "https://campusbahar.onrender.com";
+
     let currentRawCardMarkdown = "";
 
     // Client-side Database of Campuses & 10 Destinations
@@ -2149,19 +2152,29 @@
       scoutBtn.innerText = "Consulting TabPFN & Routing Engine...";
 
       try {
-        const apiEndpoint = (window.location.protocol === 'file:')
-          ? 'http://localhost:8000/api/scout'
-          : '/api/scout';
-
-        const response = await fetch(apiEndpoint, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            origin_campus: origin_campus,
-            destination: destination,
-            target_hour: target_hour
-          })
-        });
+        let response;
+        try {
+          response = await fetch(`${API_BASE_URL}/api/scout`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              origin_campus: origin_campus,
+              destination: destination,
+              target_hour: target_hour
+            })
+          });
+        } catch (netErr) {
+          console.warn("Render fetch failed, trying relative fallback:", netErr);
+          response = await fetch('/api/scout', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              origin_campus: origin_campus,
+              destination: destination,
+              target_hour: target_hour
+            })
+          });
+        }
 
         if (!response.ok) {
           throw new Error('API server returned error ' + response.status);
@@ -2534,11 +2547,21 @@
       if (statusLabel) statusLabel.innerText = "Synthesizing ElevenLabs audio narration...";
 
       try {
-        const resp = await fetch('/api/speak', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ text: guideText })
-        });
+        let resp;
+        try {
+          resp = await fetch(`${API_BASE_URL}/api/speak`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: guideText })
+          });
+        } catch (netErr) {
+          console.warn("Render speak fetch failed, trying relative fallback:", netErr);
+          resp = await fetch('/api/speak', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: guideText })
+          });
+        }
 
         if (resp.ok) {
           const contentType = resp.headers.get('content-type') || '';

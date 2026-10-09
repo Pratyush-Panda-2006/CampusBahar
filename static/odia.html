@@ -1203,6 +1203,9 @@
   <div class="toast" id="toast">Phrase copied to clipboard!</div>
 
   <script>
+    // Live Render API Base URL for production & Vercel deployment
+    const API_BASE_URL = "https://campusbahar.onrender.com";
+
     const translateBtn = document.getElementById("translate-btn");
     const transInput = document.getElementById("trans-input");
     let currentDirection = "en_to_or";
@@ -1275,14 +1278,27 @@
       }
 
       try {
-        const res = await fetch("/api/translate", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            text: query,
-            direction: currentDirection
-          })
-        });
+        let res;
+        try {
+          res = await fetch(`${API_BASE_URL}/api/translate`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              text: query,
+              direction: currentDirection
+            })
+          });
+        } catch (netErr) {
+          console.warn("Render translate fetch failed, trying relative fallback:", netErr);
+          res = await fetch("/api/translate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              text: query,
+              direction: currentDirection
+            })
+          });
+        }
 
         if (!res.ok) {
           throw new Error(`HTTP error! Status: ${res.status}`);

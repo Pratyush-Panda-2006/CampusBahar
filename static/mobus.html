@@ -583,6 +583,9 @@
 
 
   <script>
+    // Live Render API Base URL for production & Vercel deployment
+    const API_BASE_URL = "https://campusbahar.onrender.com";
+
     // Ensure seamless navigation when browsing static files directly via file:// protocol
     window.addEventListener('DOMContentLoaded', () => {
       if (window.location.protocol === 'file:') {

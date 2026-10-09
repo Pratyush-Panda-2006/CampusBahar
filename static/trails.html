@@ -823,6 +823,9 @@
   </footer>
 
   <script>
+    // Live Render API Base URL for production & Vercel deployment
+    const API_BASE_URL = "https://campusbahar.onrender.com";
+
     function filterCategory(cat) {
       document.querySelectorAll('.filter-pill').forEach(btn => btn.classList.remove('active'));
       event.target.classList.add('active');
