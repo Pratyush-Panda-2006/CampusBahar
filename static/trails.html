@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 
   <style>
     :root {
@@ -67,8 +68,40 @@
       box-shadow: var(--shadow-sm); border-radius: 10px; display: grid; place-items: center;
     }
     .brand-tile svg, .logo-box svg { width: 24px; height: 24px; }
-    .brand-name, .nav-brand span {
+    .brand-name, .brand-text, .nav-brand span {
       font-family: var(--font-display); font-weight: 800; font-size: 1.6rem; letter-spacing: -0.03em;
+    }
+
+    select, input, textarea, .memphis-select {
+      outline: none !important;
+      border: 3px solid #17140d !important;
+      background-color: #f5efe2 !important;
+      color: #17140d !important;
+      box-shadow: 4px 4px 0 #17140d !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+      border-radius: 12px;
+      padding: 10px 14px;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2317140d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+      background-repeat: no-repeat !important;
+      background-position: right 14px center !important;
+      padding-right: 44px !important;
+    }
+    select:focus, input:focus, textarea:focus, .memphis-select:focus {
+      outline: none !important;
+      border-color: #17140d !important;
+      box-shadow: 4px 4px 0 #17140d !important;
+      background-color: #ffffff !important;
+    }
+    option {
+      outline: none !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+      background-color: #f5efe2 !important;
+      color: #17140d !important;
     }
 
     .nav-links { display: flex; align-items: center; gap: 1rem; list-style: none; }
@@ -78,8 +111,18 @@
       background: var(--white); box-shadow: var(--shadow-sm); border-radius: 9999px;
       transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
     }
-    .nav-links a:hover, .nav-links a.active, .nav-link:hover, .nav-link.active {
+    .nav-links a:hover, .nav-link:hover {
       transform: translate(-2px, -2px); box-shadow: var(--shadow-md); background: var(--mustard);
+    }
+    .nav-link.active, .nav-links a.active, .mobile-nav-link.active {
+      background: #ff5b57 !important;
+      color: #ffffff !important;
+      box-shadow: 3px 3px 0 #17140d !important;
+      border: 2px solid #17140d !important;
+      border-radius: 9999px !important;
+      padding: 0.5rem 1rem !important;
+      text-decoration: none !important;
+      font-weight: 800 !important;
     }
 
     .btn-gate, .nav-cta-btn {
@@ -129,17 +172,24 @@
 
     .trails-grid {
       position: relative; z-index: 10;
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-      gap: 2rem; max-width: 1280px; margin: 0 auto 4rem; padding: 0 2rem;
+      display: grid !important; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)) !important;
+      gap: 24px !important; max-width: 1280px; margin: 0 auto 4rem; padding: 0 2rem;
     }
 
     .trail-card {
       background: var(--white); border: var(--border-hard); box-shadow: var(--shadow-lg);
-      border-radius: 20px; padding: 2rem; display: flex; flex-direction: column; justify-content: space-between;
+      border-radius: 20px; padding: 2rem;
+      display: flex !important; flex-direction: column !important; justify-content: space-between !important;
+      height: 100% !important; box-sizing: border-box !important;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .trail-card:hover {
       transform: translate(-3px, -3px); box-shadow: 10px 10px 0 var(--ink);
+    }
+    .trail-card > div:first-child {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
     }
 
     .card-top {
@@ -195,7 +245,7 @@
       display: block; width: 100%; text-align: center; text-decoration: none;
       background: var(--mustard); color: var(--ink); font-family: var(--font-display);
       font-weight: 800; font-size: 1rem; padding: 0.85rem; border: var(--border-hard);
-      box-shadow: var(--shadow-sm); border-radius: 12px;
+      box-shadow: var(--shadow-sm); border-radius: 12px; margin-top: auto;
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     .btn-scout-trail:hover {
@@ -274,15 +324,16 @@
   <nav class="nav-container">
     <a href="/" class="nav-brand">
       <div class="logo-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
-          <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M4 12C7 8 11 16 15 10C17 7 20 12 20 12" stroke="#17140d" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="6" cy="18" r="3" fill="#ff5b57" stroke="#17140d" stroke-width="2"/>
         </svg>
       </div>
-      <span>PravasiTrail</span>
+      <span class="brand-text">PravasiTrail</span>
     </a>
 
     <div class="nav-links">
+      <a href="/" class="nav-link">Scout</a>
       <a href="/trails" class="nav-link active">Campus Trails</a>
       <a href="/weather" class="nav-link">TabPFN Weather</a>
       <a href="/mobus" class="nav-link">Mo Bus Guide</a>
@@ -341,7 +392,7 @@
           <a href="https://www.google.com/maps?q=20.2588,85.7865" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=khandagiri" class="btn-scout-trail">
+      <a href="/?dest=khandagiri" class="btn-scout-trail">
         <span>Scout Khandagiri from Your Campus ➔</span>
       </a>
     </div>
@@ -365,7 +416,7 @@
           <a href="https://www.google.com/maps?q=20.3346,85.7082" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=deras" class="btn-scout-trail">
+      <a href="/?dest=deras" class="btn-scout-trail">
         <span>Scout Deras Dam from Your Campus ➔</span>
       </a>
     </div>
@@ -389,7 +440,7 @@
           <a href="https://www.google.com/maps?q=20.3060,85.8118" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=ekamra" class="btn-scout-trail">
+      <a href="/?dest=ekamra" class="btn-scout-trail">
         <span>Scout Ekamra Lake from Your Campus ➔</span>
       </a>
     </div>
@@ -413,7 +464,7 @@
           <a href="https://www.google.com/maps?q=20.1923,85.8394" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=dhauli" class="btn-scout-trail">
+      <a href="/?dest=dhauli" class="btn-scout-trail">
         <span>Scout Dhauli Stupa from Your Campus ➔</span>
       </a>
     </div>
@@ -437,7 +488,7 @@
           <a href="https://www.google.com/maps?q=20.3995,85.8252" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=nandankanan" class="btn-scout-trail">
+      <a href="/?dest=nandankanan" class="btn-scout-trail">
         <span>Scout Kanjia Lake from Your Campus ➔</span>
       </a>
     </div>
@@ -461,7 +512,7 @@
           <a href="https://www.google.com/maps?q=20.2644,85.7834" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=jayadev" class="btn-scout-trail">
+      <a href="/?dest=jayadev" class="btn-scout-trail">
         <span>Scout Jayadev Vatika from Your Campus ➔</span>
       </a>
     </div>
@@ -485,7 +536,7 @@
           <a href="https://www.google.com/maps?q=20.2415,85.8354" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=bindusagar" class="btn-scout-trail">
+      <a href="/?dest=bindusagar" class="btn-scout-trail">
         <span>Scout Bindu Sagar from Your Campus ➔</span>
       </a>
     </div>
@@ -509,7 +560,7 @@
           <a href="https://www.google.com/maps?q=20.2731,85.8361" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=ekamrahaat" class="btn-scout-trail">
+      <a href="/?dest=ekamrahaat" class="btn-scout-trail">
         <span>Scout Ekamra Haat from Your Campus ➔</span>
       </a>
     </div>
@@ -533,7 +584,7 @@
           <a href="https://www.google.com/maps?q=20.1804,85.6698" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=barunei" class="btn-scout-trail">
+      <a href="/?dest=barunei" class="btn-scout-trail">
         <span>Scout Barunei Hill from Your Campus ➔</span>
       </a>
     </div>
@@ -557,7 +608,7 @@
           <a href="https://www.google.com/maps?q=20.3392,85.8672" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=kuakhai" class="btn-scout-trail">
+      <a href="/?dest=kuakhai" class="btn-scout-trail">
         <span>Scout Kuakhai from Your Campus ➔</span>
       </a>
     </div>
@@ -581,7 +632,7 @@
           <a href="https://www.google.com/maps?q=20.2248,85.8572" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=sisupalgarh" class="btn-scout-trail">
+      <a href="/?dest=sisupalgarh" class="btn-scout-trail">
         <span>Scout Sisupalgarh from Your Campus ➔</span>
       </a>
     </div>
@@ -605,7 +656,7 @@
           <a href="https://www.google.com/maps?q=20.2382,85.8336" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=lingaraj" class="btn-scout-trail">
+      <a href="/?dest=lingaraj" class="btn-scout-trail">
         <span>Scout Lingaraj from Your Campus ➔</span>
       </a>
     </div>
@@ -629,7 +680,7 @@
           <a href="https://www.google.com/maps?q=20.2081,85.8753" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=chausathi" class="btn-scout-trail">
+      <a href="/?dest=chausathi" class="btn-scout-trail">
         <span>Scout Chausathi Yogini from Your Campus ➔</span>
       </a>
     </div>
@@ -653,7 +704,7 @@
           <a href="https://www.google.com/maps?q=20.3015,85.8085" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=rprc" class="btn-scout-trail">
+      <a href="/?dest=rprc" class="btn-scout-trail">
         <span>Scout RPRC Gardens from Your Campus ➔</span>
       </a>
     </div>
@@ -677,7 +728,7 @@
           <a href="https://www.google.com/maps?q=20.1539,85.5042" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=atri" class="btn-scout-trail">
+      <a href="/?dest=atri" class="btn-scout-trail">
         <span>Scout Atri Springs from Your Campus ➔</span>
       </a>
     </div>
@@ -701,7 +752,7 @@
           <a href="https://www.google.com/maps?q=20.2432,85.8339" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=mukteswara" class="btn-scout-trail">
+      <a href="/?dest=mukteswara" class="btn-scout-trail">
         <span>Scout Mukteswara from Your Campus ➔</span>
       </a>
     </div>
@@ -725,7 +776,7 @@
           <a href="https://www.google.com/maps?q=20.2831,85.8145" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=tribal" class="btn-scout-trail">
+      <a href="/?dest=tribal" class="btn-scout-trail">
         <span>Scout Tribal Museum from Your Campus ➔</span>
       </a>
     </div>
@@ -749,7 +800,7 @@
           <a href="https://www.google.com/maps?q=20.2396,85.8023" target="_blank" class="gmap-mini-link">🗺️ Google Maps</a>
         </div>
       </div>
-      <a href="index.html?dest=kalabhoomi" class="btn-scout-trail">
+      <a href="/?dest=kalabhoomi" class="btn-scout-trail">
         <span>Scout Kala Bhoomi from Your Campus ➔</span>
       </a>
     </div>

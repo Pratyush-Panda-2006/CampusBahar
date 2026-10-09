@@ -1,16 +1,21 @@
 import logging
 from typing import Optional, Dict, Any, List
-from fastapi import APIRouter, Query, HTTPException
+from fastapi import APIRouter, Query, HTTPException, Response
 from pydantic import BaseModel, Field
 
 from services.tabpfn_service import predict_comfort_window, tabpfn_service
-from services.llm_service import generate_pocket_guide, translate_text, TRAIL_PRESETS, llm_service
+from services.llm_service import generate_pocket_guide, TRAIL_PRESETS, llm_service
+from services.translation_service import translate_odia_with_gemini
 from services.transit_service import (
     CAMPUS_HUBS,
     DESTINATIONS_DATA,
     compute_transit_matrix
 )
-from services.audio_service import generate_elevenlabs_audio
+from services.audio_service import (
+    generate_elevenlabs_audio,
+    synthesize_elevenlabs_audio_bytes,
+    clean_markdown_for_speech
+)
 
 logger = logging.getLogger(__name__)
 
@@ -18,11 +23,8 @@ router = APIRouter(prefix="/api", tags=["scout"])
 
 
 class TranslationRequest(BaseModel):
-    text: str = Field(..., description="Text to translate between English and Odia", min_length=1)
-    direction: str = Field(
-        default="en-to-or",
-        description="Translation direction: 'en-to-or' (English to Odia) or 'or-to-en' (Odia to English)"
-    )
+    text: str
+    direction: str = "en_to_or"
 
 
 class SpeakRequest(BaseModel):
@@ -174,32 +176,37 @@ def get_comfort_forecast():
     }
 
 
-@router.post("/translate", summary="Translate text between English and Odia with speech-ready phonetic breakdown")
-def translate_endpoint(request: TranslationRequest):
-    """
-    Bidirectional English <-> Odia translator powered by Gemini Flash / Groq LLM
-    with phonetic romanization, spoken script, and local cultural survival tips.
-    """
-    if not request.text or not request.text.strip():
+@router.post("/translate")
+async def translate_text(req: TranslationRequest):
+    if not req.text or not req.text.strip():
         raise HTTPException(status_code=400, detail="Text cannot be empty.")
-
-    result = translate_text(text=request.text.strip(), direction=request.direction)
+    direction = req.direction.replace("-", "_") if req.direction else "en_to_or"
+    data = translate_odia_with_gemini(req.text.strip(), direction)
     return {
         "status": "success",
-        **result
+        "data": data
     }
 
 
 @router.post("/speak", summary="Synthesize trail guide speech via ElevenLabs audio companion")
-def speak_endpoint(request: SpeakRequest):
+async def speak_endpoint(request: SpeakRequest):
     """
     Generate natural audio narration using ElevenLabs text-to-speech companion.
-    Falls back gracefully to browser SpeechSynthesis if API key is not configured.
+    Streams audio/mpeg MP3 directly or returns fallback JSON for browser speech synthesis.
     """
     if not request.text or not request.text.strip():
         raise HTTPException(status_code=400, detail="Text cannot be empty.")
 
-    result = generate_elevenlabs_audio(text=request.text.strip(), voice_id=request.voice_id)
-    return result
+    audio_bytes = await synthesize_elevenlabs_audio_bytes(request.text.strip(), voice_id=request.voice_id)
+    if audio_bytes:
+        return Response(content=audio_bytes, media_type="audio/mpeg")
+
+    clean_text = clean_markdown_for_speech(request.text.strip())
+    return {
+        "status": "fallback",
+        "provider": "browser_speech_synthesis",
+        "message": "ElevenLabs audio unavailable. Falling back to browser speech synthesis.",
+        "clean_text": clean_text
+    }
 
 

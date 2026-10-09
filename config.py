@@ -49,7 +49,7 @@ class Settings(BaseSettings):
     # Maps & Audio Services
     GOOGLE_MAPS_API_KEY: Optional[str] = None
     ELEVENLABS_API_KEY: Optional[str] = None
-    ELEVENLABS_VOICE_ID: str = "21m00Tcm4TlvDq8ikWAM"  # Rachel (calm, clear companion voice)
+    ELEVENLABS_VOICE_ID: str = "EXAVITQu4vr4xnSDxMaL"  # Sarah (premade, clear companion voice)
 
     # Ollama is completely disabled (not in use)
     USE_OLLAMA_FALLBACK: bool = False

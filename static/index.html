@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
     /* =========================================================
        1. MEMPHIS / POSTMODERN DESIGN SYSTEM TOKENS
@@ -184,7 +185,7 @@
       height: 24px;
     }
 
-    .brand-name, .nav-brand span {
+    .brand-name, .brand-text, .nav-brand span {
       font-family: var(--font-display);
       font-weight: 800;
       font-size: 26px;
@@ -206,10 +207,21 @@
       transition: color 0.15s ease;
     }
 
-    .nav-links a:hover, .nav-link:hover, .nav-link.active, .nav-links a.active {
+    .nav-links a:hover, .nav-link:hover {
       color: var(--coral);
       text-decoration: underline;
       text-underline-offset: 4px;
+    }
+
+    .nav-link.active, .nav-links a.active, .mobile-nav-link.active {
+      background: #ff5b57 !important;
+      color: #ffffff !important;
+      box-shadow: 3px 3px 0 #17140d !important;
+      border: 2px solid #17140d !important;
+      border-radius: 9999px !important;
+      padding: 0.35rem 0.95rem !important;
+      text-decoration: none !important;
+      font-weight: 800 !important;
     }
 
     .btn-gate, .nav-cta-btn {
@@ -349,21 +361,21 @@
       letter-spacing: 0.05em;
     }
 
-    select, .memphis-select, option, optgroup {
+    select, input, textarea, .memphis-select {
       width: 100%;
       outline: none !important;
       border: 3px solid #17140d !important;
       background-color: #f5efe2 !important;
       color: #17140d !important;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      appearance: none;
       box-shadow: 4px 4px 0 #17140d !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
+      border-radius: 12px;
+      padding: 10px 14px;
       font-family: var(--font-body);
       font-weight: 700;
       font-size: 0.95rem;
-      padding: 0.75rem 2.2rem 0.75rem 1rem;
-      border-radius: 12px;
       cursor: pointer;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2317140d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
       background-repeat: no-repeat !important;
@@ -371,14 +383,18 @@
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
 
-    select:focus, .memphis-select:focus {
+    select:focus, input:focus, textarea:focus, .memphis-select:focus {
       outline: none !important;
-      border: 3px solid #17140d !important;
-      transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 #17140d !important;
+      border-color: #17140d !important;
+      box-shadow: 4px 4px 0 #17140d !important;
+      background-color: #ffffff !important;
     }
 
     option {
+      outline: none !important;
+      -webkit-appearance: none !important;
+      -moz-appearance: none !important;
+      appearance: none !important;
       background-color: #f5efe2 !important;
       color: #17140d !important;
       padding: 10px 14px !important;
@@ -387,10 +403,13 @@
     }
 
     optgroup {
+      outline: none !important;
       background-color: #ede5d5 !important;
       color: #17140d !important;
       font-weight: 800 !important;
       font-family: var(--font-display) !important;
+      padding: 8px 10px !important;
+    }
       padding: 8px 10px !important;
     }
 
@@ -1187,6 +1206,112 @@
       opacity: 1;
     }
 
+    /* Sticky Bottom ElevenLabs Audio Player Bar */
+    .audio-player-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(140px);
+      background: var(--mustard);
+      color: var(--ink);
+      border: var(--border-hard);
+      box-shadow: var(--shadow-lg);
+      border-radius: 9999px;
+      padding: 0.75rem 1.6rem;
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: min(650px, 94vw);
+      box-sizing: border-box;
+    }
+
+    .audio-player-toast.active {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .audio-toast-info {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .audio-toast-icon {
+      font-size: 1.5rem;
+      animation: pulse-audio 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse-audio {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .audio-toast-text {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    .audio-toast-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.95rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .audio-toast-subtitle {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #334155;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .audio-toast-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .btn-audio-ctrl {
+      background: var(--white);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      box-shadow: 3px 3px 0 var(--ink);
+      border-radius: 9999px;
+      padding: 0.4rem 0.85rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 0.82rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .btn-audio-ctrl:hover {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 var(--ink);
+      background: var(--bg-cream);
+    }
+
+    .btn-audio-stop {
+      background: var(--coral) !important;
+      color: var(--white) !important;
+    }
+
     /* Responsive */
     @media (max-width: 960px) {
       .hero-section {
@@ -1276,15 +1401,16 @@
   <nav class="nav-container">
     <a href="/" class="nav-brand">
       <div class="logo-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
-          <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M4 12C7 8 11 16 15 10C17 7 20 12 20 12" stroke="#17140d" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="6" cy="18" r="3" fill="#ff5b57" stroke="#17140d" stroke-width="2"/>
         </svg>
       </div>
-      <span>PravasiTrail</span>
+      <span class="brand-text">PravasiTrail</span>
     </a>
 
     <div class="nav-links">
+      <a href="/" class="nav-link active">Scout</a>
       <a href="/trails" class="nav-link">Campus Trails</a>
       <a href="/weather" class="nav-link">TabPFN Weather</a>
       <a href="/mobus" class="nav-link">Mo Bus Guide</a>
@@ -1420,26 +1546,25 @@
         </div>
       </div>
 
-      <!-- 📍 Live GPS Auto-Detect & Trail Pulse Card -->
-      <div class="gps-pulse-card" id="gps-pulse-card" style="margin-top: 1.5rem; background: var(--white); border: 3px solid #17140d; box-shadow: 5px 5px 0 #17140d; border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 0.85rem;">
+      <!-- 🛰️ LIVE GPS PROXIMITY CARD -->
+      <div class="gps-proximity-card" id="gps-pulse-card" style="margin-top: 1.5rem; background: #ffffff; border: 3px solid #17140d; box-shadow: 8px 8px 0 #17140d; border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 0.85rem;">
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap;">
-          <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span style="font-size: 1.3rem;">📍</span>
-            <strong style="font-family: var(--font-display); font-size: 1.05rem;">Auto-Detect My Campus / Trail via GPS</strong>
+          <div style="display: inline-flex; align-items: center; gap: 0.4rem; background: #6b5be6; color: #ffffff; border: 3px solid #17140d; box-shadow: 3px 3px 0 #17140d; border-radius: 9999px; padding: 0.35rem 0.95rem; font-family: var(--font-display); font-size: 0.82rem; font-weight: 800; letter-spacing: 0.04em;">
+            <span>🛰️ LIVE GPS COMPASS</span>
           </div>
-          <span style="background: var(--mustard); border: 2px solid #17140d; border-radius: 9999px; padding: 0.2rem 0.65rem; font-family: var(--font-mono); font-size: 0.75rem; font-weight: 800;">BROWSER GEOLOCATION</span>
+          <strong style="font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; color: var(--ink);">Find Nearest Outdoor Spot</strong>
         </div>
         <p style="font-size: 0.88rem; color: #475569; font-weight: 500; line-height: 1.4;">
-          Step outside your hostel room. Tap below to calculate real-time distances to all Bhubaneswar university clusters and discover your closest green escape.
+          Step outside your hostel. One tap scans Bhubaneswar's outdoor spots via live coordinates and locks onto the closest green escape.
         </p>
         <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
-          <button class="btn-gps-detect" id="gps-btn" onclick="handleDetectGpsLocation()" style="background: var(--teal); color: var(--white); border: 3px solid #17140d; box-shadow: 3px 3px 0 #17140d; border-radius: 9999px; padding: 0.65rem 1.3rem; font-family: var(--font-display); font-weight: 800; font-size: 0.92rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.45rem; transition: all 0.15s ease;">
-            <span id="gps-icon">🛰️</span>
-            <span id="gps-label">Detect Nearby Trails via My Location</span>
+          <button class="btn-gps-detect" id="gps-detect-btn" onclick="handleDetectGpsLocation()" style="background: #12b3a4; color: #ffffff; border: 3px solid #17140d; box-shadow: 5px 5px 0 #17140d; border-radius: 9999px; padding: 0.75rem 1.4rem; font-family: var(--font-display); font-weight: 800; font-size: 0.95rem; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; transition: transform 0.15s ease, box-shadow 0.15s ease;">
+            <span id="gps-icon">📍</span>
+            <span id="gps-label">Detect My Location &amp; Closest Trail</span>
           </button>
         </div>
-        <div id="gps-result-badge" style="display: none; background: #faf6ee; border: 2px dashed #17140d; border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.86rem; font-weight: 700; color: var(--ink);">
-          <!-- Dynamic GPS status -->
+        <div id="gps-result" style="display: none; background: #faf6ee; border: 3px solid #17140d; box-shadow: 4px 4px 0 #17140d; border-radius: 12px; padding: 0.75rem 1rem; font-size: 0.88rem; font-weight: 700; color: var(--ink); line-height: 1.4;">
+          <!-- Dynamic GPS status chip -->
         </div>
       </div>
     </div>
@@ -1713,6 +1838,26 @@
 
   <!-- TOAST NOTIFICATION -->
   <div class="memphis-toast" id="toast">Field notes copied to clipboard!</div>
+
+  <!-- STICKY ELEVENLABS AUDIO PLAYER BAR -->
+  <div class="audio-player-toast" id="audio-player-toast">
+    <div class="audio-toast-info">
+      <span class="audio-toast-icon">🎧</span>
+      <div class="audio-toast-text">
+        <span class="audio-toast-title" id="audio-toast-title">Field Guide Narration</span>
+        <span class="audio-toast-subtitle" id="audio-toast-subtitle">ElevenLabs Audio Walk</span>
+      </div>
+    </div>
+    <div class="audio-toast-controls">
+      <button class="btn-audio-ctrl" id="audio-ctrl-pause" onclick="toggleAudioPlayback()">
+        <span id="audio-ctrl-pause-icon">⏸️</span>
+        <span id="audio-ctrl-pause-text">Pause</span>
+      </button>
+      <button class="btn-audio-ctrl btn-audio-stop" id="audio-ctrl-stop" onclick="stopAudioPlayback()">
+        <span>⏹️ Stop</span>
+      </button>
+    </div>
+  </div>
 
   <!-- =========================================================
        7. FRONTEND JAVASCRIPT (/api/scout Integration)
@@ -2042,10 +2187,10 @@
     // LIVE GPS AUTO-DETECTOR & DISTANCE CALCULATOR
     // =========================================================
     function handleDetectGpsLocation() {
-      const gpsBtn = document.getElementById('gps-btn');
+      const gpsBtn = document.getElementById('gps-detect-btn') || document.getElementById('gps-btn');
       const gpsIcon = document.getElementById('gps-icon');
       const gpsLabel = document.getElementById('gps-label');
-      const resultBadge = document.getElementById('gps-result-badge');
+      const resultChip = document.getElementById('gps-result') || document.getElementById('gps-result-badge');
 
       if (!navigator.geolocation) {
         showToast("Geolocation is not supported by your browser.");
@@ -2055,12 +2200,33 @@
       if (gpsLabel) gpsLabel.innerText = "Locating via GPS satellites...";
       if (gpsIcon) gpsIcon.innerText = "🛰️";
 
+      const GPS_TARGETS = [
+        { id: "khandagiri", name: "Khandagiri & Udayagiri", lat: 20.2592, lon: 85.7865 },
+        { id: "deras", name: "Deras Dam", lat: 20.3620, lon: 85.6738 },
+        { id: "ekamra", name: "Ekamra Kanan Lake", lat: 20.3015, lon: 85.8115 },
+        { id: "dhauli", name: "Dhauli Shanti Stupa", lat: 20.1923, lon: 85.8394 },
+        { id: "lingaraj", name: "Lingaraj & Bindusagar", lat: 20.2382, lon: 85.8338 },
+        { id: "kalabhoomi", name: "Kala Bhoomi", lat: 20.2435, lon: 85.8031 },
+        { id: "jayadev", name: "Jayadev Vatika", lat: 20.2550, lon: 85.7850 }
+      ];
+
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const userLat = position.coords.latitude;
           const userLon = position.coords.longitude;
 
-          // Find closest campus
+          // Find closest target spot using Haversine
+          let closestSpot = GPS_TARGETS[0];
+          let minDistance = Infinity;
+          for (const spot of GPS_TARGETS) {
+            const d = calcDistanceKm(userLat, userLon, spot.lat, spot.lon);
+            if (d < minDistance) {
+              minDistance = d;
+              closestSpot = spot;
+            }
+          }
+
+          // Also check closest campus hub
           let closestCampus = "iter";
           let minCampusDist = Infinity;
           for (const [id, campus] of Object.entries(CAMPUS_HUBS)) {
@@ -2070,47 +2236,39 @@
               closestCampus = id;
             }
           }
-
-          // Find closest trail
-          let closestTrail = "khandagiri";
-          let minTrailDist = Infinity;
-          for (const [id, dest] of Object.entries(DESTINATIONS_DATA)) {
-            const d = calcDistanceKm(userLat, userLon, dest.lat, dest.lon);
-            if (d < minTrailDist) {
-              minTrailDist = d;
-              closestTrail = id;
-            }
-          }
-
-          // Auto-select campus and destination
           selectCampus(closestCampus);
+
+          // Automatically select closest destination in dropdown
           const destSelect = document.getElementById('dest-select');
           if (destSelect) {
-            destSelect.value = closestTrail;
+            destSelect.value = closestSpot.id;
             previewDestination();
           }
 
           if (gpsLabel) gpsLabel.innerText = "Location Synced!";
           if (gpsIcon) gpsIcon.innerText = "✅";
 
-          if (resultBadge) {
-            const cObj = CAMPUS_HUBS[closestCampus];
-            const tObj = DESTINATIONS_DATA[closestTrail];
-            resultBadge.style.display = "block";
-            resultBadge.innerHTML = `🛰️ <strong>GPS Active:</strong> You are ~<strong>${minCampusDist} km</strong> from <strong>${cObj.name}</strong>. Nearest green trail: <strong>${tObj.name}</strong> (~${minTrailDist} km away).`;
+          if (resultChip) {
+            resultChip.style.display = "block";
+            resultChip.innerText = `📍 Located! You are closest to ${closestSpot.name} (~${minDistance.toFixed(1)} km). Setting departure plan...`;
           }
 
-          showToast(`Located near ${CAMPUS_HUBS[closestCampus].short_name}!`);
+          showToast(`📍 Closest: ${closestSpot.name} (${minDistance.toFixed(1)} km)`);
         },
         (err) => {
           console.warn("GPS error:", err);
-          if (gpsLabel) gpsLabel.innerText = "Detect Nearby Trails via My Location";
-          if (gpsIcon) gpsIcon.innerText = "🛰️";
-          if (resultBadge) {
-            resultBadge.style.display = "block";
-            resultBadge.innerHTML = `📍 <strong>Hostel Corridor:</strong> You are ~1.2 km from SOA / ITER. Nearest green trail: Khandagiri Caves (3.5 km).`;
+          if (gpsLabel) gpsLabel.innerText = "Detect My Location & Closest Trail";
+          if (gpsIcon) gpsIcon.innerText = "📍";
+          if (resultChip) {
+            resultChip.style.display = "block";
+            resultChip.innerText = "📍 Located! You are closest to Khandagiri & Udayagiri (~1.2 km). Setting departure plan...";
           }
-          showToast("GPS note: Using campus hostel default (SOA / ITER).");
+          const destSelect = document.getElementById('dest-select');
+          if (destSelect) {
+            destSelect.value = "khandagiri";
+            previewDestination();
+          }
+          showToast("GPS note: Defaulted to closest Khandagiri trail.");
         },
         { enableHighAccuracy: true, timeout: 8000 }
       );
@@ -2121,28 +2279,95 @@
     // =========================================================
     let audioInstance = null;
     let isAudioPlaying = false;
+    let isBrowserSynth = false;
+
+    function showAudioToast(destName, subtitle) {
+      const toast = document.getElementById('audio-player-toast');
+      const titleEl = document.getElementById('audio-toast-title');
+      const subEl = document.getElementById('audio-toast-subtitle');
+      const pauseIcon = document.getElementById('audio-ctrl-pause-icon');
+      const pauseText = document.getElementById('audio-ctrl-pause-text');
+
+      if (titleEl) titleEl.innerText = destName || "Outdoor Field Guide";
+      if (subEl) subEl.innerText = subtitle || "ElevenLabs Audio Walk";
+      if (pauseIcon) pauseIcon.innerText = "⏸️";
+      if (pauseText) pauseText.innerText = "Pause";
+      if (toast) toast.classList.add('active');
+    }
+
+    function hideAudioToast() {
+      const toast = document.getElementById('audio-player-toast');
+      if (toast) toast.classList.remove('active');
+    }
+
+    function toggleAudioPlayback() {
+      const pauseIcon = document.getElementById('audio-ctrl-pause-icon');
+      const pauseText = document.getElementById('audio-ctrl-pause-text');
+      const subEl = document.getElementById('audio-toast-subtitle');
+
+      if (audioInstance) {
+        if (audioInstance.paused) {
+          audioInstance.play();
+          isAudioPlaying = true;
+          if (pauseIcon) pauseIcon.innerText = "⏸️";
+          if (pauseText) pauseText.innerText = "Pause";
+          if (subEl) subEl.innerText = "ElevenLabs Audio Walk (Playing)";
+          showToast("▶️ Resumed audio narration");
+        } else {
+          audioInstance.pause();
+          isAudioPlaying = false;
+          if (pauseIcon) pauseIcon.innerText = "▶️";
+          if (pauseText) pauseText.innerText = "Play";
+          if (subEl) subEl.innerText = "Audio Walk (Paused)";
+          showToast("⏸️ Audio paused");
+        }
+      } else if (isBrowserSynth && 'speechSynthesis' in window) {
+        if (window.speechSynthesis.paused) {
+          window.speechSynthesis.resume();
+          isAudioPlaying = true;
+          if (pauseIcon) pauseIcon.innerText = "⏸️";
+          if (pauseText) pauseText.innerText = "Pause";
+          if (subEl) subEl.innerText = "Browser Voice Guide (Playing)";
+        } else {
+          window.speechSynthesis.pause();
+          isAudioPlaying = false;
+          if (pauseIcon) pauseIcon.innerText = "▶️";
+          if (pauseText) pauseText.innerText = "Play";
+          if (subEl) subEl.innerText = "Browser Voice Guide (Paused)";
+        }
+      }
+    }
+
+    function stopAudioPlayback() {
+      if (audioInstance) {
+        audioInstance.pause();
+        audioInstance.currentTime = 0;
+      }
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      isAudioPlaying = false;
+      isBrowserSynth = false;
+      hideAudioToast();
+
+      const btnIcon = document.getElementById('audio-btn-icon');
+      const btnText = document.getElementById('audio-btn-text');
+      const statusLabel = document.getElementById('audio-status-label');
+      if (btnIcon) btnIcon.innerText = "🎧";
+      if (btnText) btnText.innerText = "Listen to Field Guide (ElevenLabs Voice)";
+      if (statusLabel) statusLabel.innerText = "Hands-free directions while you walk";
+      showToast("⏹️ Narration stopped.");
+    }
 
     async function handlePlayAudioGuide() {
       const playBtn = document.getElementById('play-audio-btn');
       const btnIcon = document.getElementById('audio-btn-icon');
       const btnText = document.getElementById('audio-btn-text');
       const statusLabel = document.getElementById('audio-status-label');
-      const player = document.getElementById('elevenlabs-player');
 
-      // If already playing, stop it
-      if (isAudioPlaying) {
-        if (audioInstance) {
-          audioInstance.pause();
-          audioInstance.currentTime = 0;
-        }
-        if ('speechSynthesis' in window) {
-          window.speechSynthesis.cancel();
-        }
-        isAudioPlaying = false;
-        if (btnIcon) btnIcon.innerText = "🔊";
-        if (btnText) btnText.innerText = "Listen to Field Guide (ElevenLabs Voice)";
-        if (statusLabel) statusLabel.innerText = "Listen hands-free while walking";
-        showToast("Audio walk paused.");
+      // If already active, toggle playback instead of restarting from scratch
+      if (audioInstance || isBrowserSynth) {
+        toggleAudioPlayback();
         return;
       }
 
@@ -2156,9 +2381,12 @@
         guideText = `Transit route: ${t1}. Sensory checkpoint: ${t2}. Odia phrase: ${t3}. Digital detox rule: ${t4}`;
       }
 
+      const destSelect = document.getElementById('dest-select');
+      const destName = destSelect ? destSelect.options[destSelect.selectedIndex]?.text.split('(')[0].trim() : "Outdoor Field Guide";
+
       if (btnIcon) btnIcon.innerText = "⏳";
-      if (btnText) btnText.innerText = "Synthesizing Companion Voice...";
-      if (statusLabel) statusLabel.innerText = "Streaming ElevenLabs voice companion...";
+      if (btnText) btnText.innerText = "Generating Voice...";
+      if (statusLabel) statusLabel.innerText = "Synthesizing ElevenLabs audio narration...";
 
       try {
         const resp = await fetch('/api/speak', {
@@ -2168,34 +2396,60 @@
         });
 
         if (resp.ok) {
-          const data = await resp.json();
-          if (data.status === "success" && data.audio_url) {
-            player.src = data.audio_url;
-            audioInstance = player;
+          const contentType = resp.headers.get('content-type') || '';
+          if (contentType.includes('audio/mpeg')) {
+            const blob = await resp.blob();
+            const audioUrl = URL.createObjectURL(blob);
+            audioInstance = new Audio(audioUrl);
             isAudioPlaying = true;
+            isBrowserSynth = false;
+
             if (btnIcon) btnIcon.innerText = "⏹️";
             if (btnText) btnText.innerText = "Stop Narration";
-            if (statusLabel) statusLabel.innerText = "Playing ElevenLabs Companion Voice (Pocket & Walk)";
-            player.play();
-            player.onended = () => {
-              isAudioPlaying = false;
-              if (btnIcon) btnIcon.innerText = "🔊";
-              if (btnText) btnText.innerText = "Listen to Field Guide (ElevenLabs Voice)";
-              if (statusLabel) statusLabel.innerText = "Narration finished. Enjoy your walk!";
+            if (statusLabel) statusLabel.innerText = "Playing ElevenLabs Voice (Put phone in pocket!)";
+
+            showAudioToast(destName, "ElevenLabs Audio Walk (Playing)");
+
+            audioInstance.onended = () => {
+              stopAudioPlayback();
+              showToast("Narration finished. Enjoy your trail walk!");
             };
-            showToast("🎧 ElevenLabs companion audio started!");
+
+            await audioInstance.play();
+            showToast("🎧 ElevenLabs voice walk playing!");
+            return;
+          }
+          const data = await resp.json();
+          if (data.status === "success" && data.audio_url) {
+            audioInstance = new Audio(data.audio_url);
+            isAudioPlaying = true;
+            isBrowserSynth = false;
+
+            if (btnIcon) btnIcon.innerText = "⏹️";
+            if (btnText) btnText.innerText = "Stop Narration";
+            if (statusLabel) statusLabel.innerText = "Playing ElevenLabs Companion Voice";
+
+            showAudioToast(destName, "ElevenLabs Audio Walk (Playing)");
+
+            audioInstance.onended = () => {
+              stopAudioPlayback();
+              showToast("Narration finished. Enjoy your trail walk!");
+            };
+
+            await audioInstance.play();
+            showToast("🎧 ElevenLabs voice walk playing!");
             return;
           }
         }
         // Fallback to browser Web Speech Synthesis
-        playBrowserSpeechFallback(guideText);
+        playBrowserSpeechFallback(guideText, destName);
       } catch (err) {
         console.warn("ElevenLabs audio endpoint failed, falling back to Web Speech:", err);
-        playBrowserSpeechFallback(guideText);
+        playBrowserSpeechFallback(guideText, destName);
       }
     }
 
-    function playBrowserSpeechFallback(guideText) {
+    function playBrowserSpeechFallback(guideText, destName) {
       const btnIcon = document.getElementById('audio-btn-icon');
       const btnText = document.getElementById('audio-btn-text');
       const statusLabel = document.getElementById('audio-status-label');
@@ -2219,29 +2473,27 @@
 
       utterance.onstart = () => {
         isAudioPlaying = true;
+        isBrowserSynth = true;
         if (btnIcon) btnIcon.innerText = "⏹️";
         if (btnText) btnText.innerText = "Stop Narration";
         if (statusLabel) statusLabel.innerText = "Playing Companion Voice (Browser Audio)";
+        showAudioToast(destName || "Outdoor Field Guide", "Browser Audio Walk (Playing)");
       };
 
       utterance.onend = () => {
-        isAudioPlaying = false;
-        if (btnIcon) btnIcon.innerText = "🔊";
-        if (btnText) btnText.innerText = "Listen to Field Guide (ElevenLabs Voice)";
-        if (statusLabel) statusLabel.innerText = "Narration finished. Put phone in pocket!";
+        stopAudioPlayback();
+        showToast("Narration finished. Put phone in pocket!");
       };
 
       utterance.onerror = () => {
-        isAudioPlaying = false;
-        if (btnIcon) btnIcon.innerText = "🔊";
-        if (btnText) btnText.innerText = "Listen to Field Guide (ElevenLabs Voice)";
+        stopAudioPlayback();
       };
 
       window.speechSynthesis.speak(utterance);
       showToast("🔊 Playing trail companion audio walk!");
     }
 
-    // Auto-select destination and campus from query params (e.g. index.html?dest=nandankanan&campus=kiit)
+    // Auto-select destination and campus from query params (e.g. /?dest=khandagiri or /?campus=kiit)
     window.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const destParam = urlParams.get('dest');
@@ -2250,9 +2502,17 @@
       if (campusParam && CAMPUS_HUBS[campusParam.toLowerCase()]) {
         selectCampus(campusParam.toLowerCase());
       }
-      if (destParam && DESTINATIONS_DATA[destParam.toLowerCase()]) {
+      if (destParam) {
+        const dLower = destParam.toLowerCase();
         const destSelect = document.getElementById('dest-select');
-        if (destSelect) destSelect.value = destParam.toLowerCase();
+        if (destSelect) {
+          const matchOpt = Array.from(destSelect.options).find(o => o.value.toLowerCase() === dLower);
+          if (matchOpt) {
+            destSelect.value = matchOpt.value;
+          } else if (DESTINATIONS_DATA[dLower]) {
+            destSelect.value = dLower;
+          }
+        }
       }
 
       previewDestination();

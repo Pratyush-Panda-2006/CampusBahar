@@ -1,3 +1,4 @@
+import os
 import logging
 import re
 import base64
@@ -32,31 +33,78 @@ def clean_markdown_for_speech(text: str) -> str:
     return clean
 
 
+async def synthesize_elevenlabs_audio_bytes(text: str, voice_id: Optional[str] = None) -> Optional[bytes]:
+    """
+    Synthesize audio using ElevenLabs API (httpx.AsyncClient).
+    Uses primary voice Rachel (21m00Tcm4TlvDq8ikWAM) with model eleven_turbo_v2_5,
+    falling back to premade Sarah (EXAVITQu4vr4xnSDxMaL) if free-tier payment restriction occurs.
+    Returns raw MP3 bytes or None.
+    """
+    clean_text = clean_markdown_for_speech(text)
+    if not clean_text:
+        return None
+
+    if len(clean_text) > 1200:
+        clean_text = clean_text[:1200] + "..."
+
+    api_key = os.getenv("ELEVENLABS_API_KEY") or config.ELEVENLABS_API_KEY
+    if not api_key or api_key.strip() == "":
+        logger.info("ElevenLabs API key not configured.")
+        return None
+
+    primary_voice = voice_id or config.ELEVENLABS_VOICE_ID or "21m00Tcm4TlvDq8ikWAM"
+    fallback_voice = "EXAVITQu4vr4xnSDxMaL"
+    voices_to_try = [primary_voice]
+    if primary_voice != fallback_voice:
+        voices_to_try.append(fallback_voice)
+
+    headers = {
+        "xi-api-key": api_key.strip(),
+        "Content-Type": "application/json",
+        "Accept": "audio/mpeg"
+    }
+
+    async with httpx.AsyncClient(timeout=25.0) as client:
+        for vid in voices_to_try:
+            url = f"https://api.elevenlabs.io/v1/text-to-speech/{vid}"
+            payload = {
+                "text": clean_text,
+                "model_id": "eleven_turbo_v2_5",
+                "voice_settings": {
+                    "stability": 0.5,
+                    "similarity_boost": 0.75
+                }
+            }
+            try:
+                resp = await client.post(url, json=payload, headers=headers)
+                if resp.status_code == 200:
+                    logger.info(f"ElevenLabs audio generated successfully using voice {vid}.")
+                    return resp.content
+                logger.warning(f"ElevenLabs voice {vid} returned HTTP {resp.status_code}: {resp.text}")
+            except Exception as exc:
+                logger.error(f"Error calling ElevenLabs API for {vid}: {exc}")
+
+    return None
+
+
 def generate_elevenlabs_audio(text: str, voice_id: Optional[str] = None) -> Dict[str, Any]:
     """
-    Synthesize speech using ElevenLabs API.
-    Returns a dict with audio base64 or fallback instructions.
+    Synchronous helper returning base64 data URL dict for backwards compatibility.
     """
     clean_text = clean_markdown_for_speech(text)
     if not clean_text:
         return {"status": "error", "message": "No text provided for audio narration."}
 
-    # Truncate text if excessively long to save quota (approx 1200 characters is plenty for a 90-sec pocket guide)
-    if len(clean_text) > 1200:
-        clean_text = clean_text[:1200] + "..."
-
-    api_key = config.ELEVENLABS_API_KEY
-    target_voice = voice_id or config.ELEVENLABS_VOICE_ID or "21m00Tcm4TlvDq8ikWAM"
-
+    api_key = os.getenv("ELEVENLABS_API_KEY") or config.ELEVENLABS_API_KEY
     if not api_key or api_key.strip() == "":
-        logger.info("ElevenLabs API key not configured; signalling client-side Web Speech fallback.")
         return {
             "status": "fallback",
             "provider": "browser_speech_synthesis",
-            "message": "ElevenLabs API key not set in .env. Using high-fidelity browser voice companion.",
+            "message": "ElevenLabs API key not configured. Using browser speech synthesis.",
             "clean_text": clean_text
         }
 
+    target_voice = voice_id or config.ELEVENLABS_VOICE_ID or "21m00Tcm4TlvDq8ikWAM"
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{target_voice}"
     headers = {
         "xi-api-key": api_key.strip(),
@@ -65,7 +113,7 @@ def generate_elevenlabs_audio(text: str, voice_id: Optional[str] = None) -> Dict
     }
     payload = {
         "text": clean_text,
-        "model_id": "eleven_multilingual_v2",
+        "model_id": "eleven_turbo_v2_5",
         "voice_settings": {
             "stability": 0.5,
             "similarity_boost": 0.75
@@ -75,6 +123,12 @@ def generate_elevenlabs_audio(text: str, voice_id: Optional[str] = None) -> Dict
     try:
         with httpx.Client(timeout=25.0) as client:
             resp = client.post(url, json=payload, headers=headers)
+            if resp.status_code != 200 and resp.status_code == 402:
+                # Try premade fallback voice
+                url = f"https://api.elevenlabs.io/v1/text-to-speech/EXAVITQu4vr4xnSDxMaL"
+                resp = client.post(url, json=payload, headers=headers)
+                target_voice = "EXAVITQu4vr4xnSDxMaL"
+
             if resp.status_code == 200:
                 audio_bytes = resp.content
                 b64_audio = base64.b64encode(audio_bytes).decode("utf-8")
@@ -85,19 +139,12 @@ def generate_elevenlabs_audio(text: str, voice_id: Optional[str] = None) -> Dict
                     "audio_url": f"data:audio/mpeg;base64,{b64_audio}",
                     "clean_text": clean_text
                 }
-            else:
-                logger.warning(f"ElevenLabs API returned {resp.status_code}: {resp.text}")
-                return {
-                    "status": "fallback",
-                    "provider": "browser_speech_synthesis",
-                    "message": f"ElevenLabs quota or key error (HTTP {resp.status_code}). Falling back to browser speech synthesis.",
-                    "clean_text": clean_text
-                }
     except Exception as exc:
-        logger.error(f"Error calling ElevenLabs API: {exc}")
-        return {
-            "status": "fallback",
-            "provider": "browser_speech_synthesis",
-            "message": f"Network exception: {str(exc)}. Falling back to browser speech synthesis.",
-            "clean_text": clean_text
-        }
+        logger.error(f"Error in generate_elevenlabs_audio: {exc}")
+
+    return {
+        "status": "fallback",
+        "provider": "browser_speech_synthesis",
+        "message": "Falling back to browser speech synthesis.",
+        "clean_text": clean_text
+    }

@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
     :root {
       --bg-cream: #f5efe2;
@@ -88,18 +89,49 @@
       transform: translate(2px, 2px); box-shadow: var(--shadow-active);
     }
     .brand-tile svg, .logo-box svg { width: 24px; height: 24px; }
-    .brand-name, .nav-brand span {
+    .brand-name, .brand-text, .nav-brand span {
       font-family: var(--font-display);
       font-weight: 800; font-size: 26px;
       letter-spacing: -0.02em;
+    }
+
+    select, input, textarea {
+      outline: none !important;
+      border: 3px solid #17140d !important;
+      background-color: #f5efe2 !important;
+      color: #17140d !important;
+      box-shadow: 4px 4px 0 #17140d !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: 12px;
+      padding: 10px 14px;
+    }
+    select:focus, input:focus, textarea:focus {
+      outline: none !important;
+      border-color: #17140d !important;
+      box-shadow: 6px 6px 0 #17140d !important;
+    }
+    option {
+      background-color: #f5efe2 !important;
+      color: #17140d !important;
     }
     .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
     .nav-links a, .nav-link {
       color: var(--ink); font-weight: 700; font-size: 0.95rem;
       text-decoration: none; transition: color 0.15s ease;
     }
-    .nav-links a:hover, .nav-link:hover, .nav-links a.active, .nav-link.active {
+    .nav-links a:hover, .nav-link:hover {
       color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
+    }
+    .nav-links a.active, .nav-link.active {
+      background: #ff5b57 !important;
+      color: #ffffff !important;
+      padding: 0.45rem 0.95rem !important;
+      border: 3px solid #17140d !important;
+      border-radius: 9999px !important;
+      box-shadow: 3px 3px 0 #17140d !important;
+      text-decoration: none !important;
     }
     .btn-gate, .nav-cta-btn {
       background: var(--teal); color: var(--white);
@@ -301,7 +333,12 @@
         box-shadow: 3px 3px 0 var(--ink); padding: 0.35rem 0.75rem;
         border-radius: 9999px;
       }
-      .mobile-nav-link:hover, .mobile-nav-link.active { background: var(--mustard); }
+      .mobile-nav-link:hover { background: var(--mustard); }
+      .mobile-nav-link.active {
+        background: #ff5b57 !important;
+        color: #ffffff !important;
+        box-shadow: 3px 3px 0 var(--ink) !important;
+      }
     }
 
   </style>
@@ -325,15 +362,16 @@
   <nav class="nav-container">
     <a href="/" class="nav-brand">
       <div class="logo-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
-          <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M4 12C7 8 11 16 15 10C17 7 20 12 20 12" stroke="#17140d" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="6" cy="18" r="3" fill="#ff5b57" stroke="#17140d" stroke-width="2"/>
         </svg>
       </div>
-      <span>PravasiTrail</span>
+      <span class="brand-text">PravasiTrail</span>
     </a>
 
     <div class="nav-links">
+      <a href="/" class="nav-link">Scout</a>
       <a href="/trails" class="nav-link">Campus Trails</a>
       <a href="/weather" class="nav-link">TabPFN Weather</a>
       <a href="/mobus" class="nav-link active">Mo Bus Guide</a>

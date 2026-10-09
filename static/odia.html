@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <style>
     :root {
       --bg-cream: #f5efe2;
@@ -92,18 +93,49 @@
     .brand-tile:hover, .logo-box:hover {
       transform: translate(2px, 2px); box-shadow: var(--shadow-active);
     }
-    .brand-name, .nav-brand span {
+    .brand-name, .brand-text, .nav-brand span {
       font-family: var(--font-display);
       font-weight: 800; font-size: 26px;
       letter-spacing: -0.02em;
+    }
+
+    select, input, textarea {
+      outline: none !important;
+      border: 3px solid #17140d !important;
+      background-color: #f5efe2 !important;
+      color: #17140d !important;
+      box-shadow: 4px 4px 0 #17140d !important;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: 12px;
+      padding: 10px 14px;
+    }
+    select:focus, input:focus, textarea:focus {
+      outline: none !important;
+      border-color: #17140d !important;
+      box-shadow: 6px 6px 0 #17140d !important;
+    }
+    option {
+      background-color: #f5efe2 !important;
+      color: #17140d !important;
     }
     .nav-links { display: flex; align-items: center; gap: 1.8rem; list-style: none; }
     .nav-links a, .nav-link {
       color: var(--ink); font-weight: 700; font-size: 0.95rem;
       text-decoration: none; transition: color 0.15s ease;
     }
-    .nav-links a:hover, .nav-link:hover, .nav-links a.active, .nav-link.active {
+    .nav-links a:hover, .nav-link:hover {
       color: var(--coral); text-decoration: underline; text-underline-offset: 4px;
+    }
+    .nav-links a.active, .nav-link.active {
+      background: #ff5b57 !important;
+      color: #ffffff !important;
+      padding: 0.45rem 0.95rem !important;
+      border: 3px solid #17140d !important;
+      border-radius: 9999px !important;
+      box-shadow: 3px 3px 0 #17140d !important;
+      text-decoration: none !important;
     }
     .btn-gate, .nav-cta-btn {
       background: var(--teal); color: var(--white);
@@ -316,47 +348,32 @@
       background: var(--white); box-shadow: 5px 5px 0 var(--ink);
     }
     .translator-action-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 0.85rem; flex-wrap: wrap; margin-bottom: 1.5rem;
-    }
-    .trans-actions-left {
-      display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;
-    }
-    .btn-mic {
-      background: var(--coral); color: var(--white);
-      border: var(--border-hard); box-shadow: var(--shadow-sm);
-      border-radius: 12px; padding: 0.75rem 1.3rem;
-      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
-      cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
-      transition: all 0.15s ease;
-    }
-    .btn-mic:hover {
-      transform: translate(-2px, -2px); box-shadow: var(--shadow-md);
-    }
-    .btn-mic.recording {
-      background: #dc2626; animation: pulse-mic 1s infinite alternate;
-    }
-    @keyframes pulse-mic {
-      0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
-      100% { transform: scale(1.03); box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+      display: flex; align-items: center; justify-content: flex-start;
+      gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;
     }
     .btn-clear {
-      background: var(--bg-cream); color: var(--ink);
-      border: 2px solid var(--ink); border-radius: 12px; padding: 0.75rem 1.1rem;
-      font-family: var(--font-display); font-weight: 800; font-size: 0.9rem;
+      background: var(--white); color: var(--ink);
+      border: var(--border-hard); box-shadow: var(--shadow-sm);
+      border-radius: 9999px; padding: 0.75rem 1.6rem;
+      font-family: var(--font-display); font-weight: 800; font-size: 0.95rem;
       cursor: pointer; transition: all 0.15s ease;
     }
-    .btn-clear:hover { background: #e2d9c8; }
+    .btn-clear:hover {
+      background: var(--bg-cream); transform: translate(-2px, -2px); box-shadow: var(--shadow-md);
+    }
     .btn-translate-now {
-      background: var(--teal); color: var(--white);
+      background: var(--coral); color: var(--white);
       border: var(--border-hard); box-shadow: var(--shadow-sm);
-      border-radius: 12px; padding: 0.75rem 1.8rem;
+      border-radius: 9999px; padding: 0.75rem 2rem;
       font-family: var(--font-display); font-weight: 800; font-size: 1.05rem;
       cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem;
       transition: all 0.15s ease;
     }
     .btn-translate-now:hover {
-      transform: translate(-2px, -2px); box-shadow: var(--shadow-md); background: #0fa193;
+      transform: translate(-2px, -2px); box-shadow: var(--shadow-md); background: #f04844;
+    }
+    .btn-translate-now:disabled {
+      opacity: 0.65; cursor: not-allowed; transform: none; box-shadow: var(--shadow-sm);
     }
     .quick-chips-section {
       margin-bottom: 1.5rem;
@@ -393,17 +410,6 @@
     }
     .trans-actions-right {
       display: flex; align-items: center; gap: 0.5rem;
-    }
-    .btn-audio-listen {
-      background: var(--sky); color: var(--ink);
-      border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink);
-      border-radius: 10px; padding: 0.45rem 0.95rem;
-      font-family: var(--font-display); font-weight: 800; font-size: 0.85rem;
-      cursor: pointer; display: inline-flex; align-items: center; gap: 0.35rem;
-      transition: all 0.15s ease;
-    }
-    .btn-audio-listen:hover {
-      transform: translate(-1px, -1px); box-shadow: 3px 3px 0 var(--ink); background: #268ef0; color: var(--white);
     }
     .trans-phonetic-bar {
       display: flex; align-items: center; gap: 0.65rem;
@@ -476,7 +482,12 @@
         box-shadow: 3px 3px 0 var(--ink); padding: 0.35rem 0.75rem;
         border-radius: 9999px;
       }
-      .mobile-nav-link:hover, .mobile-nav-link.active { background: var(--mustard); }
+      .mobile-nav-link:hover { background: var(--mustard); }
+      .mobile-nav-link.active {
+        background: #ff5b57 !important;
+        color: #ffffff !important;
+        box-shadow: 3px 3px 0 var(--ink) !important;
+      }
     }
 
   </style>
@@ -501,15 +512,16 @@
   <nav class="nav-container">
     <a href="/" class="nav-brand">
       <div class="logo-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#17140d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M3 17c3-5 5-5 8 0s5 5 8 0"/>
-          <circle cx="12" cy="7" r="2.5" fill="#17140d"/>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M4 12C7 8 11 16 15 10C17 7 20 12 20 12" stroke="#17140d" stroke-width="3" stroke-linecap="round"/>
+          <circle cx="6" cy="18" r="3" fill="#ff5b57" stroke="#17140d" stroke-width="2"/>
         </svg>
       </div>
-      <span>PravasiTrail</span>
+      <span class="brand-text">PravasiTrail</span>
     </a>
 
     <div class="nav-links">
+      <a href="/" class="nav-link">Scout</a>
       <a href="/trails" class="nav-link">Campus Trails</a>
       <a href="/weather" class="nav-link">TabPFN Weather</a>
       <a href="/mobus" class="nav-link">Mo Bus Guide</a>
@@ -541,15 +553,14 @@
   <!-- CONTENT -->
   <main class="content-container">
 
-    <!-- INTERACTIVE BIDIRECTIONAL AI TRANSLATOR (GEMINI FLASH + STT) -->
+    <!-- INTERACTIVE BIDIRECTIONAL AI TRANSLATOR (GEMINI FLASH) -->
     <section class="translator-card" id="translator-section">
       <div class="translator-badges">
         <span class="badge-gemini">⚡ GEMINI FLASH AI TRANSLATOR</span>
-        <span class="badge-stt">🎙️ SPEECH-TO-TEXT ENABLED</span>
       </div>
       
       <h2 class="translator-title">CampusBahar Voice & Text Odia Engine</h2>
-      <p class="translator-subtitle">Bidirectional translator for non-Odia hostellers. Ask auto drivers, bus conductors, chaiwallahs, or hostel wardens in real-time with spoken phonetic guides.</p>
+      <p class="translator-subtitle">Bidirectional colloquial translator for non-Odia hostellers. Communicate naturally with auto drivers, bus conductors, and locals across Bhubaneswar.</p>
 
       <!-- Direction Switcher Bar -->
       <div class="direction-control-bar">
@@ -567,24 +578,16 @@
       <div class="translator-input-wrap">
         <textarea 
           class="memphis-trans-input" 
-          id="trans-input-text" 
-          placeholder="Type or click 'Tap to Speak': e.g., 'How much for auto to Master Canteen?' or 'Where is the bus stop?'"
+          id="trans-input" 
+          placeholder="Type in English (or Odia): e.g., 'How much for auto to Master Canteen?' or 'Where is the bus stop?'"
           rows="3"
         ></textarea>
       </div>
 
-      <!-- Action Bar -->
+      <!-- Action Bar: Two clean Memphis buttons side by side -->
       <div class="translator-action-bar">
-        <div class="trans-actions-left">
-          <button class="btn-mic" id="btn-mic" onclick="toggleSpeechRecognition()">
-            <span id="mic-icon">🎤</span>
-            <span id="mic-label">Tap to Speak (Mic)</span>
-          </button>
-          <button class="btn-clear" onclick="clearTranslatorInput()">Clear</button>
-        </div>
-        <button class="btn-translate-now" id="btn-translate-submit" onclick="performTranslation()">
-          <span id="trans-btn-label">Translate Now ➔</span>
-        </button>
+        <button class="btn-clear" id="btn-clear" onclick="clearTranslatorInput()">Clear</button>
+        <button class="btn-translate-now" id="translate-btn">Translate Now ➔</button>
       </div>
 
       <!-- Quick Preset Chips -->
@@ -602,14 +605,11 @@
       </div>
 
       <!-- Translation Output Result Box -->
-      <div class="trans-result-box" id="trans-result-box">
+      <div class="trans-result-box" id="translation-result-card" style="display: none;">
         <div class="trans-result-top">
-          <div class="trans-odia-text" id="result-odia-text">ଖଣ୍ଡଗିରି କେତେ ଟଙ୍କା ହେବ?</div>
+          <div class="trans-odia-text" id="output-odia-script">ଖଣ୍ଡଗିରି କେତେ ଟଙ୍କା ହେବ?</div>
           <div class="trans-actions-right">
-            <button class="btn-audio-listen" id="btn-listen" onclick="speakCurrentTranslation()">
-              <span>🔊 Pronounce</span>
-            </button>
-            <button class="btn-copy-phrase" onclick="copyTranslatedText()">
+            <button class="btn-copy-phrase" onclick="copyTranslatedResult()">
               <span>📋 Copy</span>
             </button>
           </div>
@@ -617,19 +617,19 @@
 
         <div class="trans-phonetic-bar" id="result-phonetic-bar">
           <span>🗣️ Phonetic:</span>
-          <span id="result-phonetic-text" style="font-weight: 800; color: var(--ink);">Khandagiri kete tonka heba?</span>
+          <span id="output-phonetic" style="font-weight: 800; color: var(--ink);">Khandagiri kete tonka heba?</span>
         </div>
 
         <div class="trans-meaning-bar" id="result-meaning-row">
           <span style="color: var(--coral); font-weight: 800;">Meaning:</span>
-          <span id="result-meaning-text" style="font-weight: 600;">"How much will the fare be to Khandagiri?"</span>
+          <span id="output-meaning" style="font-weight: 600;">"How much will the fare be to Khandagiri?"</span>
         </div>
 
         <div class="trans-tip-box" id="result-tip-box">
           <span>💡</span>
           <div>
             <strong>Local Survival Tip:</strong>
-            <span id="result-tip-text">Standard shared auto fare from Jagamara is ₹15–₹20. Address the driver as 'Bhai' with a friendly smile to avoid the out-of-state tourist markup.</span>
+            <span id="output-tip">Standard shared auto fare from Jagamara is ₹15–₹20. Address the driver as 'Bhai' with a friendly smile to avoid the out-of-state tourist markup.</span>
           </div>
         </div>
 
@@ -784,50 +784,9 @@
   <div class="toast" id="toast">Phrase copied to clipboard!</div>
 
   <script>
-    let currentDirection = "en-to-or";
-    let recognitionInstance = null;
-    let isRecording = false;
-    let lastTranslatedData = null;
-
-    // Offline Student Survival Dictionary Fallback
-    const OFFLINE_FALLBACK_DICT = {
-      "khandagiri": {
-        translated: "ଖଣ୍ଡଗିରି କେତେ ଟଙ୍କା ହେବ?",
-        phonetic: "Khandagiri kete tonka heba?",
-        meaning: "How much will it cost to go to Khandagiri?",
-        tip: "Standard shared auto from Jagamara to Khandagiri is ₹15–₹20 per seat."
-      },
-      "bus stop": {
-        translated: "ଏଇଠି ବସ୍ ରଖନ୍ତୁ, ଭାଇ!",
-        phonetic: "Eithi bus rakhantu, bhai!",
-        meaning: "Please stop the bus right here, brother!",
-        tip: "Ring conductor bell or call out clearly before your stop."
-      },
-      "dahibara": {
-        translated: "ଗୋଟେ ପ୍ଲେଟ୍ ଦହିବରା ଆଳୁଦମ୍ ଦିଅନ୍ତୁ, ଅଳ୍ପ ରାଗ!",
-        phonetic: "Gote plate Dahibara Aloopdum diyantu, alpa raga!",
-        meaning: "One plate Dahibara Aloopdum, mild spicy please!",
-        tip: "Always ask for extra 'piaja-lanka' (onion-chilli) and 'jhola' (curry) after finishing."
-      },
-      "iter": {
-        translated: "ମୁଁ ଆଇଟିଇଆର୍ ଜଗମରା ରେ ପଢୁଛି।",
-        phonetic: "Mun ITER Jagamara re padhuchi.",
-        meaning: "I study at ITER college in Jagamara.",
-        tip: "Auto drivers know ITER Jagamara Gate 1 immediately."
-      },
-      "upi": {
-        translated: "ଭାଇ, ୟୁପିଆଇ / ଫୋନ୍-ପେ ଚଳିବ କି?",
-        phonetic: "Bhai, UPI / PhonePe chaliba ki?",
-        meaning: "Brother, do you accept UPI / PhonePe?",
-        tip: "Almost every tea stall and auto in Bhubaneswar accepts UPI QR codes."
-      },
-      "thank you": {
-        translated: "ବହୁତ ବହୁତ ଧନ୍ୟବାଦ, ଭାଇ!",
-        phonetic: "Bahut bahut dhanyabad, bhai!",
-        meaning: "Thank you very much, brother!",
-        tip: "A simple 'Dhanyabad' with a nod leaves an unforgettable respectful impression."
-      }
-    };
+    const translateBtn = document.getElementById("translate-btn");
+    const transInput = document.getElementById("trans-input");
+    let currentDirection = "en_to_or";
 
     function showToast(text) {
       const toast = document.getElementById('toast');
@@ -846,240 +805,111 @@
       });
     }
 
-    function copyTranslatedText() {
-      if (!lastTranslatedData) return;
-      const textToCopy = `${lastTranslatedData.translated_text} (${lastTranslatedData.phonetic})`;
+    function copyTranslatedResult() {
+      const odia = document.getElementById("output-odia-script")?.innerText || "";
+      const phonetic = document.getElementById("output-phonetic")?.innerText || "";
+      const textToCopy = phonetic ? `${odia} (${phonetic})` : odia;
       copyPhrase(textToCopy);
     }
 
     function toggleTranslationDirection() {
-      currentDirection = currentDirection === "en-to-or" ? "or-to-en" : "en-to-or";
+      currentDirection = currentDirection === "en_to_or" ? "or_to_en" : "en_to_or";
       const srcPill = document.getElementById('pill-src-lang');
       const destPill = document.getElementById('pill-dest-lang');
-      const inputEl = document.getElementById('trans-input-text');
       const metaDir = document.getElementById('result-direction-meta');
 
-      if (currentDirection === "en-to-or") {
-        srcPill.innerText = "English";
-        destPill.innerText = "Odia (ଓଡ଼ିଆ)";
-        inputEl.placeholder = "Type or click 'Tap to Speak': e.g., 'How much for auto to Master Canteen?' or 'Where is the bus stop?'";
+      if (currentDirection === "en_to_or") {
+        if (srcPill) srcPill.innerText = "English";
+        if (destPill) destPill.innerText = "Odia (ଓଡ଼ିଆ)";
+        if (transInput) transInput.placeholder = "Type in English: e.g., 'How much for auto to Master Canteen?' or 'Where is the bus stop?'";
         if (metaDir) metaDir.innerText = "English ➔ Odia Translation";
       } else {
-        srcPill.innerText = "Odia (ଓଡ଼ିଆ)";
-        destPill.innerText = "English";
-        inputEl.placeholder = "Type in Odia script or speak phonetically: e.g. 'ମୁଁ ଆଇଟିଇଆର୍ ପିଲା' or 'Khandagiri jibe ki?'";
+        if (srcPill) srcPill.innerText = "Odia (ଓଡ଼ିଆ)";
+        if (destPill) destPill.innerText = "English";
+        if (transInput) transInput.placeholder = "Type in Odia script or phonetically: e.g. 'ମୁଁ ଆଇଟିଇଆର୍ ପିଲା' or 'Khandagiri jibe ki?'";
         if (metaDir) metaDir.innerText = "Odia ➔ English Translation";
       }
     }
 
     function clearTranslatorInput() {
-      const inputEl = document.getElementById('trans-input-text');
-      if (inputEl) inputEl.value = "";
-      const resultBox = document.getElementById('trans-result-box');
-      if (resultBox) resultBox.style.display = "none";
-      if (isRecording) stopSpeechRecognition();
+      if (transInput) transInput.value = "";
+      const resultCard = document.getElementById("translation-result-card");
+      if (resultCard) resultCard.style.display = "none";
+      if (transInput) transInput.focus();
     }
 
     function applyPresetChip(text) {
-      const inputEl = document.getElementById('trans-input-text');
-      if (inputEl) {
-        if (currentDirection !== "en-to-or") {
-          toggleTranslationDirection();
-        }
-        inputEl.value = text;
-        performTranslation();
+      if (currentDirection !== "en_to_or") {
+        toggleTranslationDirection();
       }
+      if (transInput) transInput.value = text;
+      runGeminiTranslate();
     }
 
-    async function performTranslation() {
-      const inputEl = document.getElementById('trans-input-text');
-      const text = inputEl ? inputEl.value.trim() : "";
-      if (!text) {
-        showToast("Please enter or speak a phrase to translate!");
-        return;
+    async function runGeminiTranslate() {
+      const query = transInput ? transInput.value.trim() : "";
+      if (!query) return;
+
+      if (translateBtn) {
+        translateBtn.innerText = "Translating...";
+        translateBtn.disabled = true;
       }
 
-      const submitBtn = document.getElementById('btn-translate-submit');
-      const btnLabel = document.getElementById('trans-btn-label');
-      if (submitBtn) submitBtn.disabled = true;
-      if (btnLabel) btnLabel.innerText = "⏳ Translating with Gemini...";
-
       try {
-        const resp = await fetch('/api/translate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+        const res = await fetch("/api/translate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            text: text,
+            text: query,
             direction: currentDirection
           })
         });
 
-        if (!resp.ok) {
-          throw new Error(`Server returned HTTP ${resp.status}`);
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
         }
 
-        const data = await resp.json();
-        renderTranslationResult(data);
+        const payload = await res.json();
+        if (payload.status === "success" && payload.data) {
+          const d = payload.data;
+          const odiaEl = document.getElementById("output-odia-script");
+          const phoneticEl = document.getElementById("output-phonetic");
+          const meaningEl = document.getElementById("output-meaning");
+          const tipEl = document.getElementById("output-tip");
+          const resultCard = document.getElementById("translation-result-card");
+
+          if (odiaEl) odiaEl.innerText = d.odia_script;
+          if (phoneticEl) phoneticEl.innerText = d.phonetic_transliteration;
+          if (meaningEl) meaningEl.innerText = d.meaning || query;
+          if (tipEl) tipEl.innerText = d.context_tip || "Direct route available via Mo Bus.";
+          if (resultCard) {
+            resultCard.style.display = "block";
+            resultCard.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        } else {
+          throw new Error(payload.detail || "Translation failed");
+        }
       } catch (err) {
-        console.warn("Backend translation request failed, using student offline heuristic:", err);
-        renderOfflineFallback(text);
+        console.error("API error:", err);
+        alert("Translation failed. Make sure your local server is running on http://localhost:8000 and GEMINI_API_KEY is set.");
       } finally {
-        if (submitBtn) submitBtn.disabled = false;
-        if (btnLabel) btnLabel.innerText = "Translate Now ➔";
-      }
-    }
-
-    function renderTranslationResult(data) {
-      lastTranslatedData = data;
-      const resultBox = document.getElementById('trans-result-box');
-      const odiaText = document.getElementById('result-odia-text');
-      const phoneticText = document.getElementById('result-phonetic-text');
-      const meaningText = document.getElementById('result-meaning-text');
-      const tipText = document.getElementById('result-tip-text');
-      const sourceMeta = document.getElementById('result-source-meta');
-      const dirMeta = document.getElementById('result-direction-meta');
-
-      if (odiaText) odiaText.innerText = data.translated_text || data.odia_script || "";
-      if (phoneticText) phoneticText.innerText = data.phonetic || data.spoken_guide || "";
-      if (meaningText) meaningText.innerText = `"${data.meaning || data.literal || ""}"`;
-      if (tipText) tipText.innerText = data.tip || data.cultural_tip || "Speak calmly with a smile; locals are delighted when hostellers speak Odia.";
-      if (sourceMeta) sourceMeta.innerText = `⚡ ${data.service || "Gemini 2.5 Flash"} • Verified`;
-      if (dirMeta) dirMeta.innerText = currentDirection === "en-to-or" ? "English ➔ Odia Translation" : "Odia ➔ English Translation";
-
-      if (resultBox) {
-        resultBox.style.display = "block";
-        resultBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    }
-
-    function renderOfflineFallback(text) {
-      const lower = text.toLowerCase();
-      let match = null;
-      for (const [k, v] of Object.entries(OFFLINE_FALLBACK_DICT)) {
-        if (lower.includes(k)) {
-          match = v;
-          break;
+        if (translateBtn) {
+          translateBtn.innerText = "Translate Now ➔";
+          translateBtn.disabled = false;
         }
       }
-
-      const fallbackData = match ? {
-        translated_text: match.translated,
-        phonetic: match.phonetic,
-        meaning: match.meaning,
-        tip: match.tip,
-        service: "Campus Offline Lexicon (Network Fallback)"
-      } : {
-        translated_text: currentDirection === "en-to-or" ? "କ୍ଷମା କରିବେ, ଏହା କୁହନ୍ତୁ: 'ଭାଇ, ଟିକେ ସାହାଯ୍ୟ କରନ୍ତୁ!'" : "Excuse me, please help!",
-        phonetic: "Bhai, tike sahayya karantu!",
-        meaning: text,
-        tip: "Offline backup active. Use simple student keywords for offline lookup.",
-        service: "Campus Offline Lexicon"
-      };
-
-      renderTranslationResult(fallbackData);
     }
 
-    // Speech-to-Text (Microphone) Integration
-    function toggleSpeechRecognition() {
-      if (isRecording) {
-        stopSpeechRecognition();
-      } else {
-        startSpeechRecognition();
-      }
+    if (translateBtn) {
+      translateBtn.addEventListener("click", runGeminiTranslate);
     }
-
-    function startSpeechRecognition() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        showToast("Speech recognition not supported in this browser. Try Chrome or Edge!");
-        return;
-      }
-
-      try {
-        recognitionInstance = new SpeechRecognition();
-        recognitionInstance.continuous = false;
-        recognitionInstance.interimResults = true;
-        recognitionInstance.lang = currentDirection === "en-to-or" ? "en-IN" : "or-IN";
-
-        recognitionInstance.onstart = function() {
-          isRecording = true;
-          const btnMic = document.getElementById('btn-mic');
-          const micIcon = document.getElementById('mic-icon');
-          const micLabel = document.getElementById('mic-label');
-          if (btnMic) btnMic.classList.add('recording');
-          if (micIcon) micIcon.innerText = "🔴";
-          if (micLabel) micLabel.innerText = "Listening... Speak now";
-        };
-
-        recognitionInstance.onresult = function(event) {
-          let transcript = "";
-          for (let i = event.resultIndex; i < event.results.length; ++i) {
-            transcript += event.results[i][0].transcript;
-          }
-          const inputEl = document.getElementById('trans-input-text');
-          if (inputEl) inputEl.value = transcript;
-        };
-
-        recognitionInstance.onerror = function(event) {
-          console.warn("Speech recognition error:", event.error);
-          stopSpeechRecognition();
-          showToast(`Mic note: ${event.error}. You can still type directly!`);
-        };
-
-        recognitionInstance.onend = function() {
-          stopSpeechRecognition();
-          const inputEl = document.getElementById('trans-input-text');
-          if (inputEl && inputEl.value.trim().length > 0) {
-            performTranslation();
-          }
-        };
-
-        recognitionInstance.start();
-      } catch (e) {
-        console.error("Failed to start speech recognition:", e);
-        stopSpeechRecognition();
-      }
-    }
-
-    function stopSpeechRecognition() {
-      isRecording = false;
-      const btnMic = document.getElementById('btn-mic');
-      const micIcon = document.getElementById('mic-icon');
-      const micLabel = document.getElementById('mic-label');
-      if (btnMic) btnMic.classList.remove('recording');
-      if (micIcon) micIcon.innerText = "🎤";
-      if (micLabel) micLabel.innerText = "Tap to Speak (Mic)";
-
-      if (recognitionInstance) {
-        try { recognitionInstance.stop(); } catch(e) {}
-        recognitionInstance = null;
-      }
-    }
-
-    // Text-to-Speech (Pronunciation) Integration
-    function speakCurrentTranslation() {
-      if (!lastTranslatedData) return;
-      if (!('speechSynthesis' in window)) {
-        showToast("Audio playback is not supported on this browser.");
-        return;
-      }
-
-      window.speechSynthesis.cancel();
-      const textToSpeak = currentDirection === "en-to-or" 
-        ? (lastTranslatedData.phonetic || lastTranslatedData.translated_text)
-        : (lastTranslatedData.translated_text || lastTranslatedData.phonetic);
-
-      const utterance = new SpeechSynthesisUtterance(textToSpeak);
-      utterance.rate = 0.88; // Slightly slower for clear learning pronunciation
-      utterance.pitch = 1.0;
-
-      // Try selecting Indian English or Odia/Hindi voice if available
-      const voices = window.speechSynthesis.getVoices();
-      const inVoice = voices.find(v => v.lang.includes('IN') || v.lang.includes('hi') || v.lang.includes('or'));
-      if (inVoice) utterance.voice = inVoice;
-
-      window.speechSynthesis.speak(utterance);
-      showToast("🔊 Playing pronunciation audio...");
+    if (transInput) {
+      transInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          runGeminiTranslate();
+        }
+      });
     }
 
     // Ensure seamless navigation when browsing static files directly via file:// protocol

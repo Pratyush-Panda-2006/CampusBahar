@@ -1,0 +1,243 @@
+/* =========================================================
+   PravasiTrail (CampusBahar) - Global Memphis Design System
+   Warm cream #f5efe2 canvas, near-black #17140d ink, 3px solid borders,
+   flat 8px 8px 0 #17140d offset shadows, saturated retro fills.
+   ========================================================= */
+
+:root {
+  --bg-cream: #f5efe2;
+  --ink: #17140d;
+  --teal: #12b3a4;
+  --coral: #ff5b57;
+  --mustard: #ffc531;
+  --violet: #6b5be6;
+  --sky: #3aa0ff;
+  --white: #ffffff;
+  
+  --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  
+  --border-hard: 3px solid #17140d;
+  --shadow-lg: 8px 8px 0 #17140d;
+  --shadow-md: 5px 5px 0 #17140d;
+  --shadow-sm: 4px 4px 0 #17140d;
+  --shadow-active: 2px 2px 0 #17140d;
+}
+
+/* =========================================================
+   1. Universal Dropdown & Input Styling
+   Standardized appearance: none, SVG arrow, focus box-shadow
+   ========================================================= */
+select, input, textarea, .memphis-select {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  outline: none !important;
+  border: 3px solid #17140d !important;
+  background-color: #f5efe2 !important;
+  color: #17140d !important;
+  box-shadow: 4px 4px 0 #17140d !important;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+select, .memphis-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2317140d' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 16px 16px !important;
+  padding-right: 44px !important;
+  cursor: pointer;
+}
+
+select:focus, input:focus, textarea:focus, .memphis-select:focus {
+  outline: none !important;
+  border-color: #17140d !important;
+  box-shadow: 4px 4px 0 #17140d !important;
+  background-color: #ffffff !important;
+}
+
+option {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  outline: none !important;
+  background-color: #f5efe2 !important;
+  color: #17140d !important;
+  padding: 10px 14px !important;
+  font-weight: 700 !important;
+  border: none !important;
+}
+
+optgroup {
+  outline: none !important;
+  background-color: #ede5d5 !important;
+  color: #17140d !important;
+  font-weight: 800 !important;
+  font-family: var(--font-display) !important;
+  padding: 8px 10px !important;
+}
+
+/* =========================================================
+   2. Normalized Navigation Active States
+   background #ff5b57, color #ffffff, box-shadow 3px 3px 0 #17140d
+   ========================================================= */
+.nav-link.active, .nav-links a.active, .mobile-nav-link.active {
+  background: #ff5b57 !important;
+  color: #ffffff !important;
+  box-shadow: 3px 3px 0 #17140d !important;
+  border: 2px solid #17140d !important;
+  border-radius: 9999px !important;
+  padding: 0.35rem 0.95rem !important;
+  text-decoration: none !important;
+  font-weight: 800 !important;
+}
+
+/* =========================================================
+   3. Trails Card Grid Height Normalization
+   Grid: repeat(auto-fill, minmax(340px, 1fr)), gap 24px
+   Cards: flex column, justify-content space-between
+   ========================================================= */
+.trails-grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)) !important;
+  gap: 24px !important;
+  max-width: 1280px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+}
+
+.trail-card {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.trail-card > div:first-child {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.trail-card .btn-scout-trail {
+  margin-top: auto;
+}
+
+/* =========================================================
+   5. ElevenLabs Audio Companion Sticky Player Bar
+   Sticky bottom player toast with play/pause and stop controls
+   ========================================================= */
+.audio-player-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(140px);
+  background: var(--mustard);
+  color: var(--ink);
+  border: var(--border-hard);
+  box-shadow: var(--shadow-lg);
+  border-radius: 9999px;
+  padding: 0.75rem 1.6rem;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  max-width: min(650px, 94vw);
+  box-sizing: border-box;
+}
+
+.audio-player-toast.active {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.audio-toast-info {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.audio-toast-icon {
+  font-size: 1.5rem;
+  animation: pulse-audio 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse-audio {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.audio-toast-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.audio-toast-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.audio-toast-subtitle {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #334155;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.audio-toast-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+
+.btn-audio-ctrl {
+  background: var(--white);
+  color: var(--ink);
+  border: 2px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  border-radius: 9999px;
+  padding: 0.4rem 0.85rem;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 0.82rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.btn-audio-ctrl:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+  background: var(--bg-cream);
+}
+
+.btn-audio-ctrl.btn-audio-stop {
+  background: var(--coral);
+  color: var(--white);
+}
+
+.btn-audio-ctrl.btn-audio-stop:hover {
+  background: #f04844;
+}
